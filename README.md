@@ -28,4 +28,4 @@ study_plan/
 
 ## 当前阶段
 
-[[notes/阶段/阶段1-暑假Python基础|阶段1 - 暑假Python基础]]（49天 · 7月9日-8月27日）
+[[notes/阶段/阶段1-Python基础|阶段1 - Python基础]]（7周 · 5月26日开始）
