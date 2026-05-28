@@ -3,7 +3,7 @@
  Day 3 | 函数 -- 把代码封装成可复用的模块
 ====================================================
 
- 目标: 掌握函数定义, 参数传递, 多返回值, 作用域和 lambda
+ 目标: 掌握函数定义、参数传递、多返回值、作用域和 lambda
 
  结构: 讲一个知识点 -> 练一个 -> 再讲下一个 -> 最后综合练习
 
@@ -14,7 +14,7 @@
 """
 
 # ═══════════════════════════════════════════════════
-# 一, 函数定义和调用
+# 一、函数定义和调用
 # ═══════════════════════════════════════════════════
 
 "def 函数名(参数):"
@@ -40,7 +40,7 @@
 
 print("\n" + "=" * 40 + "\n练习 1")
 
-# ■ 练习 1:定义函数
+# ■ 练习 1：定义函数
 # 1. 写一个函数 calc_pnl(buy_price, sell_price, shares)
 #    返回 (sell_price - buy_price) * shares
 # 2. 写一个函数 price_trend(current, prev_close)
@@ -63,7 +63,7 @@ print(price_trend(100,101))
 
 
 # ═══════════════════════════════════════════════════
-# 二, 参数进阶
+# 二、参数进阶
 # ═══════════════════════════════════════════════════
 
 # --- 2.1 默认参数 ---
@@ -126,7 +126,7 @@ print(price_trend(100,101))
 
 print("\n" + "=" * 40 + "\n练习 2")
 
-# ■ 练习 2:各种参数
+# ■ 练习 2：各种参数
 # 1. 写一个函数 calc_asset_value(price, shares, tax_rate=0.001)
 #    返回 price * shares * (1 - tax_rate)
 # 2. 用位置参数调用: calc_asset_value(100, 50)
@@ -147,10 +147,10 @@ print_reoort(名称='茅台',价格="180",涨幅="-2.5%")
 
 
 # ═══════════════════════════════════════════════════
-# 三, 函数是一等公民
+# 三、函数是一等公民
 # ═══════════════════════════════════════════════════
 
-# Python 里函数也是值, 可以赋值给变量, 传参, 嵌套
+# Python 里函数也是值, 可以赋值给变量、传参、嵌套
 
 "def add(a, b):"
 "    return a + b"
@@ -169,7 +169,7 @@ print_reoort(名称='茅台',价格="180",涨幅="-2.5%")
 "print(apply(add, 10, 5))  # 15"
 "print(apply(sub, 10, 5))  # 5"
 
-# 多返回值(本质是返回元组, 自动解包)
+# 多返回值（本质是返回元组, 自动解包）
 
 "def analyze_kline(open_, high, low, close):"
 "    avg = (open_ + high + low + close) / 4"
@@ -183,7 +183,7 @@ print_reoort(名称='茅台',价格="180",涨幅="-2.5%")
 
 print("\n" + "=" * 40 + "\n练习 3")
 
-# ■ 练习 3:函数作为对象 + 多返回值
+# ■ 练习 3：函数作为对象 + 多返回值
 # 1. 写一个函数 calculate(func, a, b), 返回 func(a, b)
 # 2. 写三个函数: multiply(a, b), divide(a, b), max_value(a, b)
 #    分别传入 calculate 并打印结果
@@ -204,36 +204,34 @@ def max_value(a,b):
 def calculate(func, a, b):
     return func(a, b)
 def find_max(prices_list):
-  max_price = prices_list[0]
+  max = prices_list[0]
   for i in prices_list:
-    if i > max_price:
-      max_price = i
-  return max_price
+    if i > max:
+      max = i
+  return max
 def find_min(prices_list):
-  min_price = prices_list[0]
+  min = prices_list[0]
   for i in prices_list:
-    if i < min_price:
-      min_price = i
-  return min_price
+    if i < min :
+      min = i
+  return min
 def avg_(prices_list):
   total = 0
   for i in prices_list:
     total = total + i
-  avg = total / len(prices_list)
+    avg = total/len(prices_list)
   return avg
 def stock_stats(prices_list):
-  max_price = find_max(prices_list)
-  min_price = find_min(prices_list)
+  max = find_max(prices_list)
+  min = find_min(prices_list)
   avg = avg_(prices_list)
   num = len(prices_list)
-  print(f"{max_price},{min_price},{avg},{num}")
+  print(f"{max},{min},{avg},{num}")
 stock_stats([1,2,3,4])
-def stock_stats_right(prices_list):
-   return max(prices_list),min(prices_list),sum(prices_list),sum(prices_list)/len(prices_list)
 
 
 # ═══════════════════════════════════════════════════
-# 四, 作用域(scope)
+# 四、作用域（scope）
 # ═══════════════════════════════════════════════════
 
 "x = \"全局变量\""
@@ -246,7 +244,7 @@ def stock_stats_right(prices_list):
 "print(x)    # 全局变量"
 
 
-# global:声明要修改全局变量
+# global：声明要修改全局变量
 "count = 0"
 
 "def add_one():"
@@ -258,7 +256,7 @@ def stock_stats_right(prices_list):
 "print(count)  # 2"
 
 
-# nonlocal:嵌套函数中修改外层变量
+# nonlocal：嵌套函数中修改外层变量
 "def outer():"
 "    n = 0"
 "    def inner():"
@@ -274,7 +272,7 @@ def stock_stats_right(prices_list):
 
 print("\n" + "=" * 40 + "\n练习 4")
 
-# ■ 练习 4:作用域
+# ■ 练习 4：作用域
 # 1. 定义全局变量 call_count = 0
 # 2. 写一个函数 analyze_stock(name, price, pe)
 #    用 global 让 call_count 每次调用 +1
@@ -287,7 +285,7 @@ stocks_data = [("招行", 32, 5), ("茅台", 180, 30), ("宁德", 250, 50)]
 
 
 # ═══════════════════════════════════════════════════
-# 五, Lambda 表达式(匿名函数)
+# 五、Lambda 表达式（匿名函数）
 # ═══════════════════════════════════════════════════
 
 # lambda 参数: 返回值
@@ -330,7 +328,7 @@ stocks_data = [("招行", 32, 5), ("茅台", 180, 30), ("宁德", 250, 50)]
 
 print("\n" + "=" * 40 + "\n练习 5")
 
-# ■ 练习 5:lambda 实战
+# ■ 练习 5：lambda 实战
 data = [("茅台", 1820, 100), ("招行", 35, 500), ("宁德", 225, 200)]
 # 1. 按市值(价格 x 数量)从高到低排序, 用 lambda
 # 2. 用 max + lambda 找出市值最高的股票
@@ -342,7 +340,7 @@ data = [("茅台", 1820, 100), ("招行", 35, 500), ("宁德", 225, 200)]
 
 
 # ═══════════════════════════════════════════════════
-# 六, 综合练习 -- 股票计算器工具箱
+# 六、综合练习 -- 股票计算器工具箱
 # ═══════════════════════════════════════════════════
 #
 # 把今天学的函数知识全部用上
@@ -385,14 +383,13 @@ portfolio = [
 # 今天学到的
 # ====================================================
 # ✅ def/return: 定义和调用函数
-# ✅ 参数: 默认值, 关键字, *args, **kwargs
+# ✅ 参数: 默认值、关键字、*args、**kwargs
 # ✅ 函数是一等公民: 可以赋值和传参
 # ✅ 多返回值: return 多个值, 解包接收
 # ✅ 作用域: global 修改全局变量, nonlocal 嵌套
 # ✅ lambda: 匿名函数, 配合 sorted/max/min/map/filter
 #
 # 明天预告: 文件I/O + 异常处理 -- 读写股票CSV文件
-
 
 #
 # ════════════════════════════════════════════════════
