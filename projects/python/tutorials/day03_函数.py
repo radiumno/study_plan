@@ -204,31 +204,34 @@ def max_value(a,b):
 def calculate(func, a, b):
     return func(a, b)
 def find_max(prices_list):
-  max = prices_list[0]
+  max_price = prices_list[0]
   for i in prices_list:
-    if i > max:
-      max = i
-  return max
+    if i > max_price:
+      max_price = i
+  return max_price
 def find_min(prices_list):
-  min = prices_list[0]
+  min_price = prices_list[0]
   for i in prices_list:
-    if i < min :
-      min = i
-  return min
+    if i < min_price:
+      min_price = i
+  return min_price
 def avg_(prices_list):
   total = 0
   for i in prices_list:
     total = total + i
-    avg = total/len(prices_list)
+  avg = total / len(prices_list)
   return avg
 def stock_stats(prices_list):
-  max = find_max(prices_list)
-  min = find_min(prices_list)
+  max_price = find_max(prices_list)
+  min_price = find_min(prices_list)
   avg = avg_(prices_list)
   num = len(prices_list)
-  print(f"{max},{min},{avg},{num}")
+  print(f"{max_price},{min_price},{avg},{num}")
 stock_stats([1,2,3,4])
-
+def stock_stats_right(prices_list):
+   return max(prices_list),min(prices_list),sum(prices_list),sum(prices_list)/len(prices_list)
+max_price,min_price,total_price,avg_price = stock_stats_right([1,2,3,4])
+print(f"{max_price},{min_price},{total_price},{avg_price}")
 
 # ═══════════════════════════════════════════════════
 # 四、作用域（scope）
@@ -282,6 +285,19 @@ print("\n" + "=" * 40 + "\n练习 4")
 stocks_data = [("招行", 32, 5), ("茅台", 180, 30), ("宁德", 250, 50)]
 
 # ↓ 你的代码 ↓
+call_count = 0
+def analyze_sotck(name,price,pe):
+  global call_count
+  call_count +=1
+  if pe<15:
+    return "low"
+  if pe <30:
+    return "sweet"
+  else:
+    return "high"
+for name, price,pe in stocks_data:
+        print(analyze_sotck(name,price,pe))
+        print(call_count)
 
 
 # ═══════════════════════════════════════════════════
@@ -337,6 +353,14 @@ data = [("茅台", 1820, 100), ("招行", 35, 500), ("宁德", 225, 200)]
 # 提示: data 里每个元素是 (name, price, volume)
 
 # ↓ 你的代码 ↓
+sorted(data,key = lambda x : x[1]*x[2],reverse= True)
+max_1 = max(data,key = lambda x :x[1]*x[2])
+print(max_1)
+stock_name = list(map(lambda x :x[0],data))
+print(stock_name)
+stock_high_price = list(filter(lambda x : x[1] > 100 ,data))
+print(stock_high_price)
+
 
 
 # ═══════════════════════════════════════════════════
@@ -377,6 +401,27 @@ portfolio = [
 #   ========================
 
 # ↓ 你的代码 ↓
+def calc_market_value(price,shares):
+  return price*shares
+def calc_total(portfolio,func):
+  total_price = 0
+  for name,price,shares in portfolio:
+    total_price += func(price,shares)
+  return total_price
+value_arr = list(sorted(portfolio, key = lambda x : calc_market_value(x[1],x[2]),reverse=True))
+high_price =  list(filter(lambda x : x[1] >100,portfolio))
+def print_repotr(portfolio):
+  print("""
+========================
+持仓报告
+========================
+""")
+  for name ,price,shares in value_arr:
+    print(f"{name}:{calc_market_value(price,shares)}")
+  print('------------------------')
+  print(f"总市值:{calc_total(portfolio,calc_market_value)}")
+  print(f"股票数量:{len(portfolio)}只")
+print_repotr(portfolio)
 
 
 # ====================================================
