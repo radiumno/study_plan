@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-*.exe
+*.pyo
 .env
 .venv/
 venv/
@@ -8,4 +8,6 @@ venv/
 .obsidian/
 current_state
 skills_disabled/
-
+_draft_*
+_temp_*
+*.tmp
