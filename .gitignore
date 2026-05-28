@@ -1,8 +1,11 @@
 __pycache__/
 *.pyc
+*.exe
 .env
 .venv/
 venv/
 .DS_Store
 .obsidian/
 current_state
+skills_disabled/
+

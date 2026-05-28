@@ -1,0 +1,17 @@
+# Python 量化学习环境
+# 安装: pip install -r requirements.txt
+
+# === 数据处理核心 ===
+numpy>=1.26
+pandas>=2.1
+matplotlib>=3.8
+
+# === 数据采集 ===
+requests>=2.31
+yfinance>=0.2        # 股票行情数据（免费）
+
+# === 交互式开发 ===
+jupyter>=1.0         # 可选，方便EDA
+
+# === 测试 ===
+pytest>=8.0
