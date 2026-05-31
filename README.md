@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/阶段-1%20of%206-blue?style=flat-square" alt="阶段">
     <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python" alt="Python">
     <img src="https://img.shields.io/badge/C%2B%2B-20-00599C?style=flat-square&logo=c%2B%2B" alt="C++">
-    <img src="https://img.shields.io/badge/进度-5%20/%2017%20天-green?style=flat-square" alt="进度">
+    <img src="https://img.shields.io/badge/进度-5%20/%2013%20天-green?style=flat-square" alt="进度">
     <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT">
   </p>
 </div>
@@ -95,7 +95,9 @@ study_plan 引入了 [ai-engineering-from-scratch](https://github.com/rohitg00/a
 
 ## 当前进度
 
-### 阶段1 — Python基础（17天 / 7周）
+### 阶段1 — Python基础（13天 / 5周，已压缩）
+
+> 2026-05-31 复核调整: Python基础从7周压缩到5周, 更早进入C++阶段.
 
 | Day | 内容 | 状态 |
 |-----|------|------|
@@ -103,7 +105,8 @@ study_plan 引入了 [ai-engineering-from-scratch](https://github.com/rohitg00/a
 | 02 | 列表、字典、元组、内置函数 | ✅ |
 | 03 | 函数、作用域、lambda | ✅ |
 | 04 | set + 文件I/O + 异常处理 | ✅ |
-| 05-17 | 模块与包 → 综合项目 | ⏳ |
+| 05 | 模块与包、pip、datetime | ✅ |
+| 06-13 | 综合项目 → NumPy → Pandas → 项目 | ⏳ |
 
 ### 学习管理
 
