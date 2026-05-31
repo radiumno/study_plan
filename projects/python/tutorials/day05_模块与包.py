@@ -334,58 +334,28 @@ print("\n" + "=" * 40 + "\n练习 5.2")
 
 print("\n" + "=" * 40 + "\n综合练习")
 
-# 综合应用: import + datetime + pathlib
+# 综合应用: import + datetime + pathlib + 自定义模块
 #
 # 背景: A 股交易规则
 #   - 周一到周五交易
 #   - 周末不交易
 #   - 不考虑法定节假日(简化)
-
-from datetime import datetime as dt, timedelta
-from pathlib import Path
-
-def is_trading_day(date):
-    """判断某天是不是交易日(简化版: 周一~周五)"""
-    return date.weekday() < 5  # 0=周一, 4=周五, 5=周六, 6=周日
-
-def next_trading_day(date):
-    """返回下一个交易日"""
-    current = date + timedelta(days=1)
-    while not is_trading_day(current):
-        current += timedelta(days=1)
-    return current
-
-def trading_days_between(start, end):
-    """返回两个日期之间的所有交易日(含start, 不含end)"""
-    days = []
-    current = start
-    while current < end:
-        if is_trading_day(current):
-            days.append(current)
-        current += timedelta(days=1)
-    return days
-
-# --- 教学演示 ---
-today = dt.now()
-print(f"今天: {today.strftime('%Y-%m-%d %A')}")
-print(f"是交易日吗? {is_trading_day(today)}")
-print(f"下一个交易日: {next_trading_day(today).strftime('%Y-%m-%d')}")
-
-may_start = dt(2026, 5, 1)
-may_end   = dt(2026, 6, 1)
-may_trading_days = trading_days_between(may_start, may_end)
-print(f"2026年5月交易日数: {len(may_trading_days)}")
-
-
-# ■ 你的任务:
-# 基于上面三个函数, 实现:
 #
-# 1. prev_trading_day(date) -- 返回上一个交易日
+# 配套模块 day05_utils.py 已经实现了三个函数:
+#   - is_trading_day(date) -> bool
+#   - next_trading_day(date) -> datetime
+#   - trading_days_between(start, end) -> list[datetime]
 #
-# 2. count_trading_days_until(target_date) -- 今天到目标日期还有几个交易日
-#    提示: 用 dt.now().replace(hour=0, minute=0, second=0, microsecond=0) 去掉时间部分
+# 你的任务:
 #
-# 3. 把从今天起未来60天的交易日历保存到 output/trading_calendar.txt
+# 1. import day05_utils as utils
+#
+# 2. 实现 prev_trading_day(date) -- 返回上一个交易日
+#
+# 3. 实现 count_trading_days_until(target_date) -- 今天到目标日期还有几个交易日
+#    提示: 用 datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+#
+# 4. 把从今天起未来60天的交易日历保存到 output/trading_calendar.txt
 #    格式: "2026-06-01 (Monday)"
 
 # ↓ 你的代码 ↓
