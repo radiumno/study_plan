@@ -43,11 +43,11 @@
 │   ├── Day 01: 变量、类型、字符串、输入输出  ✅
 │   ├── Day 02: 列表、字典、元组、set、遍历  ✅（set 移到 Day 04）
 │   ├── Day 03: 函数、作用域、lambda  ✅
-│   ├── Day 04: set + 文件I/O + 异常处理
-│   ├── Day 05: 模块与包、pip、datetime
-│   ├── Day 06: 综合项目（股票数据管理器）
+│   ├── Day 04: set + 文件I/O + 异常处理     ✅
+│   ├── Day 05: 模块与包、pip、datetime       ✅
+│   ├── Day 06: 综合项目（股票数据管理器）   ✅
 │
-├── Part 2: 数据处理（Days 07-11，2周）
+├── Part 2: 数据处理（Days 07-11，2周）⏳
 │   ├── Day 07: NumPy 数组运算
 │   ├── Day 08: Pandas 入门
 │   ├── Day 09: Pandas 进阶
@@ -64,7 +64,7 @@
 
 ---
 
-## 3. Part 1: Python 核心（Days 01-07）
+## 3. Part 1: Python 核心（Days 01-06）
 
 ### 设计思路
 
@@ -175,7 +175,12 @@
 
 ### Day 07 ⏳ 未开始
 
-复习 + 查漏补缺
+**教学及复习:** NumPy 数组运算 (Part 2 数据处理开始)
+- 前置: numpy 包已安装 (Day 05 的 pip 知识)
+- 复习: 控制流 (在 Day 07 教学前先补 if/for/while 快速回顾)
+- 教学: ndarray 创建、数组运算、广播、索引与切片
+- 练习: 向量化计算股票收益率
+- **重要:** 开始前先 `pip install -r requirements.txt`
 
 ---
 
