@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 自动 git 保存脚本
-# 用 Git Bash 运行: bash D:\Dev\AiProject\study_plan\_autosave.sh
+# 用 Git Bash 运行: bash D:\Dev\AiProject\study_plan\scripts\_autosave.sh
 # 会每5分钟自动commit一次
 
 cd /d/Dev/AiProject/study_plan

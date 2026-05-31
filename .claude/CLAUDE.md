@@ -5,6 +5,7 @@
 ## 当前状态
 - **阶段:** 阶段1 Python基础 — 第1周（Python语法）
 - **已完成:** day01~day03（起步、列表字典、函数）
+- **Day 04 (set+文件+异常):** 模板就绪，部分练习已完成，可随时继续
 - **练习规范:** 见 `resources/教学资源参考.md`（练习密度/粒度/设计模式）
 
 ## 教学模式
@@ -33,6 +34,12 @@
 5. **附加题可超前** — 要加 `# 提示:` 注释
 6. **代码/注释中文，变量名英文**
 
+## 工作流程
+- `docs/workflows/写课程流程.md` — 每次写课, 先核对细脉络与主脉络, 再加载记忆规则, 执行依赖检查, 最后更新进度
+- `docs/workflows/写脉络流程.md` — 创建/更新阶段大纲, 调研→写主脉络→拆细脉络→5项对齐检查→定稿
+- 每次用户说"开始学习" / "继续" / "开始今天的学习", 走"写课程流程"
+- 新阶段开始 / 细脉络不存在 / 细脉络与主脉络不匹配, 先走"写脉络流程"
+
 ## 学习流程
 - "开始今天的学习" → 查进度 → 出当日教程
 - 发代码给我 → Code Review（指出问题+解释原因）
@@ -43,12 +50,13 @@
 - 教程: `projects/python/tutorials/dayXX_名称.py`
 - 项目: `projects/python/projects/`
 - C++: `projects/cpp/`
-- 计划: `docs/superpowers/plans/`
+- 计划: `docs/plans/`
 
 ## 技能优先级
 - 高频: `learning-explain` / `learning-practice` / `learning-compare`
 - 按需: `learning-roadmap` / `learning-cheatsheet`
 - 调试: `systematic-debugging`
+- 工作流: `course-writing` / `roadmap-writing` (用户说"开始学习"时自动走 course-writing)
 
 ## Git
 - 每天学完问我是否 commit
