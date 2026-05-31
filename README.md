@@ -32,23 +32,23 @@
 
 ```
 study_plan/
+├── .claude/
+│   ├── CLAUDE.md               # 项目指令
+│   ├── settings.json           # Claude 配置
+│   └── skills/                 # 自定义技能
+├── .vscode/                    # VS Code 工作区配置
 ├── docs/
 │   ├── plans/                  # 阶段详细计划
+│   ├── workflows/              # 写课/写脉络工作流
 │   ├── archive/                # 历史存档
 │   └── ai-side/                # AI 侧线学习大纲
-│       ├── README.md
-│       ├── ai-engineering.md   # AI 工程整合索引
-│       ├── phase-10-llms-from-scratch.md
-│       ├── phase-13-tools-and-protocols.md
-│       ├── phase-14-agent-engineering.md
-│       └── 其他-phase.md
 ├── data/                       # 练习用数据文件
 ├── projects/
 │   ├── python/
 │   │   ├── tutorials/          # 每日Python教程
 │   │   ├── projects/           # 项目实战
 │   │   └── setup_day04_data.py # 数据生成脚本
-│   └── cpp/                    # C++摸底+项目
+│   └── cpp/                    # C++摸底+练习
 ├── resources/
 │   ├── 个人信息.md
 │   ├── 主脉络.md               # 全6阶段路线图
@@ -57,7 +57,7 @@ study_plan/
 │   ├── 课程匹配度与AI量化分析.md
 │   └── lib/资源库.md           # 完整资源索引
 ├── scripts/                    # 工具脚本
-├── COLLEAGUES.md               # 教学契约
+├── COLLEAGUES.md               # 教学契约（Hermes 交换信息）
 └── README.md
 ```
 
