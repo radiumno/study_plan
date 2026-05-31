@@ -56,6 +56,7 @@
 - 按需: `learning-roadmap` / `learning-cheatsheet`
 - 调试: `systematic-debugging`
 - 工作流: `course-writing` / `roadmap-writing` (用户说"开始学习"时自动走 course-writing)
+- 周审: `docs/workflows/周审流程.md` (周日执行，4阶段快扫→深挖→修复→报告，逐轮迭代新角度)
 
 ## Git
 - 每天学完问我是否 commit
