@@ -148,7 +148,9 @@ print("\n" + "=" * 40 + "\n练习 1.2")
 returns = [0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.01]
 
 # ↓ 你的代码 ↓
-
+import statistics
+print(statistics.mean(returns))
+print(statistics.median(returns))
 
 # ═══════════════════════════════════════════════════
 # 二, 自定义模块 --- 把你的代码分到不同文件
@@ -202,6 +204,9 @@ returns = [0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.01]
 prices = {"茅台": 180, "招行": 35, "平安": 45, "宁德": 220, "万科": 15}
 
 # ↓ 你的代码 ↓
+import day05_utils as utils
+print(utils.calculate_sharpe(returns))
+print(utils.filter_stocks(prices))
 
 
 # ═══════════════════════════════════════════════════
@@ -251,6 +256,12 @@ print("\n" + "=" * 40 + "\n练习 3.1")
 packages_to_check = ['requests', 'numpy', 'pandas', 'matplotlib', 'flask']
 
 # ↓ 你的代码 ↓
+# for i in packages_to_check:
+#   try:
+#     __import__(i)
+#     print(f'ok,{i}已安装')
+#   except ImportError:
+#     print(f'{i}未安装,请运行: pip install')
 
 
 # ═══════════════════════════════════════════════════
@@ -344,6 +355,9 @@ print("\n" + "=" * 40 + "\n练习 4.1")
 now = datetime.now()
 
 # ↓ 你的代码 ↓
+print(f"今天是{now.strftime('%Y年%m月%d日')}")
+print(f"当前时间是{now.strftime('%H:%M')}")
+print(f"今天是{now.strftime('%A')}")
 
 
 print("\n" + "=" * 40 + "\n练习 4.2")
@@ -357,6 +371,12 @@ print("\n" + "=" * 40 + "\n练习 4.2")
 date_strings = ['2026-05-26', '2026-05-27', '2026-05-28', '2026-05-29', '2026-05-30']
 
 # ↓ 你的代码 ↓
+date_times = []
+for i in date_strings:
+  date_times.append(datetime.strptime(i,'%Y-%m-%d'))
+for i in date_times:
+  print(datetime.strftime(i,"%A"))
+
 
 
 # --- 4.5 timedelta --- 时间差计算
@@ -406,6 +426,10 @@ buy_date_str = '2026-05-15'
 sell_date_str = '2026-05-28'
 
 # ↓ 你的代码 ↓
+buy_date_time = datetime.strptime(buy_date_str,"%Y-%m-%d")
+sell_date_time = datetime.strptime(sell_date_str,'%Y-%m-%d')
+diff = sell_date_time - buy_date_time
+print(f"持股{diff.days}天")
 
 
 # ═══════════════════════════════════════════════════
@@ -483,7 +507,13 @@ print("\n" + "=" * 40 + "\n练习 5.1")
 # 4. 用 Path('output').mkdir(exist_ok=True) 确保 output 目录存在
 
 # ↓ 你的代码 ↓
-
+p = Path('data/tech.csv')
+if p.exists():
+  print(p.name)
+  print(p.suffix)
+  print(p.stat().st_size)
+  print(p.parent)
+Path('output').mkdir(exist_ok=True)
 
 print("\n" + "=" * 40 + "\n练习 5.2")
 
@@ -498,6 +528,11 @@ print("\n" + "=" * 40 + "\n练习 5.2")
 #   5. 用 .strftime() 格式化为 "2026-05-30 14:30"
 
 # ↓ 你的代码 ↓
+for i in Path('data').iterdir() :
+  if i.suffix == '.csv':
+    time_ = i.stat().st_mtime
+    time_date = datetime.fromtimestamp(time_)
+    print(datetime.strftime(time_date,'%Y-%m-%d %H:%M'))
 
 
 # ═══════════════════════════════════════════════════
@@ -542,3 +577,13 @@ print("\n" + "=" * 40 + "\n综合练习")
 #        再用 open + write 写文件
 
 # ↓ 你的代码 ↓
+start = datetime(2026,5,1)
+end =  datetime(2026,6,1)
+print(len(utils.trading_days_between(start,end)))
+def prev_trading_day(date:datetime):
+  current = date - utils.timedelta(days=1)
+  while not utils.is_trading_day(current):
+    current -= utils.timedelta(days=1)
+  return current
+
+

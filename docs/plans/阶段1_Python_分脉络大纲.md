@@ -188,15 +188,15 @@
 
 参考 **QuantInsti** 和 **Coursera Python for Finance** 的组织方式，加入数据采集环节以保证技能完整性。
 
-| Day | 内容 | 参考来源 |
-|-----|------|---------|
-| 08 | NumPy 数组运算、广播、线性代数 | QuantInsti, NumPy 官方文档 |
-| 09 | Pandas 入门（Series/DataFrame） | Pandas 官方教程, QuantInsti |
-| 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance |
-| 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 |
-| 12 | 数据采集（yfinance API/requests） | 招聘需求:数据采集60%+ |
-| 13 | 数据清洗实战 | 招聘需求:ETL 60%+ |
-| 14 | 综合练习 | — |
+| Day | 内容 | 参考来源 | Whale-Quant 对照 |
+|-----|------|---------|-----------------|
+| 08 | NumPy 数组运算、广播、线性代数 | QuantInsti, NumPy 官方文档 | — |
+| 09 | Pandas 入门（Series/DataFrame） | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
+| 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 |
+| 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
+| 12 | 数据采集（baostock/akshare API） | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
+| 13 | 数据清洗实战 | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + 数据平台对比 |
+| 14 | 综合练习 | — | ch07 手写回测（简单版） |
 
 ---
 
@@ -260,6 +260,15 @@
 | [QuantInsti](https://www.quantinsti.com/) | 量化方向参考 | Part 2-3 |
 | [尚硅谷Python数据分析](https://b23.tv/BV1D9GLzyEL6) (168万播放) | NumPy/Pandas/Matplotlib视频 | Part 2 |
 | [鱼皮AI Guide](https://github.com/liyupi/ai-guide) (14.7k⭐) | AI工具链参考（Claude Code/Cursor等） | 全阶段备查 |
+| 🐳 **whale-quant 量化课程** | [GitHub](https://github.com/datawhalechina/whale-quant) / [本地参考](../../resources/lib/whale-quant学习路线参考.md) | **出课参考源**, 各章对应 Day 见右侧 | Day 09+ |
+| — ch01 投资与量化投资 | 通识阅读，不依赖编程基础 | 随时 |
+| — ch02 金融市场基础概念 | 通识阅读，补充金融基础 | 随时 |
+| — ch03 股票数据获取 | **数据采集/清洗出课参考** | **Day 09-13** |
+| — ch04 量化选股策略(MPT/CAPM/多因子) | 因子选股综合练习参考 | Day 13-14 |
+| — ch05 量化择时策略(双均线/MACD) | 择时策略综合练习参考 | Day 14 |
+| — ch06 量化调仓策略(仓位/有效前沿) | 组合优化概念参考 | Day 14(选修) |
+| — ch07 量化回测(pandas评估/Backtrader) | 回测评估指标出课参考 | **Day 11-14** |
+| — ch08 机器学习与量化策略 | 阶段2-3参考 | 阶段2+ |
 
 ---
 
@@ -273,3 +282,4 @@
 | 2026-05-28 | 新增依赖检查机制说明（关联 COLLEAGUES.md） |
 | 2026-05-28 | 推荐资源映射更新：加入廖雪峰/Python-100-Days/资源库/菜鸟/鱼皮AI Guide |
 | 2026-05-28 | 新增四大基础类型覆盖进度表 |
+| 2026-06-03 | 新增 whale-quant 出课参考源, Part 2 每日对照章节映射 |
