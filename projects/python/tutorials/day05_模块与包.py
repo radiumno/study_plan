@@ -585,5 +585,11 @@ def prev_trading_day(date:datetime):
   while not utils.is_trading_day(current):
     current -= utils.timedelta(days=1)
   return current
-
-
+def count_trading_days_until(target_date) :
+  today = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0)
+  return len(utils.trading_days_between(today,target_date))
+from datetime  import timedelta
+with open('output/trading_calendar.txt','w',encoding='utf-8') as f:
+  today = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0)
+  for i in utils.trading_days_between(today,today + timedelta(days=60)):
+    f.write(f"{datetime.strftime(i,'%Y-%m-%d(%A)')}\n")
