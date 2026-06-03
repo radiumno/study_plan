@@ -3,10 +3,13 @@
 > 参考: `resources/个人信息.md` | `resources/主脉络.md` | `resources/教学资源参考.md`
 
 ## 当前状态
-- **阶段:** 阶段1 Python基础 — 第2周（Python核心）
+- **主线:** 阶段1 Python基础 — 第2周（Python核心）
+- **辅线:** AI应用开发（Datawhale教程体系，阶段1结束后启动）
+- **量化:AI = 60:40**（数据加权计算，量化因学习曲线更陡占更多时间）
 - **已完成:** day01~day06（起步、列表字典、函数、set+文件+异常、模块与包+datetime、综合项目）
 - **Day 06 (综合项目:股票数据管理器):** 4个分步练习+综合练习, csv.DictReader/DictWriter
 - **Day 07 预告:** NumPy 数组运算 (Part 2 数据处理开始)
+- **AI辅线状态:** 未启动（阶段1完成后开始 easy-vibe Stage 1）
 - **练习规范:** 见 `resources/教学资源参考.md`（练习密度/粒度/设计模式）
 
 ## 教学模式

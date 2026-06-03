@@ -153,6 +153,7 @@ print("\n" + "=" * 40 + "\n练习 3.1: 读取 CSV")
 #   3. list(reader) 把迭代器转成列表, 返回
 
 # ↓ 你的代码 ↓
+def read_csv(filepath):
 
 
 # --- 3.2 数据概览 ---
