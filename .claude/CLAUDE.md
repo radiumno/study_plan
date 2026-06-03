@@ -57,8 +57,9 @@
 - "复习" → 抽综合题
 
 ## 目录
-- 教程: `projects/python/tutorials/dayXX_名称.py`
+- 教程: `projects/python/tutorials/dayXX_名称.py`（三线内容写在同一文件，不分开）
 - 项目: `projects/python/projects/`
+- AI项目: `projects/ai/`
 - C++: `projects/cpp/`
 - 计划: `docs/plans/`
 
