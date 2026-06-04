@@ -52,13 +52,12 @@ print("\n" + "=" * 40 + "\n练习 1: 找 bug")
 # 提示: 类型、索引、可变性、边界条件
 
 # --- 1.1 ---
-stock_prices = [12.5, 12.8, 13.0, 12.9]
+stock_prices = ["12.5", "12.8", "13.0", "12.9"]
 avg = sum(stock_prices) / len(stock_prices)
 print(f"均价: {avg}")
 above_avg = [p for p in stock_prices if p > avg]
-print(f"高于均价的股票数: {len(above_avg)}")
 
-# ↓ 你的代码 ↓ (这里没问题, 看看下面的)
+# ↓ 你的代码 ↓
 
 
 # --- 1.2 ---
