@@ -65,10 +65,6 @@ codes = ["000001", "000002", "000651"]
 prices = [12.5, 8.3, 225.0]
 for i in range(len(codes)):
     print(f"{codes[i]}: {prices[i]}")
-# 这代码能跑, 但结果不对. 哪错了?
-
-# ↓ 你的代码 ↓
-
 
 # --- 1.3 ---
 def add_stock(portfolio, code, shares):
@@ -77,13 +73,9 @@ def add_stock(portfolio, code, shares):
     return portfolio
 
 my_portfolio = {"000001": 100, "000002": 500}
-add_stock(my_portfolio, "000651", 200)
-print(my_portfolio)
-
-# 这段代码有 2 个设计问题. 找出来.
-
-# ↓ 你的代码 ↓
-
+# add_stock(my_portfolio, "000651", 200)
+# print(my_portfolio)
+print(add_stock(my_portfolio, "000651", 200))
 
 # --- 1.4 ---
 date_str = "2026-01-05"
