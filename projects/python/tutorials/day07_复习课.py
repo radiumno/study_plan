@@ -117,7 +117,7 @@ close_prices = [12.5, 8.3, 225.0, 1800.0, 226.5]
 holdings = [100, 500, 200, 50, 100]
 
 def analyze_portfolio(codes, prices, shares):
-    pass  # 替换为你的实现
+
 
 # ↓ 你的代码 ↓
 
