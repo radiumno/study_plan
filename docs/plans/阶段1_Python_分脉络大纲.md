@@ -1,7 +1,7 @@
 # 阶段1: Python 基础 — 分脉络大纲
 
 > 编写依据：调研 CS50P、Python 官方教程、Real Python、Exercism、QuantInsti 等课程后综合裁剪
-> 调研日期：2026-05-27（资源库更新：2026-05-28）
+> 调研日期：2026-05-27（最后更新：2026-06-05）
 > 学习者：孙溢镭，地大（武汉）数据科学，大一升大二，目标量化开发
 
 ---
@@ -53,7 +53,7 @@
 │   ├── Day 09: Pandas 入门 (+ JSON 处理)
 │   ├── Day 10: Pandas 进阶
 │   ├── Day 11: Matplotlib 可视化
-│   ├── Day 12: R2 复习日 (collections + itertools + generators)
+│   ├── Day 12: R2 复习日 (collections + itertools + generators + Git基础)
 │   ├── Day 13: 数据采集与清洗 (+ pytest 验证)
 │   ├── Day 14: 综合练习
 │
@@ -67,7 +67,7 @@
 
 ---
 
-## 3. Part 1: Python 核心（Days 01-06）
+## 3. Part 1: Python 核心（Days 01-07）
 
 ### 设计思路
 
@@ -198,9 +198,22 @@
 | 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
 | 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 |
 | 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
-| 12 | **R2 复习日** (collections + itertools + generators) | 补齐6个知识点缺口 | — |
-| 13 | 数据采集（baostock/akshare API）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
-| 14 | 综合练习 | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
+| 12 | **R2 复习日** (collections + itertools + generators + **Git基础**) | 补齐6个知识点缺口 + Git 80%岗位要求 | — |
+| 13 | 数据采集（baostock/akshare API + 基础API请求）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
+| 14 | **数据采集+清洗综合** (2天内容合并, 含API+CSV+清洗全流程) | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
+
+### Day 12 — R2 复习日 (补齐6个缺口)
+
+**目的:** 集中补齐量化开发必备但Part 1没覆盖的工具类知识
+
+**内容安排:**
+- `collections` 模块: Counter(统计交易频率), defaultdict(分组聚合), deque(滑动窗口)
+- `itertools` 模块: combinations(配对交易), groupby(时间窗口分组), chain(合并数据源)
+- `yield` 生成器: 模拟逐笔行情数据流, 省内存处理大文件
+- **Git 基础**: init/add/commit/push, 用实际项目练习
+- 找 bug 题: 覆盖以上4个知识点
+
+**参考:** `docs/cheatsheets/git基础.md`
 
 ---
 

@@ -64,7 +64,7 @@ above_avg = [p for p in stock_prices if float(p) > avg]
 codes = ["000001", "000002", "000651"]
 prices = [12.5, 8.3, 225.0]
 for i in range(len(codes)):
-    print(f"{codes[1]}: {prices[i]}")
+    print(f"{codes[i]}: {prices[i]}")
 # 这代码能跑, 但结果不对. 哪错了?
 
 # ↓ 你的代码 ↓
