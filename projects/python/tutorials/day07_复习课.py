@@ -125,7 +125,11 @@ def analyze_portfolio(codes, prices, shares):
         total_value += i[1]*i[2]
         dict_temp[i[0]] = i[1]*i[2]
     final_dict['total_value'] = total_value
-    for code,value in dict_temp.items():
+    dict_sorted = sorted(dict_temp,key = lambda x:x[1])
+    final_dict['max_stock'] = dict_sorted[len(dict_sorted)].key()
+    final_dict['min_stock'] = dict_sorted[0].key()
+    final_dict['"sorted_by_value"'] = dict_sorted
+
 
 
 
