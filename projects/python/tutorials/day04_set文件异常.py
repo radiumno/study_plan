@@ -215,7 +215,7 @@ def safe_divide(a:float,b:float)->float:
         return result
     except ZeroDivisionError:
         print("除数为零")
-        return None
+        return 0
 def get_stock_price(data ,name : str):
     try:
         return data[name]

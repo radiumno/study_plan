@@ -79,6 +79,7 @@ print(add_stock(my_portfolio, "000651", 200))
 
 # --- 1.4 ---
 date_str = "2026-01-05"
+date_str.replace('/','-')
 dt = datetime.strptime(date_str, "%Y-%m-%d")
 next_day = dt + timedelta(days=1)
 print(f"下一天: {next_day}")
@@ -87,6 +88,11 @@ print(f"下一天: {next_day}")
 # 不改 datetime.strptime 的前提下, 先处理字符串.
 
 # ↓ 你的代码 ↓
+def next_day_(date_str : str):
+    date_str.replace('/','-')
+    dt = datetime.strptime(date_str, "%Y-%m-%d")
+    next_day = dt + timedelta(days=1)
+    print(f"下一天: {next_day}")
 
 
 # ═══════════════════════════════════════════════════
