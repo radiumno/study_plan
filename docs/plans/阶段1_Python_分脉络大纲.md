@@ -211,6 +211,7 @@
 - `itertools` 模块: combinations(配对交易), groupby(时间窗口分组), chain(合并数据源)
 - `yield` 生成器: 模拟逐笔行情数据流, 省内存处理大文件
 - **Git 基础**: init/add/commit/push, 用实际项目练习
+- **GitHub 项目包装**: README怎么写, 项目文档组织, 如何让简历好看
 - 找 bug 题: 覆盖以上4个知识点
 
 **参考:** `docs/cheatsheets/git基础.md`

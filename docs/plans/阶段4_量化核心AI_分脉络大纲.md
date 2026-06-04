@@ -49,11 +49,11 @@
 │   ├── Week 21-22: 简历+八股+模拟面试
 │   ├── Week 23-24: 海投 + 面试
 │
-└── AI辅线 (并行, 贯穿Part 1-4)
+└── AI辅线 (并行, 贯穿Part 1-3 + 暑假)
     ├── Stage 1: LangChain入门 (Week 5-8)
     ├── Stage 2: RAG实战 (Week 9-14)
     ├── Stage 3: Agent开发 (Week 15-20)
-    └── Stage 4: LLM微调入門 (Week 21-24)
+    └── Stage 4: LLM微调入門 → 移至暑假(阶段5期间)
 ```
 
 ---
@@ -224,13 +224,19 @@ DataLoader → Strategy → Portfolio → Metrics → Report
 | 多工具编排 | LLM Cookbook | 组合工具 |
 | **项目:** 量化数据查询Agent | 自编 | Agent+量化数据 |
 
-### Stage 4: LLM微调入門 (Week 21-24)
+### Stage 4: LLM微调入門 → 移至暑假
 
-| 知识点 | 参考 | 产出 |
-|------|------|------|
-| LoRA/QLoRA原理 | Happy-LLM | 理解微调原理 |
-| LLaMA-Factory实战 | LLaMA-Factory | 微调小模型 |
-| 数据集准备 | Self-LLM | 指令数据构建 |
+> ⚠️ 阶段4内容量过高, 微调部分移到暑假(阶段5期间)进行.
+> 阶段4 Week 21-24 专注: 实习准备 + 项目收尾 + 刷题.
+
+暑假微调安排:
+
+| 知识点 | 参考 | 时间估计 |
+|------|------|---------|
+| LoRA/QLoRA原理 | Happy-LLM | 2天 |
+| LLaMA-Factory实战 | LLaMA-Factory | 3天 |
+| 数据集准备+微调 | Self-LLM | 3天 |
+| **产出:** 微调后的模型 + 使用文档 | — | 1周 |
 
 ---
 
@@ -239,7 +245,7 @@ DataLoader → Strategy → Portfolio → Metrics → Report
 | 检查项 | 状态 |
 |--------|------|
 | 1. 岗位要求覆盖 (多线程80%+/网络60%+/SQL50%+/金融50%) | ✅ 全部覆盖 |
-| 2. AI辅线完整 (LangChain/RAG/Agent/微调) | ✅ 4个Stage |
+| 2. AI辅线完整 (LangChain/RAG/Agent/微调) | ✅ 4个Stage (微调移至暑假减压) |
 | 3. AI+量化交叉 (PyTorch因子+LLM另类数据) | ⏳ 可选 |
 | 4. 考研重叠 (OS/网络/计组+数一) | ✅ 贯穿 |
 | 5. 产出 (回测引擎+因子+GitHub) | ✅ 2个大项目 |

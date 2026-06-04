@@ -117,6 +117,16 @@ close_prices = [12.5, 8.3, 225.0, 1800.0, 226.5]
 holdings = [100, 500, 200, 50, 100]
 
 def analyze_portfolio(codes, prices, shares):
+    portfolio = list(zip(codes,close_prices,holdings))
+    total_value =0
+    dict_temp = {}
+    final_dict ={}
+    for i in portfolio :
+        total_value += i[1]*i[2]
+        dict_temp[i[0]] = i[1]*i[2]
+    final_dict['total_value'] = total_value
+    for code,value in dict_temp.items():
+
 
 
 # ↓ 你的代码 ↓
