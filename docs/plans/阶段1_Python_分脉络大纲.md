@@ -48,17 +48,18 @@
 │   ├── Day 06: 综合项目（股票数据管理器）   ✅
 │   ├── Day 07: 复习课（查漏补缺）          ✅ (2026-06-05新增)
 │
-├── Part 2: 数据处理（Days 08-13，2周）⏳
-│   ├── Day 08: NumPy 数组运算
-│   ├── Day 09: Pandas 入门
+├── Part 2: 数据处理（Days 08-14，2周+）⏳
+│   ├── Day 08: NumPy 数组运算 (+ 正则 re)
+│   ├── Day 09: Pandas 入门 (+ JSON 处理)
 │   ├── Day 10: Pandas 进阶
 │   ├── Day 11: Matplotlib 可视化
-│   ├── Day 12: 数据采集与清洗实战
-│   ├── Day 13: 综合练习
+│   ├── Day 12: R2 复习日 (collections + itertools + generators)
+│   ├── Day 13: 数据采集与清洗 (+ pytest 验证)
+│   ├── Day 14: 综合练习
 │
-├── Part 3: 项目实战（Days 14-15，1周）
-│   ├── Day 14: 股票分析工具 v1
-│   └── Day 15: 股票分析工具 v2
+├── Part 3: 项目实战（Days 15-16，1周）
+│   ├── Day 15: 股票分析工具 v1
+│   └── Day 16: 股票分析工具 v2
 │
 └── 弹性周（1周）
     └── 补进度 / 刷题 / 深入薄弱环节
@@ -187,27 +188,28 @@
 
 ---
 
-## 4. Part 2: 数据处理（Days 08-13）
+## 4. Part 2: 数据处理（Days 08-14）
 
-参考 **QuantInsti** 和 **Coursera Python for Finance** 的组织方式，加入数据采集环节以保证技能完整性。
+参考 **QuantInsti** 和 **Coursera Python for Finance** 的组织方式，加入数据采集环节以保证技能完整性。依据 2026-06-05 优化调整，新增 R2 复习日补齐 collections / itertools / generators 缺口。
 
 | Day | 内容 | 参考来源 | Whale-Quant 对照 |
 |-----|------|---------|-----------------|
-| 08 | NumPy 数组运算、广播、线性代数 | QuantInsti, NumPy 官方文档 | — |
-| 09 | Pandas 入门（Series/DataFrame） | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
+| 08 | NumPy 数组运算、广播、线性代数 **+ 正则 re** | QuantInsti, NumPy 官方文档 | — |
+| 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
 | 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 |
 | 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
-| 12 | 数据采集（baostock/akshare API） | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
-| 13 | 数据清洗+综合练习 | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
+| 12 | **R2 复习日** (collections + itertools + generators) | 补齐6个知识点缺口 | — |
+| 13 | 数据采集（baostock/akshare API）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
+| 14 | 综合练习 | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
 
 ---
 
-## 5. Part 3: 项目实战（Days 14-15）
+## 5. Part 3: 项目实战（Days 15-16）
 
 | Day | 内容 | 对应岗位能力 |
 |-----|------|-------------|
-| 14 | 股票分析工具 v1（纯Python） | 数据处理、文件I/O |
-| 15 | 股票分析工具 v2（Pandas版）| 数据分析、时间序列 |
+| 15 | 股票分析工具 v1（纯Python） | 数据处理、文件I/O |
+| 16 | 股票分析工具 v2（Pandas版）| 数据分析、时间序列 |
 
 ---
 

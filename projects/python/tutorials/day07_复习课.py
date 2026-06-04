@@ -53,12 +53,12 @@ print("\n" + "=" * 40 + "\n练习 1: 找 bug")
 
 # --- 1.1 ---
 stock_prices = ["12.5", "12.8", "13.0", "12.9"]
-avg = sum(stock_prices) / len(stock_prices)
+price_list = []
+for i in stock_prices:
+    price_list.append(float(i))
+avg = sum(price_list) / len(stock_prices)
 print(f"均价: {avg}")
-above_avg = [p for p in stock_prices if p > avg]
-
-# ↓ 你的代码 ↓
-
+above_avg = [p for p in stock_prices if float(p) > avg]
 
 # --- 1.2 ---
 codes = ["000001", "000002", "000651"]
