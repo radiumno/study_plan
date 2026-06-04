@@ -89,8 +89,8 @@ print(f"下一天: {next_day}")
 
 # ↓ 你的代码 ↓
 def next_day_(date_str : str):
-    date_str.replace('/','-')
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
+    date_str_new = date_str.replace('/','-')
+    dt = datetime.strptime(date_str_new, "%Y-%m-%d")
     next_day = dt + timedelta(days=1)
     print(f"下一天: {next_day}")
 
