@@ -154,6 +154,11 @@ print("\n" + "=" * 40 + "\n练习 3.1: 读取 CSV")
 
 # ↓ 你的代码 ↓
 def read_csv(filepath):
+    with open(filepath , 'r' ,encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        return list(reader)
+
+
 
 
 # --- 3.2 数据概览 ---
@@ -190,6 +195,14 @@ print("\n" + "=" * 40 + "\n练习 3.2: 数据概览")
 #     保留 2 位小数: f"{avg:.2f}"
 
 # ↓ 你的代码 ↓
+def show_overview(data):
+    print(f"总共记录数:{len(data)}")
+    stock_set = set(row['code'] for row in data)
+    print(f'股票种类:{len(stock_set)}')
+    time_set = set(row['date'] for row in data)
+    print(f"日期范围:{min(time_set)}~{max(time_set)}")
+    close_price_avg = sum(float(row['close']) for row in data)/len(data)
+    print(f"平均收盘价{close_price_avg:.2f}")
 
 
 # --- 3.3 按交易量筛选 ---
@@ -215,6 +228,9 @@ print("\n" + "=" * 40 + "\n练习 3.3: 按交易量筛选")
 # 用列表推导式, volume 转 int 再比较
 
 # ↓ 你的代码 ↓
+def filter_by_volume(data, min_vol):
+    stock_filtered = list(row for row in data if int(row['volume']) > min_vol)
+    return stock_filtered
 
 
 # --- 3.4 用 csv.DictWriter 导出 CSV ---
@@ -253,6 +269,13 @@ print("\n" + "=" * 40 + "\n练习 3.4: 导出 CSV")
 #   5. 遍历 data, 逐个 writerow(row)
 
 # ↓ 你的代码 ↓
+def export_csv(data,filepath):
+    fieldnames = data[0].keys()
+    with open(filepath,'w',newline='',encoding='utf-8') as f:
+        writer = csv.DictWriter(f,fieldnames=fieldnames)
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
 
 
 # ═══════════════════════════════════════════════════
@@ -269,7 +292,7 @@ print("\n" + "=" * 40 + "\n综合练习")
 #   3. 用 show_overview 打印概览
 #   4. 用 filter_by_volume 筛选交易量 > 2_000_000 的记录
 #   5. 用 export_csv 将筛选结果写到 filtered_output.csv
-#   6. 再 read_csv('filtered_output.csv') + show_overview 验证
+#   6. 再 read_csv(filtered_output.csv) + show_overview 验证
 #
 # 最后调用 main() 启动.
 #
@@ -278,3 +301,12 @@ print("\n" + "=" * 40 + "\n综合练习")
 #   - fieldnames 可以从 data[0].keys() 拿到
 
 # ↓ 你的代码 ↓
+def main():
+    prepare_data()
+    data = read_csv('stock_data.csv')
+    show_overview(data)
+    data_filtered = filter_by_volume(data, 2_000_000)
+    export_csv(data_filtered,'filtered_output.csv')
+    data_final = read_csv('filtered_output.csv')
+    show_overview(data_final)
+main()
