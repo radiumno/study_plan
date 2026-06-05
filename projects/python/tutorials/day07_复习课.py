@@ -117,19 +117,24 @@ close_prices = [12.5, 8.3, 225.0, 1800.0, 226.5]
 holdings = [100, 500, 200, 50, 100]
 
 def analyze_portfolio(codes, prices, shares):
-    portfolio = list(zip(codes,close_prices,holdings))
+    portfolio = list(zip(codes,prices,shares))
     total_value =0
+    sum = 0
     dict_temp = {}
     final_dict ={}
     for i in portfolio :
         total_value += i[1]*i[2]
         dict_temp[i[0]] = i[1]*i[2]
     final_dict['total_value'] = total_value
-    dict_sorted = sorted(dict_temp,key = lambda x:x[1])
-    final_dict['max_stock'] = dict_sorted[len(dict_sorted)].key()
-    final_dict['min_stock'] = dict_sorted[0].key()
-    final_dict['"sorted_by_value"'] = dict_sorted
-
+    dict_sorted = sorted(dict_temp.items(),key = lambda x:x[1],reverse=True)
+    final_dict['min_stock'] = dict_sorted[len(dict_sorted)-1][0]
+    final_dict['max_stock'] = dict_sorted[0][0]
+    final_dict["sorted_by_value"] = dict_sorted
+    for i in portfolio:
+        sum += i[1]
+    avg_prince = sum/len(portfolio)
+    final_dict['avg_price']=avg_prince
+    return final_dict
 
 
 
@@ -159,10 +164,29 @@ print("\n" + "=" * 40 + "\n练习 3: 板块交叉分析")
 #
 # 提示: set 是去重利器. 文件操作别忘了 try/except.
 
-def analyze_sectors():
-    pass  # 替换为你的实现
-
-# ↓ 你的代码 ↓
+def analyze_sectors(filepath_1,filepath_2):
+    tech_set = set()
+    finance_set = set()
+    try:
+        with open(filepath_1,'r',encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                tech_set.add(row[0])
+    except FileNotFoundError:
+        print(f"未找到路径为{filepath_1}的文件,请确认路径是否正确")
+    try :
+        with open(filepath_2,'r',encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                finance_set.add(row[0])
+    except FileNotFoundError:
+        print(f"未找到路径为{filepath_2}的文件,请确认路径是否正确")
+    return_dict = {}
+    return_dict['finance_only'] = finance_set - tech_set
+    return_dict['tech_only'] = tech_set - finance_set
+    return_dict['common'] = finance_set & tech_set
+    return_dict['total'] = len(finance_set | tech_set)
+    return return_dict
 
 
 # ═══════════════════════════════════════════════════
@@ -196,10 +220,20 @@ print("\n" + "=" * 40 + "\n练习 4: 交易日历生成器")
 
 WEEKDAY_NAMES = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
-def generate_trading_calendar(start_date, days, output_file):
-    pass  # 替换为你的实现
+def generate_trading_calendar(start_date : datetime, days, output_file):
+    count = 0
+    list = []
+    current = start_date
+    with open(output_file,'w',newline='',encoding='utf-8') as f:
+        writer = csv.writer(f)
+        while count < days :
+            if current.weekday() < 5 :
+                list.append([current.strftime('%Y-%m-%d') ,WEEKDAY_NAMES[current.weekday()]])
+                count += 1
+            current += timedelta(days=1)
+        writer.writerows(list)
+generate_trading_calendar(datetime(2026, 6, 1), 10, "trading_calendar.csv")
 
-# ↓ 你的代码 ↓
 
 
 # ═══════════════════════════════════════════════════
