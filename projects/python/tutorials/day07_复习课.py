@@ -136,6 +136,11 @@ def analyze_portfolio(codes, prices, shares):
     final_dict['avg_price']=avg_prince
     return final_dict
 
+# FIXME 1: 调用了吗？ — 这个函数定义了但没被调用, 底部加一行调用测试.
+# 提示: print(analyze_portfolio(codes, close_prices, holdings))
+# FIXME 2: sum 覆盖了 Python 内置函数, 建议改名 total_price
+# FIXME 3: avg_prince 拼写错误 → avg_price
+
 
 
 # ↓ 你的代码 ↓
@@ -188,6 +193,8 @@ def analyze_sectors(filepath_1,filepath_2):
     return_dict['total'] = len(finance_set | tech_set)
     return return_dict
 
+# FIXME 4: 调用了吗？ — 底部加一行 print(analyze_sectors("data/tech.csv", "data/finance.csv"))
+
 
 # ═══════════════════════════════════════════════════
 # 练习 4: 综合管道 (Days 01-06 全覆盖)
@@ -220,19 +227,22 @@ print("\n" + "=" * 40 + "\n练习 4: 交易日历生成器")
 
 WEEKDAY_NAMES = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
-def generate_trading_calendar(start_date : datetime, days, output_file):
+def generate_trading_calendar(start_date, days, output_file):
+    # FIXME 5: 参数 start_date 题目要求是 str "2026-01-05", 别改成 datetime
     count = 0
-    list = []
-    current = start_date
+    rows = []  # FIXME 6: list 是内置类型, 改名 rows
+    current = datetime.strptime(start_date, "%Y-%m-%d")
     with open(output_file,'w',newline='',encoding='utf-8') as f:
         writer = csv.writer(f)
+        # FIXME 7: 缺表头 — 先用 writer.writerow(["date", "weekday", "week_num"])
+        # FIXME 8: 缺 week_num 列 — 第3列应该是当前是第几个交易日
         while count < days :
             if current.weekday() < 5 :
-                list.append([current.strftime('%Y-%m-%d') ,WEEKDAY_NAMES[current.weekday()]])
+                rows.append([current.strftime('%Y-%m-%d'), WEEKDAY_NAMES[current.weekday()], count + 1])
                 count += 1
             current += timedelta(days=1)
-        writer.writerows(list)
-generate_trading_calendar(datetime(2026, 6, 1), 10, "trading_calendar.csv")
+        writer.writerows(rows)
+generate_trading_calendar("2026-06-01", 10, "trading_calendar.csv")
 
 
 
@@ -264,6 +274,20 @@ print("\n" + "=" * 40 + "\n练习 5: 多股票区间筛选器 (选做)")
 # 提示: 日期字符串 "2026-01-06" 可以直接用 >= <= 比较.
 
 def filter_stocks_by_date(data_path, start, end, codes):
-    pass  # 替换为你的实现
+    result = {}
+    for i in codes :
+        result[i] = []
+    try:
+        with open(data_path,'r',encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row['date'] >= start and row['date'] <= end :
+                    if row['code'] in codes:
+                        result[row['code']].append(row)
+    except FileNotFoundError:
+        print('未找到文件')
+        return {}
+    return result
 
-# ↓ 你的代码 ↓
+# FIXME 9: 没调用 — 底部加测试:
+# print(filter_stocks_by_date("stock_data.csv", "2026-01-06", "2026-01-09", ["000001", "000002"]))
