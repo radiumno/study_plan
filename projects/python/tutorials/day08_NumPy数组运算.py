@@ -82,6 +82,9 @@ print("\n" + "=" * 40 + "\n前情回顾: 列表切片热身")
 weekly_data = [10.5, 11.0, 10.8, 11.2, 10.9]
 
 # ↓ 你的代码 ↓
+print(weekly_data[0:3])
+print(weekly_data[-1:-3:-1])
+print(weekly_data[::2])
 
 
 # ═══════════════════════════════════════════════════
@@ -172,6 +175,11 @@ closes = [12.5, 12.8, 12.4, 12.75, 13.0, 12.9]
 # 提示: 转成数组后看看它的 shape 和 dtype
 
 # ↓ 你的代码 ↓
+ndarry = np.array(closes)
+print(ndarry.shape)
+print(ndarry.dtype)
+print(ndarry.ndim)
+print(len(ndarry))
 
 
 print("\n" + "=" * 40 + "\n练习 1.2: 用 arange / zeros / random 创建")
@@ -184,6 +192,12 @@ print("\n" + "=" * 40 + "\n练习 1.2: 用 arange / zeros / random 创建")
 # 4. 打印 3 个数组的 shape
 
 # ↓ 你的代码 ↓
+trading_days = np.arange(1,21)
+prices = np.zeros(20)
+daily_returns = np.random.randn(20)
+print(trading_days.shape)
+print(prices.shape)
+print(daily_returns.shape)
 
 
 print("\n" + "=" * 40 + "\n练习 1.3: 二维数组")
@@ -203,7 +217,11 @@ print("\n" + "=" * 40 + "\n练习 1.3: 二维数组")
 # 打印: 数组, shape, ndim, dtype
 
 # ↓ 你的代码 ↓
-
+list_1=[12.5, 8.2, 225.0],[12.8, 8.3, 226.5],[12.4, 8.1, 224.0], [12.7, 8.4, 227.0],  [13.0, 8.5, 228.0]
+arr_1=np.array(list_1)
+print(arr_1.shape)
+print(arr_1.ndim)
+print(arr_1.dtype)
 
 # ═══════════════════════════════════════════════════
 # 二, 数组运算 (向量化) -- 告别 for 循环
