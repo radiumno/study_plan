@@ -1,0 +1,9 @@
+- [项目概览](vpn-guide-foreign-trade.md) — 项目状态和核心事实
+- [Hysteria2 服务端配置](server-config-hysteria2.md) — 已验证可用
+- [VLESS Reality 服务端配置](server-config-vless-reality.md) — 待修复
+- [Hiddify 客户端设置](client-setup-hiddify.md) — Windows已通
+- [RackNerd VPS 详情](vps-racknerd-details.md) — 配置和费用
+- [协议决策记录](protocol-decision-log.md) — Hysteria2 vs Reality
+- [维护清单](maintenance-checklist.md) — 定期维护和故障排查
+- [姐姐上线计划](sister-onboarding-plan.md) — 待执行
+- [经验教训](lessons-learned.md) — 踩坑记录

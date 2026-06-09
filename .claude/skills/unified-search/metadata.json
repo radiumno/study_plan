@@ -1,0 +1,9 @@
+{
+  "name": "unified-search",
+  "version": "1.0.0",
+  "description": "Unified search: 16 direct engines (no key) + AnySearch API (optional key). Auto-routes queries, supports vertical/batch/domain search.",
+  "engines": 16,
+  "anysearch_domains": 7,
+  "requires_api_key": false,
+  "anysearch_optional": true
+}
