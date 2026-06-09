@@ -1,0 +1,19 @@
+- [User Background](user-background.md) — 用户背景：地大数据科学专业，量化开发方向
+- [Study Plan Architecture](study-plan-architecture.md) — 量化开发学习规划项目结构
+- [English Punctuation](english-punctuation.md) — 全程使用英文符号, 禁用中文全角标点
+- [Exercise Design Pattern](exercise-design-pattern.md) — 练习设计: 按难度调数量, 覆盖基础细节, 平衡每日内容
+- [Never Fabricate](never-fabricate.md) — 绝对禁止编造/假装完成未实际执行的操作
+- [CloakAgent Fallback](cloakagent-fallback.md) — WebSearch/WebFetch 不可用时用 CloakAgent 代替
+- [Teaching Check Exercises](teaching-check-exercises.md) — 给提示前核对已教知识点，确保不跳步
+- [Daily Progress Display](daily-progress-display.md) — 每天显示当前阶段进度：已教/待学/当前位置
+- [Sub Threads Research Based](sub-threads-research-based.md) — 分脉络基于网络教程调研+用户目标背景编写
+- [Curriculum Prerequisite Check](curriculum-prerequisite-check.md) — 课程设计必须做前置依赖检查，新知识点所用类型/概念必须在之前教过
+- [Teaching Explain Every Step](teaching-explain-every-step.md) — teaching must explain every parameter step by step, written in code comments not just verbal
+- [Claude Code Mistakes Log](claude-code-mistakes-log.md)
+- [Course & Roadmap Workflows](course-and-roadmap-workflows.md) — 写课程+写脉络两条工作流程, 每次动手前自查
+- [Commit Before & After Lesson](commit-before-after-lesson.md) — 写新课前先commit当前进度, 写完再commit一次
+- [Exercises Must Be Empty](exercises-must-be-empty.md) — 练习区必须留空, 不能预填答案; 写完做反向检查
+- [Conversation History Guide](conversation-history-guide.md) — 全项目对话历史总览, 时间线/项目/话题索引, 历史错误与教训
+- [Search Mastery Lessons](search-mastery-lessons.md) — 搜索能力最大化的操作原则、工具选择、数据可信度标注、自我纠偏
+- [Career Dual Track Decision](career-dual-track-decision.md) — 2026-06-04确定: 量化开发+AI应用+考研三线并行
+- [Exercise Hierarchy](exercise-hierarchy.md) — 练习四层结构：子知识点→Part综合→Day综合→周复习
