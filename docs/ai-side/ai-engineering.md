@@ -10,7 +10,7 @@ date: 2026-05-29
 
 # AI Engineering 整合索引
 
-> 本文件是 `D:\Dev\AiProject\_ai_ref\` (ai-engineering-from-scratch, 23.7k stars)
+> 本文件是 `projects/ai-engineering\` (ai-engineering-from-scratch, 23.7k stars)
 > 与 study_plan 的桥梁。每条目标注：🟢融入主线 | 🟡AI侧线 | ⬜跳过
 
 ---
@@ -23,7 +23,7 @@ date: 2026-05-29
 | 🟡 AI 侧线 | 11 Phase | 单独放 `docs/ai-side/`，有空再学 |
 | ⬜ 跳过 | 3 Phase | 跟你的方向完全不重叠 |
 
-**本地路径：** `D:\Dev\AiProject\_ai_ref\phases\<NN>-<name>\`
+**本地路径：** `projects/ai-engineering\phases\<NN>-<name>\`
 **在线阅读：** https://aiengineeringfromscratch.com
 
 ---
@@ -288,7 +288,7 @@ AI 模型部署/推理优化。跟量化的低延迟优化有交集，有空可�
 
 ```bash
 # 打开对应 Lesson 的 code/ 目录
-cd D:\Dev\AiProject\_ai_ref\phases\03-deep-learning-core\03-backpropagation-from-scratch\code\
+cd projects/ai-engineering\phases\03-deep-learning-core\03-backpropagation-from-scratch\code\
 # 跑一遍手撸代码
 python backprop.py
 ```
@@ -297,9 +297,9 @@ python backprop.py
 
 ```bash
 # 直接打开 AI 侧线目录
-cd D:\Dev\AiProject\study_plan\docs\ai-side\
-# 或者直接进 _ai_ref 翻
-cd D:\Dev\AiProject\_ai_ref\phases\14-agent-engineering\01-the-agent-loop\code\
+cd docs/ai-side/
+# 或者直接进 projects/ai-engineering 翻
+cd projects/ai-engineering/phases/14-agent-engineering/01-the-agent-loop/code/
 python agent_loop.py
 ```
 

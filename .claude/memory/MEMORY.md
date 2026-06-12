@@ -3,7 +3,6 @@
 - [English Punctuation](english-punctuation.md) — 全程使用英文符号, 禁用中文全角标点
 - [Exercise Design Pattern](exercise-design-pattern.md) — 练习设计: 按难度调数量, 覆盖基础细节, 平衡每日内容
 - [Never Fabricate](never-fabricate.md) — 绝对禁止编造/假装完成未实际执行的操作
-- [CloakAgent Fallback](cloakagent-fallback.md) — WebSearch/WebFetch 不可用时用 CloakAgent 代替
 - [Teaching Check Exercises](teaching-check-exercises.md) — 给提示前核对已教知识点，确保不跳步
 - [Daily Progress Display](daily-progress-display.md) — 每天显示当前阶段进度：已教/待学/当前位置
 - [Sub Threads Research Based](sub-threads-research-based.md) — 分脉络基于网络教程调研+用户目标背景编写

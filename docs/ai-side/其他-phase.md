@@ -22,7 +22,7 @@ tags: [AI侧线, 其他]
 
 **跑一个：**
 ```bash
-cd D:\Dev\AiProject\_ai_ref\phases\04-computer-vision\02-convolutions-from-scratch\code
+cd projects/ai-engineering\phases\04-computer-vision\02-convolutions-from-scratch\code
 python conv_from_scratch.py
 ```
 

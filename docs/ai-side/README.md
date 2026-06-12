@@ -38,10 +38,10 @@ date: 2026-06-04
 
 ## 怎么学
 
-### 方式一：直接去 _ai_ref 翻 code/
+### 方式一：去 projects/ai-engineering/ 翻 code/
 
 ```bash
-cd D:\Dev\AiProject\_ai_ref\phases\14-agent-engineering\01-the-agent-loop\code\
+cd projects/ai-engineering/phases/14-agent-engineering/01-the-agent-loop/code/
 python agent_loop.py
 ```
 

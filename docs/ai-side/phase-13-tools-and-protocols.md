@@ -29,7 +29,7 @@ AI 和现实世界之间的接口。Function Calling → Structured Output → M
 ## 怎么跑
 
 ```bash
-cd D:\Dev\AiProject\_ai_ref\phases\13-tools-and-protocols\07-building-an-mcp-server\code
+cd projects/ai-engineering\phases\13-tools-and-protocols\07-building-an-mcp-server\code
 python mcp_server.py
 ```
 

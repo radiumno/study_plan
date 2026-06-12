@@ -30,7 +30,7 @@ tags: [AI侧线, LLM, Phase10]
 
 ```bash
 # 手撸 tokenizer
-cd D:\Dev\AiProject\_ai_ref\phases\10-llms-from-scratch\02-building-a-tokenizer-from-scratch\code
+cd projects/ai-engineering\phases\10-llms-from-scratch\02-building-a-tokenizer-from-scratch\code
 python tokenizer.py
 
 # Mini GPT 训练

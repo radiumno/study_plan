@@ -86,7 +86,7 @@ date: 2026-06-04
 
 | 阶段 | 状态 | 位置 |
 |------|------|------|
-| easy-vibe Stage 1 | ⏳ 待开始 | `D:\Dev\AiProject\_ai_ref` |
+| easy-vibe Stage 1 | ⏳ 待开始 | `projects/ai-engineering` |
 | PyTorch入门 | ⏳ 待开始 | — |
 | Transformer原理 | ⏳ 待开始 | — |
 | LangChain/RAG/Agent | ⏳ 待开始 | — |

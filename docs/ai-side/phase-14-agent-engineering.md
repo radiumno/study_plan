@@ -38,7 +38,7 @@ tags: [AI侧线, Agent, Phase14]
 
 ```bash
 # 先跑 Agent 核心循环
-cd D:\Dev\AiProject\_ai_ref\phases\14-agent-engineering\01-the-agent-loop\code
+cd projects/ai-engineering\phases\14-agent-engineering\01-the-agent-loop\code
 python agent_loop.py
 
 # 再跑记忆系统
