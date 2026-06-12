@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "web-research": {
-      "command": "npx",
-      "args": ["-y", "web-research-mcp"]
-    }
-  }
-}
