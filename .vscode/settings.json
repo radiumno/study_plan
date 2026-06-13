@@ -1,0 +1,54 @@
+{
+  // === Python 运行环境 ===
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+
+  // === 自学模式：关闭所有补全与提示 ===
+
+  // Cursor Tab / AI 内联补全
+  "editor.inlineSuggest.enabled": false,
+  "cursor.completions.enabled": false,
+  "cursor.cpp.enablePartialAccepts": false,
+
+  // 常规编辑器补全
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.tabCompletion": "off",
+  "editor.wordBasedSuggestions": "off",
+  "editor.parameterHints.enabled": false,
+  "editor.snippetSuggestions": "none",
+  "editor.hover.enabled": false,
+  "editor.lightbulb.enabled": "off",
+  "editor.codeLens": false,
+
+  // Python / Pylance 智能提示
+  "python.languageServer": "None",
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.completeFunctionParens": false,
+
+  // Copilot（若已安装扩展）
+  "github.copilot.enable": {
+    "*": false
+  },
+
+  "[python]": {
+    "editor.quickSuggestions": {
+      "other": "off",
+      "comments": "off",
+      "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "editor.parameterHints.enabled": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.tabCompletion": "off",
+    "editor.hover.enabled": false,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  }
+}
