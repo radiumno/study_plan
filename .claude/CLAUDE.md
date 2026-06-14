@@ -2,9 +2,28 @@
 
 > 参考: `resources/个人信息.md` | `resources/主脉络.md` | `resources/教学资源参考.md`
 
+## 全局规则引用
+- 本文件覆盖项目特定规则，通用行为规则见全局 APPEND_SYSTEM.md
+- ~/.claude/memory/ 中的记忆文件在所有项目中可用，相关内容会自动加载
+
+## 记忆文件使用
+- memory/ 下的 .md 文件会作为上下文自动加载，不要删除，只需更新内容
+- 教学中的新决策/教训 → 写入 memory/claude-code-mistakes-log.md（带日期戳）
+- 课程进度 → 写入 memory/daily-progress-display.md
+- 用户背景变更 → 写入 memory/user-background.md
+
+## 资源库参考规范
+- 写课前必须引用至少2个资源库中的源，标注在文件顶部
+- 资源库: resources/lib/（如发现新资源，添加到该目录）
+
+## Day 08+ 注意事项
+- Part 2（NumPy/Pandas）的练习应使用真实或合理的股票/金融数据
+- 综合练习需跨知识点，可引导学生用已学 AI 辅助调试
+- 每3-5天插入一个复习日，形式为找 bug + 跨 days 综合题
+
 ## 当前状态
 - **主线:** 阶段1 Python基础 — 第3周（Part 2 数据处理开始）
-- **辅线:** AI应用开发（Datawhale教程体系，阶段1结束后启动）
+- **辅线:** AI应用开发（阶段1结束后启动，路线图: `resources/lib/资源库.md` → AI辅线升级 → **start-ai-engineering**）
 - **考研备考:** 与技能学习高度重叠（408/数一/英一），无需额外大量时间
 - **量化:AI = 60:40**（数据加权计算，量化因学习曲线更陡占更多时间）
 - **已完成:** day01~day07（起步、列表字典、函数、set+文件+异常、模块与包+datetime、综合项目、复习课）
@@ -76,6 +95,17 @@
 - 周审: `docs/workflows/周审流程.md` (周日执行，4阶段快扫→深挖→修复→报告，逐轮迭代新角度)
 
 ## Git
+- 远程仓库: `https://github.com/radiumno/study_plan.git`
 - 写完课直接 `git add -A && git commit -m "dayXX: 描述" && git push`
 - 不再问"要不要 commit"
 - 周末写学习日志
+
+## 自进化规则
+- **发现新 GitHub 资源**（trending/调研/推荐）→ 按以下步骤自动处理:
+  1. 判断是否与学习计划（量化/AI/考研/开发工具）相关
+  2. 相关则加入 `resources/lib/资源库.md` 对应分类章节，标注优先级和使用时机
+  3. 如果在当前或近期阶段能用 → 同步更新 `docs/workflows/写课程流程.md` 的 Step 4 资源查表
+  4. 如果在后续阶段用 → 更新对应阶段的 `docs/plans/阶段X_分脉络大纲.md`
+  5. 提交: `"chore: 新增资源 XXX 到资源库及工作流"`
+- **新工具/新技能**（找到好用的 VS Code 扩展、MCP 等）→ 推荐给用户
+- **每周自动扫描** → 周审流程中检查是否有值得加入的新资源

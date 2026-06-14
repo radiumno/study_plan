@@ -21,7 +21,7 @@
 """
 
 # ═══════════════════════════════════════════════════
-# 阶段1: Python 基础 (5周)
+# 阶段1: Python 基础 (5)
 # Part 2: 数据处理 (Days 08-13, 2周)  ★ 今天开始!
 #
 # Day 01 ✅ 变量, 类型, 字符串, I/O
@@ -85,6 +85,7 @@ weekly_data = [10.5, 11.0, 10.8, 11.2, 10.9]
 print(weekly_data[0:3])
 print(weekly_data[-1:-3:-1])
 print(weekly_data[::2])
+
 
 
 # ═══════════════════════════════════════════════════
@@ -375,6 +376,10 @@ price_matrix = np.array([
 # 提示: 均值是按列算还是按行算? 减完之后验证.
 
 # ↓ 你的代码 ↓
+col_mean = np.mean(price_matrix, axis=0)
+centered_matrix = price_matrix - col_mean
+print(centered_matrix)
+
 
 
 # ═══════════════════════════════════════════════════
@@ -406,6 +411,11 @@ print("\n" + "=" * 40 + "\n练习 3.1: 一维索引与切片")
 weekly_close = np.array([12.5, 12.8, 13.0, 12.9, 13.2])
 
 # ↓ 你的代码 ↓
+print(weekly_close[2])
+print(weekly_close[-1])
+print(weekly_close[0:3])
+print(weekly_close[::-1])
+
 
 
 # --- 3.2 二维数组索引 ---
@@ -444,7 +454,10 @@ kline = np.array([
 # 列: 0=开盘, 1=最高, 2=最低, 3=收盘
 
 # ↓ 你的代码 ↓
-
+print(kline[2])
+print(kline[:,3])
+print(kline[0:3,[0,3]])
+print(kline[1:4,2])
 
 # --- 3.3 布尔索引 (最重要的技巧之一) ---
 # 用一个布尔数组筛选元素, 返回满足条件的元素
@@ -477,6 +490,14 @@ prices_arr = np.array([12.5, 13.2, 12.8, 13.5, 12.3, 13.0, 12.9, 13.1])
 # 提示: 布尔索引 + & 组合条件, 想想怎么算比例
 
 # ↓ 你的代码 ↓
+mask1 = prices_arr >= 13.0
+print(prices_arr[mask1])
+mask2 = (prices_arr >= 12.6) & (prices_arr <= 13.0)
+print(prices_arr[mask2])
+days = len(prices_arr[mask1])
+print(f"满足条件的天数为{days}")
+ratio = days / len(prices_arr)
+print(f"满足条件的天数占比为{ratio}")
 
 
 # --- 3.4 花式索引 (Fancy Indexing) ---
@@ -502,6 +523,9 @@ print("\n" + "=" * 40 + "\n练习 3.4: 花式索引")
 stock_prices = np.array([12.5, 8.3, 225.0, 20.5, 35.0, 28.0])
 
 # ↓ 你的代码 ↓
+print(stock_prices[[0,2,4]])
+print(stock_prices[[-3,-2,-3]])
+print(stock_prices[::-1])
 
 
 # ═══════════════════════════════════════════════════
@@ -555,6 +579,30 @@ prices_matrix = np.array([
 # 先把 3 只股票分变量存放 (方便后续引用)
 
 # ↓ 你的代码 ↓
+maotai_avg = np.mean(prices_matrix[:,0],axis = 0)
+zhaoshang_avg = np.mean(prices_matrix[:,1],axis = 0)
+ningde_avg = np.mean(prices_matrix[:,2],axis = 0)
+avg = np.mean(prices_matrix,axis = 0)
+raido = prices_matrix[1:]/prices_matrix[:-1]
+raido_avg = np.mean(raido,axis = 0)
+raido_stu = np.std(raido,axis = 0)
+max_prices_index = np.argmax(prices_matrix , axis = 0)
+max_prices_date = trading_days[max_prices_index]
+maotai_price = prices_matrix[:,0]
+zhaoshang_price = prices_matrix[:,1]
+maotai_price_mask = maotai_price > 1820
+maotai_price_days = np.sum(maotai_price_mask)
+zhaoshao_prices_mask = zhaoshang_price < 36.0
+zhaoshao_prices = prices_matrix[zhaoshao_prices_mask]
+
+print(f"贵州茅台均价:{maotai_avg}")
+print(f"招商银行均价:{zhaoshang_avg}")
+print(f"宁德时代均价:{ningde_avg}")
+print(f"贵州茅台日收益率均值:{raido_avg}")
+print(f"贵州茅台日收益率标准差:{raido_stu}")
+print(f"贵州茅台最高收盘价:{max_prices_date}")
+print(f"贵州茅台收盘价 > 1820 的天数:{maotai_price_days}")
+print(f"招商银行收盘价 < 36 的所有数据:{zhaoshao_prices}")
 
 
 # ═══════════════════════════════════════════════════

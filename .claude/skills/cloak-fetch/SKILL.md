@@ -8,12 +8,12 @@ description: >
 
 # Cloak Fetch
 
-Fetch the rendered text content of a web page using CloakBrowser (stealth Chromium with 49+ C++ fingerprint patches). This bypasses Cloudflare Turnstile, reCAPTCHA, JS rendering requirements, and GFW blocking.
+Fetch the rendered text content of a web page using CloakBrowser (stealth Chromium with 58+ C++ fingerprint patches). This bypasses Cloudflare Turnstile, reCAPTCHA, JS rendering requirements, and GFW blocking.
 
 ## Usage
 
 ```
-/cloak-fetch <url> [--no-proxy] [--wait <ms>]
+/cloak-fetch <url> [--wait <ms>] [--no-proxy]
 ```
 
 ## When to use this skill
@@ -23,49 +23,51 @@ Fetch the rendered text content of a web page using CloakBrowser (stealth Chromi
 - The site requires JavaScript rendering (SPA, React, Vue)
 - The site is blocked by GFW and needs a proxy
 
+## Install
+
+```bash
+pip install cloakbrowser
+```
+
+CloakBrowser auto-downloads the stealth Chromium binary on first launch.
+
+Optional extras:
+```bash
+pip install cloakbrowser[geoip]    # match timezone/locale to proxy IP
+pip install cloakbrowser[patchright]  # alternative driver
+pip install cloakbrowser[serve]    # web service mode
+```
+
 ## Process
 
 ### 1. Determine if proxy is needed
 
-- **Default: use proxy** — if the target is overseas or likely blocked (github.com, google.com, stackoverflow.com, npm, pypi, etc.)
-- **`--no-proxy`** — if the target is a domestic Chinese site (baidu.com, zhihu.com, etc.)
+- **Default: use proxy** — if the target is overseas or likely blocked
+- **`--no-proxy`** — if the target is a domestic Chinese site
 
-### 2. Start proxy (if needed and not already running)
+### 2. Fetch the page
 
-```powershell
-cd D:\Dev\AiProject\CloakAgent
-.venv\Scripts\python scripts/start_proxy.py --bg
+```python
+from cloakbrowser import launch
+
+browser = launch(headless=True, humanize=True)
+page = browser.new_page()
+page.goto("<url>")
+content = page.inner_text("body")
+browser.close()
+print(content)
 ```
 
-Wait 2 seconds for initialization.
+- `--wait <ms>`: add `page.wait_for_timeout(<ms>)` before reading content
+- `--proxy`: add `proxy="..."` to `launch()`
 
-### 3. Fetch the page
-
-```powershell
-cd D:\Dev\AiProject\CloakAgent
-.venv\Scripts\python fetch_page.py <url> --headless [--proxy] --wait <wait_ms> --text
-```
-
-- Add `--proxy` if using VPN
-- `--wait 3000` for normal sites, `--wait 8000` for heavy SPA
-
-### 4. Present the result
+### 3. Present the result
 
 Show the user the page title and content. Note any truncation.
 
-### 5. Cleanup
-
-If the user is done with overseas access, stop the proxy:
-
-```powershell
-cd D:\Dev\AiProject\CloakAgent
-.venv\Scripts\python scripts/start_proxy.py --stop
-```
-
-If the user may need it again soon, leave the proxy running.
-
 ## Notes
 
-- CloakBrowser binary cached at `.cloakbrowser_cache/` (~200MB)
+- CloakBrowser binary auto-downloads and caches on first launch (~200MB)
 - First launch takes 3-5 seconds
-- Proxy (Clash.Meta) listens on `127.0.0.1:7890`
+- Passes Cloudflare Turnstile, reCAPTCHA (v3 score ~0.9), FingerprintJS
+- Dodocker run --rm cloakhq/cloakbrowser cloaktest` for a quick test without install

@@ -50,8 +50,8 @@
 │
 ├── Part 2: 数据处理（Days 08-14，2周+）⏳
 │   ├── Day 08: NumPy 数组运算 (+ 正则 re)
-│   ├── Day 09: Pandas 入门 (+ JSON 处理)
-│   ├── Day 10: Pandas 进阶
+│   ├── Day 09: Pandas 入门 (+ JSON 处理) ⚡引入 yfinance 拉股票数据
+│   ├── Day 10: Pandas 进阶 ⚡yfinance 实战：计算均线/波动率
 │   ├── Day 11: Matplotlib 可视化
 │   ├── Day 12: R2 复习日 (collections + itertools + generators + Git基础)
 │   ├── Day 13: 数据采集与清洗 (+ pytest 验证)
@@ -192,6 +192,7 @@
 
 参考 **QuantInsti** 和 **Coursera Python for Finance** 的组织方式，加入数据采集环节以保证技能完整性。依据 2026-06-05 优化调整，新增 R2 复习日补齐 collections / itertools / generators 缺口。
 
+正则表达式（re）教学说明：`re` 模块基础语法在 Day 08 副线覆盖，Day 13 数据采集与清洗会深度复用。
 | Day | 内容 | 参考来源 | Whale-Quant 对照 |
 |-----|------|---------|-----------------|
 | 08 | NumPy 数组运算、广播、线性代数 **+ 正则 re** | QuantInsti, NumPy 官方文档 | — |

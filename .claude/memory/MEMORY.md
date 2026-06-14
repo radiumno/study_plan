@@ -16,3 +16,5 @@
 - [Search Mastery Lessons](search-mastery-lessons.md) — 搜索能力最大化的操作原则、工具选择、数据可信度标注、自我纠偏
 - [Career Dual Track Decision](career-dual-track-decision.md) — 2026-06-04确定: 量化开发+AI应用+考研三线并行
 - [Exercise Hierarchy](exercise-hierarchy.md) — 练习四层结构：子知识点→Part综合→Day综合→周复习
+- [Global Behavior Rules](<global>) — 参考 ~/.omp/agent/APPEND_SYSTEM.md 和 ~/.claude/CLAUDE.md 中的全局规则
+- [Config 2026-06-13] 全局 APPEND_SYSTEM.md 创建，覆盖行为规则、搜索协议、代码风格、记忆管理
