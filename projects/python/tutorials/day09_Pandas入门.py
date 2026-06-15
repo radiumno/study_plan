@@ -345,8 +345,10 @@ df_stocks = pd.DataFrame({
 # df.to_csv('output.csv', index=False) # 不写行索引
 
 # --- 4.2 JSON 基础 ---
-# JSON = JavaScript Object Notation, 是 API 数据交换最常用的格式
-# Python 的 json 模块可以轻松处理
+# CSV 适合存本地文件, 但量化系统从 API (数据供应商/交易所) 拿到的
+# 数据通常是 JSON 格式. Pandas 两种都能处理.
+# JSON 的全称是 JavaScript Object Notation, 和 Python 的 dict/list
+# 长得几乎一样, 所以转换非常自然.
 
 import json
 
@@ -431,7 +433,7 @@ import yfinance as yf
 "print(aapl.head())  # 有 Open/High/Low/Close/Volume 等列"
 ""
 # 参数说明:
-#   ticker:   股票代码 (AAPL = Apple, 600519.SS = 茅台上海)
+#   ticker:   股票代码 (AAPL = Apple, 600519.SS = 茅台上海, 但 A 股在国内经常连不上)
 #   start:    开始日期 (字符串 'YYYY-MM-DD')
 #   end:      结束日期 (默认到今天)
 #   progress: 是否显示进度条 (默认 True, 第一次可以关掉)

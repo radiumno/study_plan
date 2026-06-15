@@ -1,6 +1,6 @@
 ---
 name: course-writing
-description: Write a daily lesson tutorial following the course-writing workflow — check progress, verify 细脉络 alignment, load memory rules, dependency-check, write tutorial, update progress, ask for commit. Use when the user says "start learning" / "continue" / "开始今天的学习" / "开始写课".
+description: Write a daily lesson tutorial following the course-writing workflow — check progress, verify 细脉络 alignment, load memory rules, dependency-check, write tutorial, update progress, auto-commit. Use when the user says "start learning" / "continue" / "开始今天的学习" / "开始写课".
 license: MIT
 ---
 
@@ -9,6 +9,13 @@ license: MIT
 每次用户说"开始今天的学习" / "开始写课" / "继续" 时, 走此流程.
 
 ## Workflow
+
+### Step 0: 课前 commit
+Before writing anything new, commit current working state:
+```bash
+git add -A && git commit -m "dayXX: 课前 checkpoint"
+```
+**不询问用户**, 直接执行 (per CLAUDE.md: "不再问要不要 commit").
 
 ### Step 1: 定位进度
 Read `resources/主脉络.md` and `.claude/CLAUDE.md#当前状态` to determine current stage and day.
@@ -20,48 +27,93 @@ Check `docs/plans/阶段X_分脉络大纲.md`:
 - **吻合?** -> Proceed with the day's arrangement.
 
 ### Step 3: 加载记忆规则
-Scan MEMORY.md. Confirm these rules are loaded:
+Scan `.claude/memory/` directory. Mandatory rules:
 
 | Memory | Constraint |
 |--------|------------|
-| english-punctuation | Code files: ASCII punctuation only, no Chinese full-width |
-| teaching-explain-every-step | Break down every line and parameter |
-| teaching-check-exercises | Check taught content before giving hints |
+| teaching-explain-every-step | Break down every line and parameter. **No C++ comparison needed** |
+| exercises-must-be-empty | Every `# ↓ 你的代码 ↓` must be blank below |
+| exercise-hierarchy | 4-level structure: sub-topic → Part → Day → Week review |
+| exercise-design-pattern | Adjust exercise count by difficulty (core = more exercises) |
 | curriculum-prerequisite-check | Diff today's dependencies vs already-taught |
-| exercise-design-pattern | Adjust exercise count by difficulty |
-| never-fabricate | Don't fake what wasn't done |
 | daily-progress-display | Show progress bar at lesson start |
-| sub-threads-research-based | Base teaching on researched sources |
+| english-punctuation | Code files: ASCII punctuation only |
+| never-fabricate | Don't fake what wasn't done |
+| sub-threads-research-based | Base teaching on 2-3 researched sources |
+
+Also check `day09-review-lessons.md` for yfinance-specific notes.
 
 ### Step 4: 依赖检查
-List all types/syntax used today. Confirm each was taught before or is taught today.
+List all types/syntax used today. Confirm each was taught before or is taught today:
+1. Scan today's tutorial and list every Python type/syntax/function used
+2. Check against previous days (scan `day*.py` headers or `git log`)
+3. If a dependency is missing, stop and add it to an earlier day first
+4. Exception: "附加题" can use untaught syntax, but **must** have a `# 提示:` comment
 
-### Step 5: 写教程
-Write `projects/python/tutorials/dayXX_名称.py` per 细脉络 + memory rules.
+### Step 5: 三层复习机制
+Per "复习+实践=左右手" principle, include in every lesson:
+1. **前情回顾** — 复习上day核心 (1-2道小题)
+2. **抽题回练** — 从3-7天前的练习抽1道
+3. **新知教学 + 新练习** — 当天内容
+
+### Step 6: 写教程 (四层练习结构)
+Write `projects/python/tutorials/dayXX_名称.py`.
 
 Structure:
 ```
-## [Day X] 标题
-
-### 教学部分
-- Parameter-by-parameter breakdown
-- Python vs C++ comparison
-- Quant development context
-
-### 练习部分
-- After each knowledge point (not all at end)
-- Difficulty progression: fill-in -> complete -> full implementation
-- Comprehensive exercise crossing today's topics
+前情回顾 (上day核心, 1-2道小题)
+=== ↓ ===
+抽题回练 (3-7天前的练习抽1道)
+=== ↓ ===
+### Part A: [知识点群]
+- 教学: Parameter-by-parameter breakdown, 绑定量化场景
+- → 子知识点练习 (紧跟之后)
+- → Part 综合练习 (该Part末尾)
+=== ↓ ===
+### Day 综合练习 (跨当天知识点)
 ```
 
-### Step 6: 更新进度
+Rules:
+- **No C++ comparison** (Phase 1 Python doesn't need it)
+- **练习区必须留空** — 写完要反向检查
+- **yfinance 注意事项** (如果涉及):
+  - 不要用 A 股代码 (600519.SS 等), 用美股 (AAPL/MSFT/GOOGL/AMZN)
+  - 多股票返回 MultiIndex columns, 加注释解释
+  - 数据有 NaN, 先教 `.dropna()` 或在练习里加提示
+- **综合练习只用当天教过的知识点**, 超前的标为"选做"
+
+### Step 7: 反向检查清单
+After writing, verify ALL:
+
+| Check | Standard |
+|-------|----------|
+| 1. 练习区留空 | Every `# ↓ 你的代码 ↓` below has no executable code |
+| 2. 练习不泄漏答案 | Description says "what" not "how" |
+| 3. 依赖完整 | All syntax used was taught before or today |
+| 4. 每参数拆解 | Every function parameter explained |
+| 5. 量化场景 | Every concept linked to a quant dev use case |
+| 6. 提示克制 | Hints ≤ 2 sentences, not step-by-step |
+| 7. 格式一致 | Separator style matches previous days |
+| 8. yfinance安全(如有) | 美股非A股, 有NaN注释, 有多级索引说明 |
+
+### Step 8: 更新进度
 Update status in:
-- `resources/主脉络.md`
-- `docs/plans/阶段X_分脉络大纲.md`
+- `resources/主脉络.md (7.2 进度追踪 & 7.3 当前状态)`
+- `docs/plans/阶段X_分脉络大纲.md (Day 标记)`
 - `.claude/CLAUDE.md#当前状态`
 
-### Step 7: 问 commit
-After lesson, ask user whether to commit. Format: `dayXX: brief description`
+### Step 9: 课后 auto-commit
+```bash
+git add -A && git commit -m "dayXX: 描述" && git push
+```
+**不询问用户**, 直接执行.
+
+## Skills Reference
+- 需要深入解释概念时 → 调用 `learning-explain` skill
+- 需要生成额外练习时 → 调用 `learning-practice` skill
+- 需要对比技术选项时 → 调用 `learning-compare` skill
+- 需要创建速查表时 → 调用 `learning-cheatsheet` skill
+- 需要创建/更新阶段规划时 → 调用 `roadmap-writing` skill
 
 ## Full Workflow File
 For the complete detailed reference including examples, see `docs/workflows/写课程流程.md`.

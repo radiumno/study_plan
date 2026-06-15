@@ -14,7 +14,7 @@ Teaching must not just show code and say "this is how you do X". Every line, eve
 **How to apply:**
 1. For each code snippet, break it down parameter by parameter (e.g. `open('f.txt', 'w', encoding='utf-8')` -> explain filename / mode / encoding separately)
 2. Compare similar concepts side by side (e.g. `'w'` vs `'a'` vs `'r'`)
-3. No C++ comparison required (remove from template)
+3. No C++ comparison for Phase 1 (Python) — remove from template for Python days
 4. Before each exercise, give step-by-step hints on what to do first, second, third
 5. Mark memorization points (e.g. `newline=''` is a fixed idiom for csv) explicitly
 6. When teaching content lives in a .py file, write the full explanation **in code comments**, not just in conversation

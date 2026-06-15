@@ -53,7 +53,7 @@ curl -s "https://api.github.com/search/repositories?q=created:>$(date -v-30d '+%
 
 ### Phase 3: 比对本地技能列表
 
-1. 列出 `~/.claude/skills/` 和 `~/study_plan/.claude/skills/` 中已有的 skills
+1. 列出 `~/.claude/skills/` 和 `~/Projects/study_plan/.claude/skills/` 中已有的 skills
 2. 检查 mattpocock/skills 和 academic-research-skills 是否有新 skill 没装
 3. 标记可安装的新 skill
 
