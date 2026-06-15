@@ -26,10 +26,12 @@
 - **辅线:** AI应用开发（阶段1结束后启动，路线图: `resources/lib/资源库.md` → AI辅线升级 → **start-ai-engineering**）
 - **考研备考:** 与技能学习高度重叠（408/数一/英一），无需额外大量时间
 - **量化:AI = 60:40**（数据加权计算，量化因学习曲线更陡占更多时间）
-- **已完成:** day01~day08（起步、列表字典、函数、set+文件+异常、模块与包+datetime、综合项目、复习课、NumPy 数组运算）
+- **已完成:** day01~day08 + day08R + day09（起步→NumPy→Pandas 入门）
 - **Day 06 (综合项目:股票数据管理器):** 4个分步练习+综合练习, csv.DictReader/DictWriter
 - **Day 07 (复习课):** 找bug+跨days综合题, 查漏补缺
 - **Day 08 (NumPy 数组运算):** 教程+练习已完成，正则副线待补
+- **Day 08R (NumPy 强化课):** axis/广播/布尔索引/向量化思维专项强化
+- **Day 09 (Pandas 入门):** Series/DataFrame/CSV-JSON读写/yfinance引子
 - **AI辅线状态:** 未启动（阶段1完成后开始 easy-vibe Stage 1）
 - **考研备考状态:** 未启动（阶段2开始自然融入，408=算法+系统知识）
 

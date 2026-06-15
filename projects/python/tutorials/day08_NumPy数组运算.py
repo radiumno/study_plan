@@ -678,3 +678,11 @@ dirty_data = [
 #       用 try 跳过提取失败的脏行
 
 # ↓ 你的代码 ↓
+list_date = []
+for raw_date in dirty_data :
+        stock_code = re.findall(r'\d{6}',raw_date)
+        price = re.findall(r'\d+\.\d+',raw_date)
+        if stock_code and price :
+            list_date.append([int(stock_code[0]),float(price[0])])
+arr =np.array(list_date)
+
