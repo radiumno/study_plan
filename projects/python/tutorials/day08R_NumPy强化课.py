@@ -360,8 +360,6 @@ mask_cold = ~mask_both
 print(f"冷清天数: {np.sum(mask_cold)}")
 
 # 5. (附加) 用 ~ 取反: 找出不是"量价齐升"的天数
-# mask_not_both = '这和冷清有啥区别'
-print(f"非量价齐升天数: {np.sum(mask_not_both)}")
 
 
 # ═══════════════════════════════════════════════════
@@ -565,7 +563,7 @@ print(f"\n3. 每只股票买入信号次数: {buy_count_per_stock}")
 #    提示: 对 signals == 1 的位置, 取下一分钟的 returns
 #    注意: signals 有 96 行, returns 有 99 行, 索引对应关系?
 #          signals[t] 对应 returns[t+4]  (因为 sma5 从索引 4 开始)
-buy_returns = returns[4:][signals==1].mean()  # 你的代码 (用布尔索引)
+buy_returns = returns[4:][signals[:-1]==1].mean()  # signals[:-1] 舍弃最后一分钟（无对应收益率）
 print(f"\n4. 买入信号后 1 分钟平均收益率: {buy_returns}")
 
 # 5. (附加) 三只股票同时买入的分钟

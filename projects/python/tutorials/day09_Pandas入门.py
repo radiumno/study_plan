@@ -440,6 +440,15 @@ import yfinance as yf
 "portfolio = yf.download(['AAPL', 'MSFT', 'GOOGL'], start='2024-01-01')"
 "print(portfolio.columns)  # 多级列索引: (Open/Close..., AAPL/MSFT...)"
 "print(portfolio['Close'])  # 只看收盘价 (DataFrame)"
+"# ⚠️ portfolio['Close'] 返回的列名是 ('Close', 'AAPL') 这样的多级索引,"
+"#   暂时不用纠结, 当成 3 列 'AAPL'/'MSFT'/'GOOGL 来用就行"
+""
+# ⚠️ yfinance 数据常有 NaN (缺失值):
+#     节假日没有交易, 对应日期就是 NaN.
+#     用 .dropna() 删除, 或者 .fillna(0) 填零.
+"print(portfolio['Close'].isna().sum())  # 每列有多少个 NaN"
+"portfolio_clean = portfolio['Close'].dropna()  # 删掉含 NaN 的行"
+""
 
 # --- 5.2 .info 属性 — 查看股票信息 ---
 
@@ -458,9 +467,12 @@ print("\n" + "=" * 40 + "\n练习 5: yfinance 入门")
 # ■ 练习 5.1: 拉取真实股票数据
 #
 # 用 yfinance 拉取:
-#   1. 茅台 (600519.SS) 2024年全年的数据
+#   1. AAPL (苹果) 2024年全年的数据
 #   2. 打印 head() 和 tail()
-#   3. 打印 info() 看 describe()
+#   3. 用 describe() 看统计摘要
+#
+# ⚠️ 如果你在国内, 需要开 WARP/VPN 才能连 yahoo finance
+#    连不上不影响后续练习, 可以直接用前面的 df_stocks 练手
 
 # ↓ 你的代码 ↓
 
@@ -497,9 +509,8 @@ print("=" * 50)
 # 1. 用 yfinance 下载上述 4 只股票数据
 # 2. 提取 'Close' 收盘价 DataFrame
 # 3. 用 .head() 和 .describe() 查看数据概览
-# 4. 计算每只股票的月均价 (提示: groupby + resample
-#    或手动切片, 但 Day 09 还没教 resample, 用切片法)
-#    (可选: 按月份分组, 每月算均值 → 4 只股票 x 5 个月)
+# 4. (选做) 计算每只股票的月均价
+#    提示: df.resample('M').mean() — Day 10 会细讲, 这里先试试
 # 5. 找出每只股票的历史最高收盘价和对应日期
 # 6. 计算每只股票的累计收益率:
 #    累计收益率 = (最后一天收盘 / 第一天收盘 - 1)
