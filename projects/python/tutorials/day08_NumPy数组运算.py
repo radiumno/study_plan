@@ -102,6 +102,14 @@ print(weekly_data[::2])
 
 import numpy as np
 
+# 颜色输出 (ANSI转义码, macOS终端支持)
+GREEN  = '\033[92m'
+YELLOW = '\033[93m'
+BLUE   = '\033[94m'
+RED    = '\033[91m'
+CYAN   = '\033[96m'
+RESET  = '\033[0m'
+
 # --- 1.1 创建 ndarray ---
 
 # 最直接: 从 list 转
@@ -221,6 +229,7 @@ print("\n" + "=" * 40 + "\n▸ Part 1 综合: 二维数组")
 # ↓ 你的代码 ↓
 list_1=[12.5, 8.2, 225.0],[12.8, 8.3, 226.5],[12.4, 8.1, 224.0], [12.7, 8.4, 227.0],  [13.0, 8.5, 228.0]
 arr_1=np.array(list_1)
+print(arr_1)
 print(arr_1.shape)
 print(arr_1.ndim)
 print(arr_1.dtype)
@@ -324,6 +333,7 @@ print("\n" + "=" * 40 + "\n练习 2.2: 聚合函数")
 #   4. 中位数
 
 prices = np.array([12.5, 12.8, 13.2, 12.9, 13.5, 13.1, 12.7, 12.3, 12.9, 13.0])
+#省略打印
 
 # 提示: 用 np.mean(), np.max(), np.min(), np.std(), np.median()
 
@@ -333,6 +343,8 @@ highest_price = np.max(prices)
 lowest_price = np.min(prices)
 std_price = np.std(prices)
 median_price = np.median(prices)
+print(f"平均价:{avg_price}  最高:{highest_price}  最低:{lowest_price}")
+print(f"标准差:{std_price:.4f}  中位数:{median_price}")
 
 
 # --- 2.4 广播 (Broadcasting) 简介 ---
@@ -379,6 +391,8 @@ price_matrix = np.array([
 col_mean = np.mean(price_matrix, axis=0)
 centered_matrix = price_matrix - col_mean
 print(centered_matrix)
+if np.allclose(centered_matrix.mean(axis=0), 0):
+    print('均值为零')
 
 
 
@@ -457,7 +471,7 @@ kline = np.array([
 print(kline[2])
 print(kline[:,3])
 print(kline[0:3,[0,3]])
-print(kline[1:4,2])
+print(kline[1:4,1])
 
 # --- 3.3 布尔索引 (最重要的技巧之一) ---
 # 用一个布尔数组筛选元素, 返回满足条件的元素
@@ -524,7 +538,7 @@ stock_prices = np.array([12.5, 8.3, 225.0, 20.5, 35.0, 28.0])
 
 # ↓ 你的代码 ↓
 print(stock_prices[[0,2,4]])
-print(stock_prices[[-3,-2,-3]])
+print(stock_prices[[-3,-2,-1]])
 print(stock_prices[::-1])
 
 
@@ -582,8 +596,8 @@ prices_matrix = np.array([
 maotai_avg = np.mean(prices_matrix[:,0],axis = 0)
 zhaoshang_avg = np.mean(prices_matrix[:,1],axis = 0)
 ningde_avg = np.mean(prices_matrix[:,2],axis = 0)
-avg = np.mean(prices_matrix,axis = 0)
-raido = prices_matrix[1:]/prices_matrix[:-1]
+# avg = np.mean(prices_matrix,axis = 0)
+raido = prices_matrix[1:]/prices_matrix[:-1]-1
 raido_avg = np.mean(raido,axis = 0)
 raido_stu = np.std(raido,axis = 0)
 max_prices_index = np.argmax(prices_matrix , axis = 0)
@@ -595,14 +609,15 @@ maotai_price_days = np.sum(maotai_price_mask)
 zhaoshao_prices_mask = zhaoshang_price < 36.0
 zhaoshao_prices = prices_matrix[zhaoshao_prices_mask]
 
-print(f"贵州茅台均价:{maotai_avg}")
-print(f"招商银行均价:{zhaoshang_avg}")
-print(f"宁德时代均价:{ningde_avg}")
-print(f"贵州茅台日收益率均值:{raido_avg}")
-print(f"贵州茅台日收益率标准差:{raido_stu}")
-print(f"贵州茅台最高收盘价:{max_prices_date}")
-print(f"贵州茅台收盘价 > 1820 的天数:{maotai_price_days}")
-print(f"招商银行收盘价 < 36 的所有数据:{zhaoshao_prices}")
+print(f"{GREEN}贵州茅台均价:{maotai_avg:.2f}{RESET}")
+print(f"{GREEN}招商银行均价:{zhaoshang_avg:.2f}{RESET}")
+print(f"{GREEN}宁德时代均价:{ningde_avg:.2f}{RESET}")
+print(f"{YELLOW}贵州茅台日收益率均值:{raido_avg[0]:.6f}, 波动率:{raido_stu[0]:.6f}{RESET}")
+print(f"{YELLOW}招商银行日收益率均值:{raido_avg[1]:.6f}, 波动率:{raido_stu[1]:.6f}{RESET}")
+print(f"{YELLOW}宁德时代日收益率均值:{raido_avg[2]:.6f}, 波动率:{raido_stu[2]:.6f}{RESET}")
+print(f"{BLUE}贵州茅台最高收盘价(日期):{max_prices_date}{RESET}")
+print(f"{BLUE}贵州茅台收盘价 > 1820 的天数:{maotai_price_days}{RESET}")
+print(f"{CYAN}招商银行收盘价 < 36 的所有数据:{zhaoshao_prices}{RESET}")
 
 
 # ═══════════════════════════════════════════════════
