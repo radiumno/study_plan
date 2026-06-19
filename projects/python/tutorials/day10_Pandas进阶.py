@@ -640,66 +640,71 @@ volume_data = pd.DataFrame({
 
 
 # ═══════════════════════════════════════════════════
-# ▸ 综合练习: 真实股票均线策略分析
+# ▸ 综合练习: 股票均线策略分析 (离线可用)
 # ═══════════════════════════════════════════════════
 
 print("\n" + "=" * 50)
-print("综合练习: 真实股票均线策略分析")
+print("综合练习: 股票均线策略分析")
 print("=" * 50)
 
-# 综合运用今日全部知识点
-#
-# 模拟一个真实的量化分析场景:
-#   下载 2024 年 AAPL (苹果) 股票数据, 计算均线/波动率,
-#   生成交易信号, 最后分析策略表现.
+# 国内 yfinance 用不了, 所以直接用累乘生成"看起来像"真实股价的数据.
+# AAPL 2024 年从 ~180 起步, 年化波动约 25%, 日波动率约 1.6%.
+# 用了固定种子, 每次运行结果一样.
+
+np.random.seed(2024)
+dates_stock = pd.date_range('2024-01-02', '2024-12-31', freq='B')
+n_days = len(dates_stock)
+
+# 生成"真实感"价格: 基准价格 180 + 随机游走 + 一点向上趋势
+daily_vol = 0.016  # 日波动率 ~1.6%
+trend = 0.0004     # 每日微涨趋势 (~10%/年)
+returns = np.random.randn(n_days) * daily_vol + trend
+price_start = 180.0
+prices_stock = price_start * np.cumprod(1 + returns)
+
+spy = pd.DataFrame({
+    'close': prices_stock,
+    'volume': np.random.randint(30000000, 80000000, n_days)
+}, index=dates_stock)
+
+# 可以用 spy 替代 yfinance 做全部练习.
+# 想看数据长什么样:
+print(spy.head())
+print(f"数据范围: {spy.index[0].date()} ~ {spy.index[-1].date()}")
+print(f"价格区间: {spy['close'].min():.2f} ~ {spy['close'].max():.2f}")
+
+# 综合运用今日全部知识点, 分析 spy 的均线策略
 #
 # 步骤:
 #
-# 1. 用 yfinance 下载 AAPL 2024 年数据
-#    (如果连不上 yfinance, 跳到步骤 2 使用模拟数据)
-#
-# 2. 从下载的数据中提取 'Close' 列,
-#    确保索引是 DatetimeIndex (yfinance 默认就是)
-#
-# 3. 计算:
+# 1. 计算:
 #    a) SMA_5 (5日均线)
 #    b) SMA_20 (20日均线)
 #    c) 20日年化波动率
 #
-# 4. 生成交易信号:
-#    - 金叉买入: SMA_5 上穿 SMA_20 (前一天 SMA_5 <= SMA_20)
-#    - 死叉卖出: SMA_5 下穿 SMA_20 (前一天 SMA_5 >= SMA_20)
-#    - 持仓状态: signal = 1 (持仓) / -1 (空仓) / 0 (无持仓)
+# 2. 生成交易信号:
+#    - 金叉买入: SMA_5 上穿 SMA_20 (当天 SMA_5 > SMA_20, 前一天 SMA_5 <= SMA_20)
+#    - 死叉卖出: SMA_5 下穿 SMA_20 (当天 SMA_5 < SMA_20, 前一天 SMA_5 >= SMA_20)
+#    - 持仓状态: signal = 1 (持仓, SMA_5 > SMA_20) / -1 (空仓, SMA_5 < SMA_20)
 #
-# 5. (选做) 计算策略的累计收益率:
-#    - 每天收益 = signal.shift(1) * daily_ret
-#    - 注意 shift(1): 今天用昨天的信号交易 (避免未来函数)
-#    - 累计收益 = (1 + 每天收益).cumprod()
+# 3. (核心) 计算策略的累计收益率:
+#    - 日收益率: daily_ret = spy['close'].pct_change()
+#    - 每天策略收益 = signal.shift(1) * daily_ret
+#      (shift(1) 是因为今天收盘出信号, 明天开盘才执行)
+#    - 策略净值 = (1 + 策略收益).cumprod()
+#    - 基准净值 = (1 + daily_ret).cumprod()
 #
-# 6. (选做) 用 groupby 按月统计收益率
+# 4. (选做) 用 groupby 按月统计收益率
 #    - 提取 month, 按月分组看收益分布
 #
-# 7. 打印分析报告:
+# 5. 打印分析报告:
 #    === 均线策略分析报告 ===
 #    总交易日: xxx
-#    持仓天数: xxx (xx.x%)
-#    总收益率 (策略 vs 持有):
-#      Buy-and-Hold: +xx.xx%
-#      策略: +xx.xx%
-#    最大回撤: -xx.xx%
-#
-# 输出格式参考:
-#   === AAPL 均线策略 ===
-#   数据范围: 2024-01-02 ~ 2024-12-31
-#   SMA_5 上穿 SMA_20 次数: 6
-#   SMA_20 均线值范围: xxx ~ xxx
-#   最大单日涨幅: +x.xx%
-#   最大单日跌幅: -x.xx%
-#
-#   === 月收益率 ===
-#   month    ret
-#   1       +x.xx%
-#   2       +x.xx%
-#   ...
+#    金叉次数: xx
+#    死叉次数: xx
+#    Buy-and-Hold 累计收益: +xx.xx%
+#    策略累计收益: +xx.xx%
+#    最大单日涨幅: +x.xx%
+#    最大单日跌幅: -x.xx%
 
 # ↓ 你的代码 ↓
