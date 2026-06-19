@@ -114,6 +114,11 @@ print("\n" + "=" * 40 + "\n练习 1: Series 创建与操作")
 prices_list = [12.5, 12.8, 13.0, 12.9, 13.2]
 
 # ↓ 你的代码 ↓
+s1 = pd.Series(prices_list,index = ['Day1', 'Day2', 'Day3', 'Day4', 'Day5'])
+print(s1)
+print(s1.values)
+print(s1.index)
+print(s1.dtype)
 
 
 # ■ 练习 1.2: 从 dict 创建 Series (更常见)
@@ -124,6 +129,8 @@ prices_list = [12.5, 12.8, 13.0, 12.9, 13.2]
 stock_close = {'茅台': 1800.0, '招行': 35.5, '宁德': 226.5, '平安': 48.0}
 
 # ↓ 你的代码 ↓
+s2 = pd.Series(stock_close)
+print(s2[s2 > 226])
 
 
 # ■ 练习 1.3: 向量化运算
@@ -137,6 +144,11 @@ closes = pd.Series([12.5, 12.8, 13.0, 12.9, 13.2],
                     index=['周一', '周二', '周三', '周四', '周五'])
 
 # ↓ 你的代码 ↓
+avg = closes.mean()
+std = closes.std()
+max_index = closes.idxmax()
+print(avg,std,max_index)
+print(closes.index[closes > avg])
 
 
 # ═══════════════════════════════════════════════════
@@ -229,7 +241,13 @@ print("\n" + "=" * 40 + "\n练习 2: 创建和查看 DataFrame")
 #   - 用 .describe() 看统计摘要
 
 # ↓ 你的代码 ↓
-
+data = [[48.5, 28.2, 42.0],[49.0, 28.5, 42.5],[48.8, 28.0, 41.5],[49.2, 28.8, 43.0],[49.5, 29.0, 43.2]]
+df1 = pd. DataFrame(data,columns=['平安', '万科', '格力'],index =['Day1', 'Day2', 'Day3', 'Day4', 'Day5'])
+print(df1)
+print(df1.shape)
+print(df1.columns)
+print(df1.dtypes)
+print(df1.describe())
 
 # ■ 练习 2.2: 从 NumPy 创建
 #
@@ -247,6 +265,8 @@ stock_names = ['平安', '万科', '格力']
 trading_days = ['Day1', 'Day2', 'Day3', 'Day4', 'Day5']
 
 # ↓ 你的代码 ↓
+df2 = pd.DataFrame(price_data , columns=stock_names,index = trading_days)
+print(df2)
 
 
 # ═══════════════════════════════════════════════════
@@ -314,6 +334,11 @@ df_stocks = pd.DataFrame({
 }, index=['Day1', 'Day2', 'Day3', 'Day4', 'Day5'])
 
 # ↓ 你的代码 ↓
+print(df_stocks['宁德'])
+print(df_stocks[['招行','茅台']])
+df_stocks['平均值']=df_stocks.mean(axis = 1)
+df_stocks['茅台涨跌幅']=df_stocks['茅台']/df_stocks['茅台'].shift(1)-1
+print(df_stocks)
 
 
 # ■ 练习 3.2: 行操作
@@ -326,52 +351,104 @@ df_stocks = pd.DataFrame({
 #   5. 用 df.iloc 取出第 0, 2, 4 行的第 0, 2 列
 
 # ↓ 你的代码 ↓
-
+print(df_stocks.loc['Day1':'Day3'])
+print(df_stocks.iloc[:3])
+print(df_stocks[df_stocks['茅台'] >1810])
+print(df_stocks.loc['Day2':'Day4',['茅台','宁德']])
+print(df_stocks.iloc[[0,2,4],[0,2]])
 
 # ═══════════════════════════════════════════════════
 # 四, CSV 文件读写 + JSON 基础
 # ═══════════════════════════════════════════════════
 # 量化开发每天要处理 CSV (历史数据, 因子数据, 回测结果...)
 
+# ═══════════════════════════════════════════════════
+# 四, 数据读写 — CSV / JSON
+# ═══════════════════════════════════════════════════
+#
+# 量化开发日常: CSV 存本地历史数据, JSON 从 API 拉实时数据.
+# Pandas 两种都能直接读, 省去手动解析的麻烦.
+
 # --- 4.1 CSV 读写 ---
+#
+# CSV (Comma-Separated Values) 是表格数据最通用的格式.
+# 打开就是 Excel 表格的样子: 第一行列名, 后面每行一条记录.
+#
+# 举个栗子, 一个 CSV 文件长这样:
+#   date,茅台,招行,宁德
+#   2024-01-02,1800.5,35.2,225.0
+#   2024-01-03,1810.0,35.5,228.5
+#
+# Pandas 用 pd.read_csv 读, pd.DataFrame.to_csv 写.
 
 # 读取 CSV:
-# df_csv = pd.read_csv('data.csv')              # 默认: 第一行是列名
-# df_csv = pd.read_csv('data.csv', index_col=0) # 第 0 列作为行索引
-# df_csv = pd.read_csv('data.csv', parse_dates=['date'])  # 日期列自动解析
+# df_csv = pd.read_csv('data.csv')               # 默认: 第一行当列名
+# df_csv = pd.read_csv('data.csv', index_col=0)  # 第 0 列作为行索引 (一般用日期列)
+# df_csv = pd.read_csv('data.csv', parse_dates=['date'])  # 把 date 列解析为时间类型
 
 # 写入 CSV:
-# df.to_csv('output.csv')              # 默认包含行索引 (会多一列 Unnamed)
-# df.to_csv('output.csv', index=False) # 不写行索引
+# df.to_csv('output.csv')               # 默认: 包含行索引 → 会多一列 Unnamed:0
+# df.to_csv('output.csv', index=False)  # 不写行索引 (绝大多数场景用这个)
+# df.to_csv('output.csv', index=False, encoding='utf-8-sig')  # Excel 打开不乱码
+
+# 关键区别: index=False 是否把行索引也写进文件.
+# 读回来时如果写了索引就用 index_col=0 恢复, 没写就不用.
+
 
 # --- 4.2 JSON 基础 ---
+#
 # CSV 适合存本地文件, 但量化系统从 API (数据供应商/交易所) 拿到的
-# 数据通常是 JSON 格式. Pandas 两种都能处理.
-# JSON 的全称是 JavaScript Object Notation, 和 Python 的 dict/list
-# 长得几乎一样, 所以转换非常自然.
+# 数据通常是 JSON 格式. 比如拉实时行情, 返回的是一段 JSON 文本.
+#
+# JSON = JavaScript Object Notation, 和 Python 的 dict/list 长得几乎一样:
+#   Python dict:  {"name": "茅台", "price": 1800.0}
+#   JSON 文本:    {"name": "茅台", "price": 1800.0}
+# 所以转换非常自然, 但注意 JSON 是"文本"(字符串), Python dict 是内存对象.
 
 import json
 
-# Python dict → JSON 字符串 (序列化)
+# --- dumps / loads: 内存中的转换 ---
+
+# dumps = dict → JSON 字符串 ("序列化")
 "data = {'name': '茅台', 'price': 1800.0, 'volume': 10000}"
 "json_str = json.dumps(data, ensure_ascii=False)"
-"print(json_str)  # '{\"name\": \"茅台\", \"price\": 1800.0, \"volume\": 10000}'"
+"print(json_str)  # {'name': '茅台', 'price': 1800.0, 'volume': 10000}"
 ""
-# ensure_ascii=False 才能保留中文!
-
-# JSON 字符串 → Python dict (反序列化)
+# ensure_ascii=False 才能保留中文! 不加的话中文会变成 茶...
+"json_str_ascii = json.dumps(data)"
+"print(json_str_ascii)  # {'name': '\\u8336... 根本没法读"
+""
+# loads = JSON 字符串 → Python dict ("反序列化")
 "parsed = json.loads(json_str)"
-"print(parsed['name'])   # '茅台'"
-""
-# 从文件读 JSON:
-# with open('data.json', 'r') as f:
-#     data = json.load(f)      # json.load (不是 loads!) -> 从文件读
+"print(parsed['name'])    # '茅台'"
+"print(type(parsed))      # <class 'dict'>"
 
-# 写 JSON 到文件:
-# with open('data.json', 'w') as f:
+# --- dump / load: 直接读写文件 (没有 s) ---
+
+# dump 直接写文件 (不用先 dumps 再 write):
+# data = {'name': '茅台', 'price': 1800.0}
+# with open('stock.json', 'w') as f:
 #     json.dump(data, f, ensure_ascii=False, indent=2)
 
-# JSON 列表 → DataFrame:
+# load 直接从文件读:
+# with open('stock.json', 'r') as f:
+#     data = json.load(f)          # json.load 不是 loads!
+#     print(data['name'])
+
+# 记忆口诀: dumps/loads 有 s → 处理字符串 (string)
+#           dump/load   无 s → 处理文件 (stream)
+
+
+# --- pd.read_json: JSON 直接转 DataFrame ---
+#
+# 量化场景最常见的是 API 返回了一个 JSON 列表:
+# [
+#   {"name": "茅台", "price": 1800},
+#   {"name": "招行", "price": 35.5}
+# ]
+# 这种结构 = list of dict, 就是 DataFrame 的行列表.
+# pd.read_json 可以直接解析, 一步到位:
+
 "json_list = '[{\"name\": \"茅台\", \"price\": 1800}, {\"name\": \"招行\", \"price\": 35.5}]'"
 "df_from_json = pd.read_json(json_list)"
 "print(df_from_json)"
@@ -379,9 +456,14 @@ import json
 "# 0   茅台  1800.0"
 "# 1   招行    35.5"
 
-# 等价于:
-"data_list = json.loads(json_list)  # 先解析为 Python list of dict"
-"df_alt = pd.DataFrame(data_list)   # list of dict -> DataFrame"
+# 等价的两步走 (先 json.loads 解析, 再 pd.DataFrame 转换):
+"data_list = json.loads(json_list)   # JSON 字符串 → list of dict"
+"df_alt = pd.DataFrame(data_list)    # list of dict → DataFrame"
+"print(df_alt)"
+"# 输出和上面一模一样"
+
+# 两步走的好处是可以在中间做数据清洗,
+# 比如过滤、修改字段名再转 DataFrame.
 
 
 print("\n" + "=" * 40 + "\n练习 4: CSV + JSON")
@@ -393,6 +475,9 @@ print("\n" + "=" * 40 + "\n练习 4: CSV + JSON")
 # 3. 打印读回来的 DataFrame, 确认和原来一样
 
 # ↓ 你的代码 ↓
+df_stocks.to_csv('stocks.csv',index = False)
+df_json=pd.read_csv('stocks.csv')
+print(df_json)
 
 
 # ■ 练习 4.2: JSON 解析
@@ -413,6 +498,11 @@ api_response = '''
 #       然后添加成交额列
 
 # ↓ 你的代码 ↓
+data_list = json.loads(api_response)
+df_from_json = pd.DataFrame(data_list)
+df_from_json['成交额'] = df_from_json['price']*df_from_json['volume']
+print(df_from_json)
+
 
 
 # ═══════════════════════════════════════════════════
@@ -477,6 +567,10 @@ print("\n" + "=" * 40 + "\n练习 5: yfinance 入门")
 #    连不上不影响后续练习, 可以直接用前面的 df_stocks 练手
 
 # ↓ 你的代码 ↓
+apple = yf.download('AAPL',start='2024-01-01', end='2024-12-31')
+print(apple.head(1))
+print(apple.tail(1))
+print(apple.describe())
 
 
 # ■ 练习 5.2: 多股票收盘价
@@ -489,6 +583,14 @@ print("\n" + "=" * 40 + "\n练习 5: yfinance 入门")
 #    - 三只股票中, 哪只波动最大 (标准差)
 
 # ↓ 你的代码 ↓
+data = yf.download(['AAPL', 'MSFT', 'GOOGL'], start='2024-01-01', end='2024-03-31')
+close_data = data['Close']
+avg = close_data.mean(axis = 0)
+max_ = close_data.max(axis = 0)
+min_ = close_data.min(axis = 0)
+std_ = close_data.std(axis = 0)
+std_max = std_.argmax()
+
 
 
 # ═══════════════════════════════════════════════════
@@ -532,3 +634,18 @@ print("=" * 50)
 #   ...
 
 # ↓ 你的代码 ↓
+stock= yf.download(['AAPL', 'MSFT', 'GOOGL','AMZN',],start='2024-01-01', end='2024-06-01')
+close_price = stock['Close']
+print(close_price.head(10))
+print(close_price.describe())
+max_price = close_price.max(axis = 0)
+max_price_index = close_price.idxmax(axis = 0)
+ratio = close_price.iloc[-1]/close_price.iloc[0] -1
+#记住行的寻找方式
+apple_stock = close_price['AAPL']
+high_apple_days = sum(apple_stock > 200)
+result = pd.DataFrame({'最高收盘价': max_price,
+    '最高日期': max_price_index,
+    '累计收益率': ratio})
+result.to_csv('stock_anlysis.csv')
+
