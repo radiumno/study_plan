@@ -506,43 +506,36 @@ print(df_from_json)
 
 
 # ═══════════════════════════════════════════════════
-# 五, yfinance 引子 — 一行代码拉股票数据
+# 五, 模拟股票数据 -- 无需网络
 # ═══════════════════════════════════════════════════
-# yfinance 是雅虎财经的 Python 客户端.
+# yfinance 在国内用不了, 我们用 numpy 生成模拟行情数据.
 # 一行代码就能拿到真实股票数据, 返回的就是 DataFrame.
 
-# 安装: pip install yfinance (在终端运行)
+# 固定种子, 每次运行结果一样, 不影响练习.
 
-# --- 5.1 基本的 yfinance 用法 ---
+# --- 5.1 生成模拟股票数据 ---
 
-import yfinance as yf
+# 国内 yfinance 用不了, 我们用 NumPy 生成模拟数据.
+# 固定种子, 每次运行结果一样.
 
-# 下载单只股票:
-"aapl = yf.download('AAPL', start='2024-01-01', end='2024-03-01')"
-"print(type(aapl))   # <class 'pandas.core.frame.DataFrame'>"
-"print(aapl.head())  # 有 Open/High/Low/Close/Volume 等列"
-""
+np.random.seed(42)
+dates_5 = pd.date_range('2024-01-02', '2024-03-31', freq='B')
+
+# 生成 3 只股票的模拟收盘价:
+sim_prices = pd.DataFrame({
+    'AAPL':  180 * np.cumprod(1 + np.random.randn(len(dates_5)) * 0.015),
+    'MSFT':  380 * np.cumprod(1 + np.random.randn(len(dates_5)) * 0.012),
+    'GOOGL': 140 * np.cumprod(1 + np.random.randn(len(dates_5)) * 0.018),
+}, index=dates_5)
+
+print(sim_prices.head())
+print(sim_prices.describe())
+
 # 参数说明:
-#   ticker:   股票代码 (AAPL = Apple, 600519.SS = 茅台上海, 但 A 股在国内经常连不上)
-#   start:    开始日期 (字符串 'YYYY-MM-DD')
-#   end:      结束日期 (默认到今天)
-#   progress: 是否显示进度条 (默认 True, 第一次可以关掉)
-
-# 下载多只股票:
-"portfolio = yf.download(['AAPL', 'MSFT', 'GOOGL'], start='2024-01-01')"
-"print(portfolio.columns)  # 多级列索引: (Open/Close..., AAPL/MSFT...)"
-"print(portfolio['Close'])  # 只看收盘价 (DataFrame)"
-"# ⚠️ portfolio['Close'] 返回的列名是 ('Close', 'AAPL') 这样的多级索引,"
-"#   暂时不用纠结, 当成 3 列 'AAPL'/'MSFT'/'GOOGL 来用就行"
-""
-# ⚠️ yfinance 数据常有 NaN (缺失值):
-#     节假日没有交易, 对应日期就是 NaN.
-#     用 .dropna() 删除, 或者 .fillna(0) 填零.
-"print(portfolio['Close'].isna().sum())  # 每列有多少个 NaN"
-"portfolio_clean = portfolio['Close'].dropna()  # 删掉含 NaN 的行"
-""
-
-# --- 5.2 .info 属性 — 查看股票信息 ---
+#   180/380/140:   起始股价 (模拟 AAPL/MSFT/GOOGL 的价位)
+#   0.015/0.012/0.018: 日波动率 (标准差), 值越大股价越波动
+#   np.cumprod(1 + rets): 累乘涨跌幅, 生成价格序列
+#   freq='B': 仅交易日 (Business day, 周一到周五)
 
 # 获取单只股票的详细信息:
 "aapl_info = yf.Ticker('AAPL').info"
@@ -554,84 +547,69 @@ import yfinance as yf
 # .info 返回一个 dict, 包含几十个字段
 
 
-print("\n" + "=" * 40 + "\n练习 5: yfinance 入门")
+print("\n" + "=" * 40 + "\n练习 5: 模拟股票数据分析")
 
-# ■ 练习 5.1: 拉取真实股票数据
+# ■ 练习 5.1: 查看股票数据
 #
-# 用 yfinance 拉取:
-#   1. AAPL (苹果) 2024年全年的数据
-#   2. 打印 head() 和 tail()
-#   3. 用 describe() 看统计摘要
-#
-# ⚠️ 如果你在国内, 需要开 WARP/VPN 才能连 yahoo finance
-#    连不上不影响后续练习, 可以直接用前面的 df_stocks 练手
+# 用上面生成的 sim_prices:
+#   1. 打印前 5 行和后 5 行
+#   2. 用 describe() 看统计摘要
+#   3. 找出 3 只股票中, 哪只均价最高
 
 # ↓ 你的代码 ↓
-apple = yf.download('AAPL',start='2024-01-01', end='2024-12-31')
-print(apple.head(1))
-print(apple.tail(1))
-print(apple.describe())
+print(sim_prices.head())
+print(sim_prices.tail())
+print(sim_prices.describe())
+print(sim_prices.mean())
 
 
-# ■ 练习 5.2: 多股票收盘价
+# ■ 练习 5.2: 多股票分析
 #
-# 1. 拉取 ['AAPL', 'MSFT', 'GOOGL'] 2024年1月~3月数据
-# 2. 从返回的数据中提取 'Close' 列 (收盘价 DataFrame)
-# 3. 计算:
-#    - 每只股票的均价
-#    - 每只股票的最高价和最低价
-#    - 三只股票中, 哪只波动最大 (标准差)
+# 用 sim_prices 计算:
+#   1. 每只股票的均价
+#   2. 每只股票的最高价和最低价
+#   3. 三只股票中, 哪只波动最大 (标准差)
+#
+# ⚠️ 这里的列名就是 'AAPL'/'MSFT'/'GOOGL', 不是 MultiIndex,
+#    直接用 df['AAPL'] 取值即可.
 
 # ↓ 你的代码 ↓
-data = yf.download(['AAPL', 'MSFT', 'GOOGL'], start='2024-01-01', end='2024-03-31')
-close_data = data['Close']
-avg = close_data.mean(axis = 0)
-max_ = close_data.max(axis = 0)
-min_ = close_data.min(axis = 0)
-std_ = close_data.std(axis = 0)
+avg = sim_prices.mean(axis=0)
+max_ = sim_prices.max(axis=0)
+min_ = sim_prices.min(axis=0)
+std_ = sim_prices.std(axis=0)
 std_max = std_.argmax()
 
 
 
 # ═══════════════════════════════════════════════════
-# ▸ 综合练习: 真实股票数据分析管道
+# ▸ 综合练习: 多股票数据分析 (离线可用)
 # ═══════════════════════════════════════════════════
 
 print("\n" + "=" * 50)
-print("综合练习: 真实股票数据分析管道")
+print("综合练习: 多股票数据分析")
 print("=" * 50)
 
-# 综合运用今天的全部知识点
-#
-# 任务: 分析 2024 年美股科技股的走势
-#
-# 数据:
-#   - 股票: AAPL, MSFT, GOOGL, AMZN
-#   - 时间: 2024-01-01 ~ 2024-06-01
-#
-# 步骤:
-# 1. 用 yfinance 下载上述 4 只股票数据
-# 2. 提取 'Close' 收盘价 DataFrame
-# 3. 用 .head() 和 .describe() 查看数据概览
-# 4. (选做) 计算每只股票的月均价
-#    提示: df.resample('M').mean() — Day 10 会细讲, 这里先试试
-# 5. 找出每只股票的历史最高收盘价和对应日期
-# 6. 计算每只股票的累计收益率:
-#    累计收益率 = (最后一天收盘 / 第一天收盘 - 1)
-# 7. 用布尔索引找出 AAPL 收盘价 > 200 的天数
-# 8. (附加) 把分析结果保存为 CSV
-#
-# 输出格式参考:
-#   === 数据概览 ===
-#   AAPL 均价: xxx.xx, 最高: xxx.xx
-#   MSFT 均价: xxx.xx, 最高: xxx.xx
-#   ...
-#   === 月均价 ===
-#   2024-01: [AAPL均值, MSFT均值, ...]
-#   ...
-#   === 累计收益率 ===
-#   AAPL: +xx.xx%
-#   ...
+# 生成 4 只股票的 6 个月模拟数据 (和 Day 10 的练习类似)
+np.random.seed(2024)
+dates_comp = pd.date_range('2024-01-02', '2024-06-01', freq='B')
+
+portfolio = pd.DataFrame({
+    'AAPL':  180 * np.cumprod(1 + np.random.randn(len(dates_comp)) * 0.015),
+    'MSFT':  380 * np.cumprod(1 + np.random.randn(len(dates_comp)) * 0.012),
+    'GOOGL': 140 * np.cumprod(1 + np.random.randn(len(dates_comp)) * 0.018),
+    'AMZN':  150 * np.cumprod(1 + np.random.randn(len(dates_comp)) * 0.016),
+}, index=dates_comp)
+
+# 组合运用今天学过的所有知识点:
+#   1. 用 .head() 和 .describe() 查看数据概览
+#   2. 找出每只股票的最高收盘价和对应日期
+#      (提示: .max() + .idxmax())
+#   3. 计算每只股票的累计收益率:
+#      累计收益率 = 最后一天 / 第一天 - 1
+#      (提示: .iloc[-1] / .iloc[0] - 1)
+#   4. 用布尔索引找出 AAPL 收盘价 > 200 的天数
+#   5. (附加) 把分析结果保存为 CSV
 
 # ↓ 你的代码 ↓
 stock= yf.download(['AAPL', 'MSFT', 'GOOGL','AMZN',],start='2024-01-01', end='2024-06-01')
