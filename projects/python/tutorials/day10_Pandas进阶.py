@@ -32,7 +32,7 @@
 # 前情回顾 -- Day 09: Pandas 入门
 # ═══════════════════════════════════════════════════
 # 你已学会: Series/DataFrame 创建, loc/iloc, shift,
-# CSV/JSON 读写, yfinance 拉数据.
+# CSV/JSON 读写, 模拟数据/AKShare 拉数据.
 #
 # Day 09 的局限:
 #   1. 日期只是普通字符串, Pandas 不认识它是"时间"
@@ -708,3 +708,33 @@ print(f"价格区间: {spy['close'].min():.2f} ~ {spy['close'].max():.2f}")
 #    最大单日跌幅: -x.xx%
 
 # ↓ 你的代码 ↓
+
+
+# ═══════════════════════════════════════════════════
+# ▸ 附: AKShare 真实 A 股数据 (国内直连)
+# ═══════════════════════════════════════════════════
+#
+# 用 AKShare 拉平安银行真实数据, 算均线和波动率.
+# 安装: pip install akshare (已装好)
+
+"import akshare as ak"
+"df_ak = ak.stock_zh_a_hist("
+"    symbol='000001', period='daily',"
+"    start_date='20240101', end_date='20241231', adjust='qfq'"
+")"
+"# 日期设索引, 改列名为英文"
+"df_ak.index = pd.to_datetime(df_ak['日期'])"
+"df_ak['close'] = df_ak['收盘'].astype(float)"
+"df_ak['volume'] = df_ak['成交量'].astype(float)"
+""
+"# 和上面练习完全一样的均线分析:"
+"df_ak['SMA_5'] = df_ak['close'].rolling(5).mean()"
+"df_ak['SMA_20'] = df_ak['close'].rolling(20).mean()"
+"df_ak['daily_ret'] = df_ak['close'].pct_change()"
+"df_ak['vol_20'] = df_ak['daily_ret'].rolling(20).std() * np.sqrt(252)"
+""
+"print(df_ak[['close', 'SMA_5', 'SMA_20']].tail())"
+"print(f'平安银行2024年化波动率: {df_ak[\"vol_20\"].mean():.1%}')"
+""
+# ⚠️ 注意: AKShare 返回的列名是中文, 需要 .astype(float)
+#     转类型. A 股有涨跌停, 日波动率比美股小.

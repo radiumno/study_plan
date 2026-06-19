@@ -14,7 +14,7 @@
    - Real Python Pandas 教程 (realpython.com/pandas-python-explore-dataset)
 
  三线:
-   量化主线 (80%): Pandas 数据分析 + yfinance 拉取股票
+   量化主线 (80%): Pandas 数据分析 + 模拟股票数据/AKShare
    AI辅线 (10%): 简要提及 Pandas 是 ML 预处理的核心
    考研(10%): 本日以实操为主, 与计组/OS 无直接重叠
 
@@ -537,14 +537,10 @@ print(sim_prices.describe())
 #   np.cumprod(1 + rets): 累乘涨跌幅, 生成价格序列
 #   freq='B': 仅交易日 (Business day, 周一到周五)
 
-# 获取单只股票的详细信息:
-"aapl_info = yf.Ticker('AAPL').info"
-"print(aapl_info['currentPrice'])    # 当前价格"
-"print(aapl_info['marketCap'])       # 市值"
-"print(aapl_info['trailingPE'])      # 市盈率"
-"print(aapl_info['dividendYield'])   # 股息率"
+# AKShare 也能拉股票基本信息:
+"# df_info = ak.stock_individual_info_em(symbol='000001')"
 ""
-# .info 返回一个 dict, 包含几十个字段
+# .info 返回股票基本面字段
 
 
 print("\n" + "=" * 40 + "\n练习 5: 模拟股票数据分析")
@@ -612,18 +608,58 @@ portfolio = pd.DataFrame({
 #   5. (附加) 把分析结果保存为 CSV
 
 # ↓ 你的代码 ↓
-stock= yf.download(['AAPL', 'MSFT', 'GOOGL','AMZN',],start='2024-01-01', end='2024-06-01')
-close_price = stock['Close']
+close_price = portfolio
 print(close_price.head(10))
 print(close_price.describe())
-max_price = close_price.max(axis = 0)
-max_price_index = close_price.idxmax(axis = 0)
-ratio = close_price.iloc[-1]/close_price.iloc[0] -1
-#记住行的寻找方式
+max_price = close_price.max(axis=0)
+max_price_index = close_price.idxmax(axis=0)
+ratio = close_price.iloc[-1] / close_price.iloc[0] - 1
+
 apple_stock = close_price['AAPL']
 high_apple_days = sum(apple_stock > 200)
-result = pd.DataFrame({'最高收盘价': max_price,
+result = pd.DataFrame({
+    '最高收盘价': max_price,
     '最高日期': max_price_index,
-    '累计收益率': ratio})
-result.to_csv('stock_anlysis.csv')
+    '累计收益率': ratio
+})
+result.to_csv('stock_analysis.csv')
+
+
+# ═══════════════════════════════════════════════════
+# ▸ 附: AKShare 真实 A 股数据 (国内直连)
+# ═══════════════════════════════════════════════════
+#
+# 上面的练习用模拟数据, 但你需要学会拉真实数据.
+# AKShare 是国内最活跃的金融数据源, 免费直连.
+# 安装: pip install akshare (已装好)
+#
+# 拉取平安银行(000001) 2024年日线:
+
+"import akshare as ak"
+"df_ak = ak.stock_zh_a_hist("
+"    symbol='000001', period='daily',"
+"    start_date='20240101', end_date='20241231', adjust='qfq'"
+")"
+"print(df_ak.head())"
+""
+# 参数说明:
+#   symbol:   股票代码 (000001 = 平安银行, 上海加 sh, 深圳加 sz)
+#   period:   频率 (daily/weekly/monthly)
+#   start_date: 开始日期 YYYYMMDD
+#   end_date:   结束日期 YYYYMMDD
+#   adjust:     复权方式 (qfq=前复权, hfq=后复权, '')
+#
+# 返回值列:
+#   日期, 开盘, 收盘, 最高, 最低, 成交量, 成交额,
+#   振幅, 涨跌幅, 涨跌额, 换手率
+#
+# AKShare 返回的列名是中文, 需要处理一下兼容性:
+"df_ak.columns"
+"# Index(['日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额',"
+"#        '振幅', '涨跌幅', '涨跌额', '换手率'], dtype='object')"
+""
+# 把日期列设成索引, 就和之前的练习统一了:
+"df_ak.index = pd.to_datetime(df_ak['日期'])"
+"df_ak = df_ak[['开盘', '收盘', '最高', '最低', '成交量']]"
+"print(df_ak.head())"
 

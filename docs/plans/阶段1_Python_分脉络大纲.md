@@ -195,11 +195,27 @@
 | Day | 内容 | 参考来源 | Whale-Quant 对照 |
 |-----|------|---------|-----------------|
 | 08 | NumPy 数组运算、广播、线性代数 **+ 正则 re** | QuantInsti, NumPy 官方文档 | — |
-| 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
+| 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 | ✅ day09 |
 | 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 | ✅ day10 |
 | 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
 | 12 | **R2 复习日** (collections + itertools + generators + **Git基础**) | 补齐6个知识点缺口 + Git 80%岗位要求 | — |
 | 13 | 数据采集（baostock/akshare API + 基础API请求）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
+
+### 数据源使用策略 (2026-06-20 更新)
+
+国内 yfinance 被墙，替换方案：
+
+| 数据源 | 安装 | 覆盖 | 使用场景 |
+|--------|------|------|---------|
+| **AKShare** | `pip install akshare` | A股/港股/美股/期货/宏观 | 新教程首选，社区活跃 |
+| **Baostock** | `pip install baostock` | A股 | 稳定性优先，长期运行 |
+| **腾讯直连** | 只需 `requests` | A股 | 零依赖教学，Day 11 K线 |
+| **模拟数据** | NumPy cumprod | 任意 | 练习/原型开发，种子固定可复现 |
+
+使用规则:
+- Day 09-10 教学: 模拟数据 (练习可复现) + 末尾附 AKShare 真实数据示例
+- Day 11 可视化: 腾讯直连 (零依赖拉真实数据画K线)
+- Day 13-14 数据采集: AKShare + Baostock 主线教学
 | 14 | **数据采集+清洗综合** (2天内容合并, 含API+CSV+清洗全流程) | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
 
 ### Day 12 — R2 复习日 (补齐6个缺口)
