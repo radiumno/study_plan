@@ -196,7 +196,7 @@
 |-----|------|---------|-----------------|
 | 08 | NumPy 数组运算、广播、线性代数 **+ 正则 re** | QuantInsti, NumPy 官方文档 | — |
 | 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 |
-| 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 |
+| 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 | ✅ day10 |
 | 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
 | 12 | **R2 复习日** (collections + itertools + generators + **Git基础**) | 补齐6个知识点缺口 + Git 80%岗位要求 | — |
 | 13 | 数据采集（baostock/akshare API + 基础API请求）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
