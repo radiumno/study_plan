@@ -50,36 +50,52 @@ List all types/syntax used today. Confirm each was taught before or is taught to
 3. If a dependency is missing, stop and add it to an earlier day first
 4. Exception: "附加题" can use untaught syntax, but **must** have a `# 提示:` comment
 
-### Step 5: 三层复习机制
-Per "复习+实践=左右手" principle, include in every lesson:
-1. **前情回顾** — 复习上day核心 (1-2道小题)
+### Step 5: 复习机制
+Per CLAUDE.md 教学模式, every lesson starts with:
+1. **上day核心复习** — 抽1-2道小题
 2. **抽题回练** — 从3-7天前的练习抽1道
-3. **新知教学 + 新练习** — 当天内容
 
-### Step 6: 写教程 (四层练习结构)
+### Step 6: 写教程
 Write `projects/python/tutorials/dayXX_名称.py`.
 
-Structure:
+**常规课结构:**
 ```
-前情回顾 (上day核心, 1-2道小题)
-=== ↓ ===
-抽题回练 (3-7天前的练习抽1道)
-=== ↓ ===
-### Part A: [知识点群]
-- 教学: Parameter-by-parameter breakdown, 绑定量化场景
-- → 子知识点练习 (紧跟之后)
-- → Part 综合练习 (该Part末尾)
-=== ↓ ===
-### Day 综合练习 (跨当天知识点)
+### 复习环节 (每天必有)
+练习1: 上day核心概念小题
+练习2: 3-7天前知识回练
+
+### 知识块1: [主题]
+- 知识点1 → 练习1 (填空/补全)
+- 知识点2 → 练习2 (填空/补全)
+- ▸ 知识块1总练习 (跨该块所有知识点)
+
+### 知识块2: [主题]
+- 知识点2.1 → 练习2.1
+- ...
+- ▸ 知识块2总练习
+
+### Day 综合练习 (跨所有块)
+```
+单个知识块 = 2~4个知识点 + 对应的填空/补全练习 + 末尾块总练习
+
+**复习综合课结构 (每3-5天一次, 不教新内容):**
+```
+### 知识点回顾
+- 过去N天的核心概念速查表
+
+### 综合测试 (闭卷风格)
+- 练习1-3: 单知识点加深
+- 练习4-5: 跨天综合
+- 练习6(选做): 附加挑战
+
+### 自评
+- 做完对答案, 标记薄弱环节
 ```
 
 Rules:
 - **No C++ comparison** (Phase 1 Python doesn't need it)
 - **练习区必须留空** — 写完要反向检查
-- **yfinance 注意事项** (如果涉及):
-  - 不要用 A 股代码 (600519.SS 等), 用美股 (AAPL/MSFT/GOOGL/AMZN)
-  - 多股票返回 MultiIndex columns, 加注释解释
-  - 数据有 NaN, 先教 `.dropna()` 或在练习里加提示
+- **知识块内练习难度递进**: 填空→补全→完整实现
 - **综合练习只用当天教过的知识点**, 超前的标为"选做"
 
 ### Step 7: 反向检查清单
