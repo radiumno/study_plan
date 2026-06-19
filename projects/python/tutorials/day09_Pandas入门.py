@@ -537,8 +537,8 @@ print(sim_prices.describe())
 #   np.cumprod(1 + rets): 累乘涨跌幅, 生成价格序列
 #   freq='B': 仅交易日 (Business day, 周一到周五)
 
-# AKShare 也能拉股票基本信息:
-"# df_info = ak.stock_individual_info_em(symbol='000001')"
+# Baostock 也能拉股票基本信息:
+"# rs = bs.query_stock_basic(code='sz.000001')"
 ""
 # .info 返回股票基本面字段
 

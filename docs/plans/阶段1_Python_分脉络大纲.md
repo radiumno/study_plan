@@ -49,8 +49,8 @@
 │   ├── Day 07: 复习课（查漏补缺）          ✅ (2026-06-05新增)
 │
 ├── Part 2: 数据处理（Days 08-14，2周+）✅ Day 08 已完成<br>│   ├── Day 08: NumPy 数组运算 (+ 正则 re) ✅
-│   ├── Day 09: Pandas 入门 (+ JSON 处理) ⚡引入 yfinance 拉股票数据
-│   ├── Day 10: Pandas 进阶 ⚡yfinance 实战：计算均线/波动率
+│   ├── Day 09: Pandas 入门 (+ JSON 处理) ⚡模拟数据练手
+│   ├── Day 10: Pandas 进阶 ⚡Baostock 实战：计算均线/波动率
 │   ├── Day 11: Matplotlib 可视化
 │   ├── Day 12: R2 复习日 (collections + itertools + generators + Git基础)
 │   ├── Day 13: 数据采集与清洗 (+ pytest 验证)
@@ -192,54 +192,96 @@
 参考 **QuantInsti** 和 **Coursera Python for Finance** 的组织方式，加入数据采集环节以保证技能完整性。依据 2026-06-05 优化调整，新增 R2 复习日补齐 collections / itertools / generators 缺口。
 
 正则表达式（re）教学说明：`re` 模块基础语法在 Day 08 副线覆盖，Day 13 数据采集与清洗会深度复用。
-| Day | 内容 | 参考来源 | Whale-Quant 对照 |
-|-----|------|---------|-----------------|
-| 08 | NumPy 数组运算、广播、线性代数 **+ 正则 re** | QuantInsti, NumPy 官方文档 | — |
-| 09 | Pandas 入门（Series/DataFrame）**+ JSON** | Pandas 官方教程, QuantInsti | ch03 数据清洗部分 | ✅ day09 |
-| 10 | Pandas 进阶（时间序列/groupby/merge） | Coursera Python for Finance | ch03 常见指标 + ch07 pandas 评估指标 | ✅ day10 |
-| 11 | Matplotlib 可视化（K线/折线/柱状） | Matplotlib 官方教程 | ch07 净值曲线图 |
-| 12 | **R2 复习日** (collections + itertools + generators + **Git基础**) | 补齐6个知识点缺口 + Git 80%岗位要求 | — |
-| 13 | 数据采集（baostock/akshare API + 基础API请求）**+ pytest** | 招聘需求:数据采集60%+ | **ch03 股票数据获取** 整章参考 |
 
-### 数据源使用策略 (2026-06-20 更新)
+### 数据源说明
 
-国内 yfinance 被墙，替换方案：
+国内直连可用方案：**Baostock**（`pip install baostock`，A股日线，国内直连最稳）+ **模拟数据**（NumPy cumprod，种子固定，练习可复现）
 
-| 数据源 | 安装 | 覆盖 | 状况 |
-|--------|------|------|------|
-| **Baostock** | `pip install baostock` | A股 | ✅ 国内直连, 最稳, 线上教学首选 |
-| **AKShare** | `pip install akshare` | A股/港股/美股/期货/宏观 | ⚠️ 需关本地代理(Clash等), 东财接口被代理拦截 |
-| **东财直连** | 只需 `requests` | A股 | ✅ 设置 `proxies={'http':'','https':''}` 绕过代理 |
-| **模拟数据** | NumPy cumprod | 任意 | ✅ 练习/原型开发, 种子固定可复现 |
+- Day 09-10: 模拟数据 (练习可复现) + 末尾附 Baostock 真实数据示例
+- Day 11: Baostock / 模拟数据
+- Day 13-14: Baostock 主线教学
 
-使用规则:
-- Day 09-10 教学: 模拟数据 (练习可复现) + 末尾附 Baostock 真实数据示例
-- Day 11 可视化: 东财直连 / Baostock
-- Day 13-14 数据采集: Baostock + AKShare 双方案教学
-| 14 | **数据采集+清洗综合** (2天内容合并, 含API+CSV+清洗全流程) | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
+---
+### Day 08 — NumPy 数组运算 (已完成 ✅) [预估 2.5h]
 
-### Day 12 — R2 复习日 (补齐6个缺口)
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | ndarray 创建、形状/轴、广播机制、布尔索引、通用函数 | 50min |
+| 练 | 5个子练习 (数组创建→广播→布尔索引→向量化) | 60min |
+| 综合 | 用 NumPy 实现一个多股票日收益率矩阵运算 | 40min |
+
+### Day 08R — NumPy 强化 (已完成 ✅) [预估 3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | axis 参数深入、广播 shape 匹配、布尔索引括号陷阱、向量化 vs for 循环 | 40min |
+| 练 | 5个子练习 (axis选择→multi-stock归一化→信号生成→滑动窗口→综合) | 90min |
+| 综合 | 分钟级多股票交易信号引擎 (向量化实现) | 50min |
+
+### Day 09 — Pandas 入门 (已完成 ✅) [预估 2.5-3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | Series/DataFrame 创建、loc/iloc、shift、CSV/JSON 读写、模拟数据 | 50min |
+| 练 | 5组练习 (Series创建→DataFrame查看→列行操作→CSV/JSON→股票分析) | 70min |
+| 综合 | 多股票数据分析管道 (模拟数据 + Baostock 附) | 40min |
+
+### Day 10 — Pandas 进阶 (已完成 ✅) [预估 3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | DatetimeIndex/date_range/to_datetime、rolling均线、波动率、resample、groupby、merge/concat | 60min |
+| 练 | 5组练习 (时间序列→均线/波动率→resample→groupby→merge) | 80min |
+| 综合 | 均线金叉/死叉策略分析 (信号生成→持仓统计→绩效评估) | 50min |
+
+---
+### Day 11 — Matplotlib 可视化 [预估 2.5-3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | figure/axes、plot折线、bar柱状、hist分布、subplot多子图、K线自制方法 | 50min |
+| 练 | 折线图(股价走势) → 柱状图(成交量) → subplot(价量双图) → 分布直方图 | 60min |
+| 综合 | 净值曲线 + 均线叠加 + 买卖点标注 (完整交易可视化报表) | 50min |
+
+练习数: 8~10个，数据用 Baostock/模拟
+
+### Day 12 — R2 复习日 [预估 3-4h]
 
 **目的:** 集中补齐量化开发必备但Part 1没覆盖的工具类知识
 
-**内容安排:**
-- `collections` 模块: Counter(统计交易频率), defaultdict(分组聚合), deque(滑动窗口)
-- `itertools` 模块: combinations(配对交易), groupby(时间窗口分组), chain(合并数据源)
-- `yield` 生成器: 模拟逐笔行情数据流, 省内存处理大文件
-- **Git 基础**: init/add/commit/push, 用实际项目练习
-- **GitHub 项目包装**: README怎么写, 项目文档组织, 如何让简历好看
-- 找 bug 题: 覆盖以上4个知识点
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | collections(Counter/defaultdict/deque)、itertools(combinations/groupby/chain)、yield生成器、Git init-add-commit-push | 45min |
+| 练 | Counter统计交易频次、deque模拟滑动窗口、itertools配对交易组合、生成器流式行情 | 60min |
+| 综合1 | **Git实战**: 初始化本项目 → commit → push → README写作 | 40min |
+| 综合2 | 找bug题(跨 Day 08-11) + 跨days综合管道题 | 60min |
 
 **参考:** `docs/cheatsheets/git基础.md`
+
+### Day 13 — 数据采集与清洗 [预估 3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | Baostock API 完整用法、requests GET请求、JSON解析、缺失值处理、pytest基本断言 | 50min |
+| 练 | 拉单只A股 → 拉多只A股 → 日期范围遍历 → 数据清洗(去重/补空/类型修正) | 70min |
+| 综合 | 采集3只A股2024全年数据 → 清洗 → 合并 → 保存CSV → pytest验证完整性 | 60min |
+
+### Day 14 — 数据采集+清洗综合+回测引子 [预估 3h]
+
+| 环节 | 内容 | 时间 |
+|------|------|------|
+| 学 | 双均线策略回测全流程(数据→信号→持仓→绩效)、收益率曲线/最大回撤/夏普比 | 40min |
+| 练 | 用 Day 09-13 知识完整实现: Baostock拉数据 → Pandas清洗 → 策略计算 → Matplotlib可视化 | 80min |
+| 综合 | **完整回测管道**: 采集→清洗→策略→回测→绩效报告→可视化 一条龙 | 60min |
 
 ---
 
 ## 5. Part 3: 项目实战（Days 15-16）
 
-| Day | 内容 | 对应岗位能力 |
-|-----|------|-------------|
-| 15 | 股票分析工具 v1（纯Python） | 数据处理、文件I/O |
-| 16 | 股票分析工具 v2（Pandas版）| 数据分析、时间序列 |
+| Day | 内容 | 对应岗位能力 | 预估时间 |
+|-----|------|-------------|---------|
+| 15 | **股票分析工具 v1**（纯Python, csv/txt/模块组织） | 数据处理、文件I/O、模块化 | 3-4h |
+| 16 | **股票分析工具 v2**（Pandas版 + 简单可视化） | 数据分析、时间序列、可视化 | 3-4h |
 
 ---
 
@@ -316,3 +358,4 @@
 | 2026-05-28 | 推荐资源映射更新：加入廖雪峰/Python-100-Days/资源库/菜鸟/鱼皮AI Guide |
 | 2026-05-28 | 新增四大基础类型覆盖进度表 |
 | 2026-06-03 | 新增 whale-quant 出课参考源, Part 2 每日对照章节映射 |
+| 2026-06-20 | 数据源替换 yfinance→Baostock, Part 2/3 细化(每课拆学/练/综合+时间预估) |

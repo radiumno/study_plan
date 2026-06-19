@@ -543,7 +543,7 @@ data_ret = pd.DataFrame({
 "#    date close volume    date close volume"
 "# 0  2024-01-02  180  10000  2024-01-02  380  15000"
 "# 1  2024-01-03  182  12000  2024-01-03  385  14000"
-"# 这就是 yfinance 多股票下载时 MultiIndex 的由来"
+"# 用 keys 参数指定上层列名, 就产生了 MultiIndex"
 
 # --- 5.2 pd.merge() -- SQL 式 join ---
 

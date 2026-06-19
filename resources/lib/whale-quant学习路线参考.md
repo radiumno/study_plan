@@ -38,7 +38,7 @@ matplotlib==3.8.2    # 可视化
 ```
 
 > ⚠️ tushare 需要 token，注册地址: https://tushare.pro
-> 可选替代: baostock（免费，无需 token）、akshare
+> 国内直连推荐: baostock（免费稳定，无需 token，Day 09+ 教学用）
 
 ---
 
