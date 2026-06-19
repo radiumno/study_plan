@@ -14,7 +14,7 @@
    - Real Python Pandas 教程 (realpython.com/pandas-python-explore-dataset)
 
  三线:
-   量化主线 (80%): Pandas 数据分析 + 模拟股票数据/AKShare
+   量化主线 (80%): Pandas 数据分析 + 模拟数据/Baostock
    AI辅线 (10%): 简要提及 Pandas 是 ML 预处理的核心
    考研(10%): 本日以实操为主, 与计组/OS 无直接重叠
 
@@ -626,40 +626,44 @@ result.to_csv('stock_analysis.csv')
 
 
 # ═══════════════════════════════════════════════════
-# ▸ 附: AKShare 真实 A 股数据 (国内直连)
+# ▸ 附: Baostock 真实 A 股数据 (国内直连)
 # ═══════════════════════════════════════════════════
 #
 # 上面的练习用模拟数据, 但你需要学会拉真实数据.
-# AKShare 是国内最活跃的金融数据源, 免费直连.
-# 安装: pip install akshare (已装好)
+# Baostock 免费直连, 无需注册, 极其稳定.
 #
 # 拉取平安银行(000001) 2024年日线:
 
-"import akshare as ak"
-"df_ak = ak.stock_zh_a_hist("
-"    symbol='000001', period='daily',"
-"    start_date='20240101', end_date='20241231', adjust='qfq'"
+"import baostock as bs"
+"import pandas as pd"
+""
+"# 登录 (免费, 无需注册)"
+"bs.login()"
+""
+"rs = bs.query_history_k_data_plus("
+"    'sz.000001',"
+"    'date,open,close,high,low,volume',"
+"    start_date='2024-01-01', end_date='2024-12-31'"
 ")"
-"print(df_ak.head())"
+"df_bs = rs.get_data()"
+"bs.logout()"
+""
+"# 类型转换 (Baostock 返回字符串)"
+"for col in ['open', 'close', 'high', 'low', 'volume']:"
+"    df_bs[col] = df_bs[col].astype(float)"
+""
+"# 日期设索引"
+"df_bs.index = pd.to_datetime(df_bs['date'])"
+"print(df_bs[['open', 'close']].head())"
+"print(f'\\n行数: {len(df_bs)}')"
 ""
 # 参数说明:
-#   symbol:   股票代码 (000001 = 平安银行, 上海加 sh, 深圳加 sz)
-#   period:   频率 (daily/weekly/monthly)
-#   start_date: 开始日期 YYYYMMDD
-#   end_date:   结束日期 YYYYMMDD
-#   adjust:     复权方式 (qfq=前复权, hfq=后复权, '')
+#   bs.login(): 必须登录, 免费无密码
+#   query_history_k_data_plus(代码, 字段列表, 起止日期)
+#     代码格式: sh.600000 (上海), sz.000001 (深圳)
+#     字段: date,open,close,high,low,volume 等
+#   .get_data(): 返回 DataFrame, 但全是字符串
+#   bs.logout(): 释放连接
 #
-# 返回值列:
-#   日期, 开盘, 收盘, 最高, 最低, 成交量, 成交额,
-#   振幅, 涨跌幅, 涨跌额, 换手率
-#
-# AKShare 返回的列名是中文, 需要处理一下兼容性:
-"df_ak.columns"
-"# Index(['日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额',"
-"#        '振幅', '涨跌幅', '涨跌额', '换手率'], dtype='object')"
-""
-# 把日期列设成索引, 就和之前的练习统一了:
-"df_ak.index = pd.to_datetime(df_ak['日期'])"
-"df_ak = df_ak[['开盘', '收盘', '最高', '最低', '成交量']]"
-"print(df_ak.head())"
+# ⚠️ Baostock 数据是 T+1 更新, 今天看不到今天的数据.
 

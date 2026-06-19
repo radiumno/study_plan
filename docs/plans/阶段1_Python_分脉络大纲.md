@@ -205,17 +205,17 @@
 
 国内 yfinance 被墙，替换方案：
 
-| 数据源 | 安装 | 覆盖 | 使用场景 |
-|--------|------|------|---------|
-| **AKShare** | `pip install akshare` | A股/港股/美股/期货/宏观 | 新教程首选，社区活跃 |
-| **Baostock** | `pip install baostock` | A股 | 稳定性优先，长期运行 |
-| **腾讯直连** | 只需 `requests` | A股 | 零依赖教学，Day 11 K线 |
-| **模拟数据** | NumPy cumprod | 任意 | 练习/原型开发，种子固定可复现 |
+| 数据源 | 安装 | 覆盖 | 状况 |
+|--------|------|------|------|
+| **Baostock** | `pip install baostock` | A股 | ✅ 国内直连, 最稳, 线上教学首选 |
+| **AKShare** | `pip install akshare` | A股/港股/美股/期货/宏观 | ⚠️ 需关本地代理(Clash等), 东财接口被代理拦截 |
+| **东财直连** | 只需 `requests` | A股 | ✅ 设置 `proxies={'http':'','https':''}` 绕过代理 |
+| **模拟数据** | NumPy cumprod | 任意 | ✅ 练习/原型开发, 种子固定可复现 |
 
 使用规则:
-- Day 09-10 教学: 模拟数据 (练习可复现) + 末尾附 AKShare 真实数据示例
-- Day 11 可视化: 腾讯直连 (零依赖拉真实数据画K线)
-- Day 13-14 数据采集: AKShare + Baostock 主线教学
+- Day 09-10 教学: 模拟数据 (练习可复现) + 末尾附 Baostock 真实数据示例
+- Day 11 可视化: 东财直连 / Baostock
+- Day 13-14 数据采集: Baostock + AKShare 双方案教学
 | 14 | **数据采集+清洗综合** (2天内容合并, 含API+CSV+清洗全流程) | 招聘需求:ETL 60%+ | ch03 pandas 清洗 + ch07 手写回测 |
 
 ### Day 12 — R2 复习日 (补齐6个缺口)
