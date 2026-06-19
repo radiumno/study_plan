@@ -66,127 +66,30 @@ arr_r2 = np.array([-0.5, 1.2, 0.0, 2.1, -0.3, 1.5])
 # 但 Python 默认不认识 "2024-01-02" 是日期 -- 它就是个字符串.
 # 需要用 pd.to_datetime() 把它变成 Pandas 能理解的时间类型.
 
-# --- 1.1 pd.to_datetime() -- 字符串转时间 ---
+# --- 知识点1.1: pd.to_datetime + DatetimeIndex ---
 
-# 单字符串转换:
+# 单字符串转时间:
 "t = pd.to_datetime('2024-01-02')"
 "print(t)                      # 2024-01-02 00:00:00"
-"print(type(t))                # <class 'pandas._libs.tslibs.Timestamp'>"
 ""
-# 参数说明:
-#   arg: 可以是字符串, 字符串列表, 或 Series
-#   format: 指定格式 (不传则 Pandas 自动推断, 慢但方便)
+# 参数说明: arg=字符串/列表/Series, format=指定格式(不传则自动推断)
+# ⚠️ '01-02-2024' 有歧义, 建议传 format
 
-# 列表转换:
+# 列表转时间:
 "dates = pd.to_datetime(['2024-01-02', '2024-01-03', '2024-01-04'])"
-"print(dates)                  # DatetimeIndex: 一批时间戳"
-"print(type(dates))            # <class 'pandas.core.indexes.datetimes.DatetimeIndex'>"
-""
-# ⚠️ 常见日期格式都能自动识别: '2024-01-02', '2024/01/02', '01-02-2024'
-#    但有歧义时 (01-02-2024 是 1月2日 还是 2月1日?) 建议传 format
+"# DatetimeIndex(['2024-01-02', '2024-01-03', '2024-01-04'])"
 
-# Series 转换:
+# Series 转时间 + 设索引:
 "df = pd.DataFrame({'date': ['2024-01-02', '2024-01-03'], 'price': [100, 101]})"
-"df['date'] = pd.to_datetime(df['date'])  # 把 date 列转为时间类型"
-"print(df.dtypes)  # date -> datetime64[ns]"
-
-# --- 1.2 DatetimeIndex -- 日期作为行索引 ---
-
-# 把日期列设为行索引:
-"df = df.set_index('date')  # 原来的 'date' 列变成了行索引"
-"print(df.index)            # DatetimeIndex(['2024-01-02', '2024-01-03'])"
+"df['date'] = pd.to_datetime(df['date'])  # 转类型"
+"df = df.set_index('date')                 # 设为行索引"
+"print(df.index)  # DatetimeIndex(['2024-01-02', '2024-01-03'])"
 ""
-# 为什么要把日期设为索引? 三个原因:
-#   1. 时间切片: df['2024-01'] 直接取 1 月所有数据
-#   2. rolling/resample 都要求索引是时间类型
-#   3. 画图时 x 轴自动标日期
+# 日期索引的好处: 时间切片/rolling/resample 都依赖它
 
-# 也可以读 CSV 时直接指定:
-# df = pd.read_csv('data.csv', parse_dates=['date'], index_col='date')
-#   parse_dates: 告诉 Pandas 哪些列是日期 (自动转 DatetimeIndex)
-#   index_col:   指定哪列作为行索引
+print("\n--- 练习1.1: 字符串转时间 ---")
 
-# --- 1.3 pd.date_range() -- 生成日期序列 ---
-
-# 生成连续的交易日 (但包含周末):
-"dates = pd.date_range(start='2024-01-01', end='2024-01-10', freq='D')"
-"print(dates)"
-"# DatetimeIndex(['2024-01-01', '2024-01-02', ..., '2024-01-10'])"
-""
-# 参数说明:
-#   start: 开始日期 (字符串或 Timestamp)
-#   end:   结束日期 (含)
-#   periods: 生成 N 个日期 (与 end 二选一)
-#   freq:  频率 (默认 'D' 按天)
-#     'D'  = 每日 (含周末)
-#     'B'  = 仅交易日 (Business day, 周一到周五)
-#     'W'  = 每周 (默认周日)
-#     'ME' = 月末 (Month End)
-#     'QE' = 季度末
-
-"biz_days = pd.date_range(start='2024-01-01', periods=10, freq='B')"
-"print(biz_days)  # 跳过周末, 只有周一到周五"
-
-# --- 1.4 时间切片 -- 按时间范围取数据 ---
-
-# 当索引是 DatetimeIndex 时, 可以直接切片:
-"dates = pd.date_range('2024-01-01', periods=10, freq='D')"
-"df = pd.DataFrame({'price': range(10)}, index=dates)"
-""
-"print(df['2024-01-03':'2024-01-07'])  # 左闭右闭! (和普通标签切片一样)"
-"#             price"
-"# 2024-01-03      2"
-"# 2024-01-04      3"
-"# 2024-01-05      4"
-"# 2024-01-06      5"
-"# 2024-01-07      6"
-""
-"print(df['2024-01'])  # 取整个 1 月的数据"
-"#             price"
-"# 2024-01-01      0"
-"# 2024-01-02      1"
-"# ..."
-""
-# ⚠️ 时间切片包含结尾 (左闭右闭), 和普通标签切片一致.
-
-
-print("\n" + "=" * 40 + "\n知识块1 练习: 时间序列")
-
-# ■ 练习 1.1: 创建 DatetimeIndex
-#
-# 给定一个价格 list, 用 pd.date_range 生成 2024 年 1 月
-# (仅交易日, 不包含周末) 的日期索引, 创建 DataFrame.
-# 打印 DataFrame 和 index 的信息.
-
-prices = [100, 102, 101, 105, 103, 107, 106, 110, 108, 112,
-          111, 115, 113, 118, 116, 120, 119, 122, 121, 125,
-          123, 128, 126, 130, 129, 133, 131, 135, 134, 138]
-
-# 提示:
-#   1. 1月有 31 天, 周六周日各 4-5 天, 交易日约 23 天
-#   2. 用 pd.date_range(start='2024-01-01', periods=len(prices), freq='B')
-#   3. 创建 df = pd.DataFrame({'price': prices}, index=dates)
-
-# ↓ 你的代码 ↓
-
-
-# ■ 练习 1.2: 时间切片
-#
-# 从上题创建的 DataFrame 中:
-#   1. 取出 2024 年 1 月第三周的数据 (1月15日 ~ 1月19日)
-#   2. 计算这周的均价
-#   3. 取出 1 月下半月 (1月16日之后) 的数据
-
-# 提示: 时间切片用 df['2024-01-15':'2024-01-19']
-
-# ↓ 你的代码 ↓
-
-
-# ■ 练习 1.3: 字符串转时间
-#
-# 以下是从 CSV 读取的数据 (日期是字符串),
-# 请把 date 列转为时间类型, 再设为索引.
-
+# 以下数据日期是字符串, 转时间类型后设为索引:
 data_str = {
     'date': ['2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-08'],
     'close': [180.0, 182.5, 181.0, 183.5, 185.0],
@@ -194,23 +97,73 @@ data_str = {
 }
 df_raw = pd.DataFrame(data_str)
 
-# 提示:
-#   1. pd.to_datetime(df_raw['date']) 转类型
-#   2. df_raw['date'] = 转好的结果
-#   3. df_raw = df_raw.set_index('date')
-# 完成后打印 df_raw 和 df_raw.index
+# 提示: pd.to_datetime(df_raw['date']) → 赋值 → set_index
 
 # ↓ 你的代码 ↓
 
 
+# --- 知识点1.2: pd.date_range() 生成日期序列 ---
+
+# 生成连续日期:
+"dates = pd.date_range(start='2024-01-01', end='2024-01-10', freq='D')"
+"# DatetimeIndex(['2024-01-01', ..., '2024-01-10'])"
+""
+# 参数: start(开始), end(结束/含), periods(N个), freq(频率)
+#   'D'=每日, 'B'=仅交易日, 'W'=每周, 'ME'=月末
+
+"biz_days = pd.date_range(start='2024-01-01', periods=10, freq='B')"
+"print(biz_days)  # 跳过周末, 只有周一到周五"
+
+print("\n--- 练习1.2: 生成日期序列 ---")
+
+# 生成 2024 年 2 月的交易日历, 包含所有交易日的序号
+# 2月有28天(2024是闰年29天), 交易日约20天
+# 提示: pd.date_range(start='2024-02-01', periods=20, freq='B')
+
+# ↓ 你的代码 ↓
+
+
+# --- 知识点1.3: 时间切片 ---
+
+# 当索引是 DatetimeIndex 时, 直接按时间范围取数据:
+"dates = pd.date_range('2024-01-01', periods=10, freq='D')"
+"df = pd.DataFrame({'price': range(10)}, index=dates)"
+""
+"print(df['2024-01-03':'2024-01-07'])  # 左闭右闭!"
+"print(df['2024-01'])                  # 取整个 1 月"
+""
+# ⚠️ 时间切片包含结尾 (左闭右闭), 和普通标签切片一致.
+
+print("\n--- 练习1.3: 时间切片 ---")
+
+# 生成 2024年1月 每日数据, 取出:
+#   1. 1月5日到1月10日的数据
+#   2. 整个1月的数据
+# dates_slice = pd.date_range('2024-01-01', periods=31, freq='D')
+# df_slice = pd.DataFrame({'val': range(31)}, index=dates_slice)
+
+# ↓ 你的代码 ↓
+
+
+# ▸ 知识块1 总练习: 时间序列全流程
+#
+# 给定价格数据, 完成:
+#   1. 把日期转时间类型并设为索引
+#   2. 用 date_range 生成 2024年1月 的交易日历
+#   3. 取出 1月第三周 的数据
+block1_prices = [100, 102, 101, 105, 103, 107, 106, 110, 108, 112,
+                  111, 115, 113, 118, 116, 120, 119, 122, 121, 125,
+                  123, 128, 126, 130, 129, 133, 131, 135, 134, 138]
+
+
 # ═══════════════════════════════════════════════════
-# 二, 滚动窗口 -- 算均线和波动率
+# 知识块2: 滚动窗口 -- 算均线和波动率
 # ═══════════════════════════════════════════════════
 # 移动平均线 (Moving Average) 是量化分析最基础的指标.
 # SMA_n = n 日收盘价的平均值, 每天滚动计算.
 # 不用 for 循环, Pandas 的 .rolling() 一行搞定.
 
-# --- 2.1 rolling() -- 滑动窗口 ---
+# --- 知识点2.1: rolling() 滑动窗口 ---
 
 # 基本用法:
 "dates = pd.date_range('2024-01-01', periods=10, freq='D')"
@@ -238,7 +191,7 @@ df_raw = pd.DataFrame(data_str)
 "df['min_3']    = df['price'].rolling(3).min()     # 3 日最低"
 "df['std_3']    = df['price'].rolling(3).std()     # 3 日标准差 (波动率)"
 
-# --- 2.2 波动率 (年化) ---
+# --- 知识点2.2: 波动率 (年化) ---
 
 # 日收益率:
 "df['daily_ret'] = df['price'].pct_change()  # 每日涨跌幅"
@@ -255,7 +208,7 @@ df_raw = pd.DataFrame(data_str)
 #    rolling(60) -> 季度波动率
 #    rolling(252) -> 年度波动率
 
-# --- 2.3 均线的量化应用: 金叉/死叉 ---
+# --- 知识点2.3: 均线量化应用: 金叉/死叉 ---
 
 # 金叉 (Golden Cross): 短期均线上穿长期均线 -> 买入信号
 # 死叉 (Death Cross):  短期均线下穿长期均线 -> 卖出信号
@@ -271,15 +224,6 @@ df_raw = pd.DataFrame(data_str)
 #   穿越 (= 前一天没有持仓, 今天开始持仓) 需要 shift:
 #   buy_signal = (df['SMA_5'] > df['SMA_20']) & (df['SMA_5'].shift(1) <= df['SMA_20'].shift(1))
 
-
-# ▸ 知识块1 总练习: 时间序列全流程
-#
-# 给定起始日期和价格数组, 完成:
-#   1. 创建 DatetimeIndex (仅交易日)
-#   2. 计算 5 日均线和 20 日年化波动率
-#   3. 用时间切片取出 1 月下半月数据
-#   4. 找出价格最高的交易周
-# 提示: 把上面 3 个知识点串起来
 
 
 print("\n" + "=" * 40 + "\n知识块2 练习: 滚动窗口 -- 均线和波动率")
@@ -369,7 +313,7 @@ df_2 = pd.DataFrame({'close': price_2}, index=dates_2)
 #   QE: Quarter End (季末)
 #   YE: Year End (年末)
 
-# --- 3.2 多聚合: 用 .agg() ---
+# --- 知识点3.2: 多聚合: 用 .agg() ---
 
 # resample 后可以同时算多个值:
 "monthly_agg = df.resample('ME').agg({"
@@ -382,7 +326,7 @@ df_2 = pd.DataFrame({'close': price_2}, index=dates_2)
 "# 2024-02-29  xxx    xxx     xxx     xxx"
 ""
 
-# --- 3.3 OHLC 重采样 (常见: 日线→周线) ---
+# --- 知识点3.3: OHLC 重采样 ---
 
 # 股票交易软件经常把日线数据压缩成周线:
 #   Open  = 周一开盘 (窗口内第一个)
@@ -452,7 +396,7 @@ print("\n" + "=" * 40 + "\n知识块3 练习: 重采样 + 分组 + 合并")
 #   然后 ['ret'] 提取每组的 ret 列
 #   最后 .mean() 对每组分别算均值
 
-# --- 4.2 多列分组 + agg ---
+# --- 知识点4.2: 多列分组 + agg ---
 
 # 按 'stock' 和 'date' 两列分组:
 "print(df_group.groupby(['stock', 'date'])['ret'].mean())"
@@ -467,7 +411,7 @@ print("\n" + "=" * 40 + "\n知识块3 练习: 重采样 + 分组 + 合并")
 "# 多聚合: 同时算均值、标准差、计数"
 "print(df_group.groupby('stock')['ret'].agg(['mean', 'std', 'count']))"
 
-# --- 4.3 量化场景: 月收益率分组 ---
+# --- 知识点4.3: 量化场景: 月收益率分组 ---
 
 # 先用 resample 按月份, 再用 groupby? 不对.
 # 更常见的场景: 有多只股票的全量数据, 想算每只股票的月均收益率.
@@ -588,7 +532,7 @@ data_block4 = pd.DataFrame({
 "# 1  2024-01-03  182  12000  2024-01-03  385  14000"
 "# 用 keys 参数指定上层列名, 就产生了 MultiIndex"
 
-# --- 5.2 pd.merge() -- SQL 式 join ---
+# --- 知识点5.2: pd.merge() SQL 式 join ---
 
 # 按某个 key 列匹配, 把两张表拼在一起.
 # 类似 Excel 的 VLOOKUP.
