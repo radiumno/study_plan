@@ -231,9 +231,13 @@
 
 | 环节 | 内容 | 时间 |
 |------|------|------|
-| 学 | DatetimeIndex/date_range/to_datetime、rolling均线、波动率、resample、groupby、merge/concat | 60min |
-| 练 | 5组练习 (时间序列→均线/波动率→resample→groupby→merge) | 80min |
-| 综合 | 均线金叉/死叉策略分析 (信号生成→持仓统计→绩效评估) | 50min |
+| 复习R | Series创建回练 + 布尔索引回练 | 15min |
+| 块1 | 时间序列(to_datetime/date_range/切片): 练1.1-1.3 + 块练习 | 40min |
+| 块2 | 滚动窗口(均线/波动率/金叉死叉): 练2.1-2.3 + 块练习 | 40min |
+| 块3 | 重采样: 练3.1-3.2 | 20min |
+| 块4 | GroupBy: 练4.1-4.2 + 块练习 | 20min |
+| 块5 | 合并(concat/merge): 练5.1-5.2 + 块练习 | 25min |
+| 综合 | Day综合: 均线金叉/死叉策略分析 | 50min |
 
 ---
 ### Day 11 — Matplotlib 可视化 [预估 2.5-3h]
