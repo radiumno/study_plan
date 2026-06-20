@@ -164,7 +164,7 @@ df_slice = pd.DataFrame({'val' : range(31)} , index = date_slice)
 #   3. 取出 1月第三周 的数据
 block1_prices = [100, 102, 101, 105, 103, 107, 106, 110, 108, 112,
                   111, 115, 113, 118, 116, 120, 119, 122, 121, 125,
-                  123, 128, 126]  # 23个 → 匹配2024年1月23个交易日
+                  123, 128, 126, 130, 129, 133, 131, 135, 134, 138]
 
 
 # ═══════════════════════════════════════════════════
@@ -267,13 +267,7 @@ print(df_2.tail(10))
 #   vol = daily_ret.rolling(20).std() * np.sqrt(252)
 
 # ↓ 你的代码 ↓
-df_2['ratio'] = df_2['close'].pct_change()
-df_2['vol_20d'] = df_2['ratio'].rolling(20).std()*np.sqrt(252)
-print(df_2['vol_20d'].idxmax())
-mask = df_2['vol_20d'] > 0.15
-print(df_2[mask])
-
-
+df_2['prc_change']
 
 # ■ 练习 2.3: 金叉/死叉信号
 #
@@ -286,11 +280,6 @@ print(df_2[mask])
 # 最后统计: signal=1 的天数占比
 
 # ↓ 你的代码 ↓
-df_2['signal'] = 0
-df_2.loc[ df_2['SMA_5'] > df_2['SMA_20'] , 'signal'] = 1
-df_2.loc[ df_2['SMA_5'] < df_2['SMA_20'] , 'signal'] = -1
-mask_2 = df_2['signal'] == 1
-print(df_2[mask_2].sum())
 
 
 # ▸ 知识块2 总练习: 完整均线策略信号

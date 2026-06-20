@@ -1,0 +1,65 @@
+site_name: 量化开发学习计划
+site_description: 从零到量化开发工程师 - 四轨并行(量化/AI/后端/考研)
+repo_url: https://github.com/radiumno/study_plan
+site_url: https://radiumno.github.io/study_plan
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: zh
+  icon:
+    logo: fontawesome/solid/chart-line
+  palette:
+    primary: indigo
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.action.edit
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - admonition
+  - footnotes
+  - tables
+
+nav:
+  - 首页: index.md
+  - 学习路线:
+    - 主脉络: 主脉络.md
+    - 分脉络 (阶段1):
+      - Python基础: plans/阶段1_Python_分脉络大纲.md
+    - 分脉络 (后续):
+      - C++算法: plans/阶段2_C++算法_分脉络大纲.md
+      - C++深入: plans/阶段3_C++深入_分脉络大纲.md
+      - 量化+AI: plans/阶段4_量化核心AI_分脉络大纲.md
+      - 实习冲刺: plans/阶段5-6_实习与冲刺_分脉络大纲.md
+  - 教程:
+    - Stage 1 - Python基础:
+      - Day 01: 变量/类型/字符串: ../projects/python/stage1_python基础/day01_Python起步.py
+      - Day 02: 列表与字典: ../projects/python/stage1_python基础/day02_列表与字典.py
+      - Day 03: 函数: ../projects/python/stage1_python基础/day03_函数.py
+      - Day 04: Set/文件/异常: ../projects/python/stage1_python基础/day04_set文件异常.py
+      - Day 05: 模块与包: ../projects/python/stage1_python基础/day05_模块与包.py
+      - Day 06: 股票数据管理器: ../projects/python/stage1_python基础/day06_股票数据管理器.py
+      - Day 07: 复习课: ../projects/python/stage1_python基础/day07_复习课.py
+    - Stage 2 - 数据处理:
+      - Day 08: NumPy: ../projects/python/stage2_数据处理/day08_NumPy数组运算.py
+      - Day 08R: NumPy强化: ../projects/python/stage2_数据处理/day08R_NumPy强化课.py
+      - Day 09: Pandas入门: ../projects/python/stage2_数据处理/day09_Pandas入门.py
+      - Day 10: Pandas进阶: ../projects/python/stage2_数据处理/day10_Pandas进阶.py
+  - 资源库:
+    - 教学资源: lib/资源库.md
+    - 招聘调研: ../resources/招聘市场调研报告.md
+  - 周审: workflows/周审流程.md
+  - 考研: plans/考研备考对照表.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/radiumno/study_plan

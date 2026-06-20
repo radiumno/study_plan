@@ -47,3 +47,6 @@ projects/ai-engineering/
 null
 _flash_log.txt
 report.txt
+
+# Obsidian workspace config (user-specific)
+vault/.obsidian/workspace*
