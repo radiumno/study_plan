@@ -290,7 +290,7 @@ df_2['signal'] = 0
 df_2.loc[ df_2['SMA_5'] > df_2['SMA_20'] , 'signal'] = 1
 df_2.loc[ df_2['SMA_5'] < df_2['SMA_20'] , 'signal'] = -1
 mask_2 = df_2['signal'] == 1
-print(df_2[mask_2].sum())
+print(len(df_2[mask_2]))
 
 
 # ▸ 知识块2 总练习: 完整均线策略信号

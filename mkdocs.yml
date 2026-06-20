@@ -41,18 +41,18 @@ nav:
       - 实习冲刺: plans/阶段5-6_实习与冲刺_分脉络大纲.md
   - 教程:
     - Stage 1 - Python基础:
-      - Day 01: 变量/类型/字符串: ../projects/python/stage1_python基础/day01_Python起步.py
-      - Day 02: 列表与字典: ../projects/python/stage1_python基础/day02_列表与字典.py
-      - Day 03: 函数: ../projects/python/stage1_python基础/day03_函数.py
-      - Day 04: Set/文件/异常: ../projects/python/stage1_python基础/day04_set文件异常.py
-      - Day 05: 模块与包: ../projects/python/stage1_python基础/day05_模块与包.py
-      - Day 06: 股票数据管理器: ../projects/python/stage1_python基础/day06_股票数据管理器.py
-      - Day 07: 复习课: ../projects/python/stage1_python基础/day07_复习课.py
+      - 'Day 01: 变量/类型/字符串': '../projects/python/stage1_python基础/day01_Python起步.py'
+      - 'Day 02: 列表与字典': '../projects/python/stage1_python基础/day02_列表与字典.py'
+      - 'Day 03: 函数': '../projects/python/stage1_python基础/day03_函数.py'
+      - 'Day 04: Set/文件/异常': '../projects/python/stage1_python基础/day04_set文件异常.py'
+      - 'Day 05: 模块与包': '../projects/python/stage1_python基础/day05_模块与包.py'
+      - 'Day 06: 股票数据管理器': '../projects/python/stage1_python基础/day06_股票数据管理器.py'
+      - 'Day 07: 复习课': '../projects/python/stage1_python基础/day07_复习课.py'
     - Stage 2 - 数据处理:
-      - Day 08: NumPy: ../projects/python/stage2_数据处理/day08_NumPy数组运算.py
-      - Day 08R: NumPy强化: ../projects/python/stage2_数据处理/day08R_NumPy强化课.py
-      - Day 09: Pandas入门: ../projects/python/stage2_数据处理/day09_Pandas入门.py
-      - Day 10: Pandas进阶: ../projects/python/stage2_数据处理/day10_Pandas进阶.py
+      - 'Day 08: NumPy': '../projects/python/stage2_数据处理/day08_NumPy数组运算.py'
+      - 'Day 08R: NumPy强化': '../projects/python/stage2_数据处理/day08R_NumPy强化课.py'
+      - 'Day 09: Pandas入门': '../projects/python/stage2_数据处理/day09_Pandas入门.py'
+      - 'Day 10: Pandas进阶': '../projects/python/stage2_数据处理/day10_Pandas进阶.py'
   - 资源库:
     - 教学资源: lib/资源库.md
     - 招聘调研: ../resources/招聘市场调研报告.md

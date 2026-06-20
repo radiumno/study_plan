@@ -120,6 +120,9 @@
 
 ## 目录
 - 教程: `projects/python/stageN_阶段名/dayXX_名称.py`（三线内容写在同一文件，不分开。stage1=python基础, stage2=数据处理, stage3=项目实战）
+- 文档站: `mkdocs serve` (需要先 `pip install mkdocs-material`)
+- 知识库: `vault/` (Obsidian vault, 我跨会话记忆)
+- 笔记工具: Obsidian (已安装), NotebookLM (网页), mkdocs文档站 (已生成)
 - 项目: `projects/python/projects/`
 - AI项目: `projects/ai/`
 - C++: `projects/cpp/`
