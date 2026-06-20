@@ -85,13 +85,13 @@ Write `projects/python/tutorials/dayXX_名称.py`.
 - `练习2.1` = 知识块2, 知识点1
 - `块总练习` = 不带编号, 标 `▸` 符号
 
-单个知识块 = 2~4个知识点, 每个知识点紧跟练习, 末尾块总练习.
-
-**关键规则: 练习描述中禁止出现 `# 提示:` 或任何等同于提示的步骤指引.**
+**铁律: 知识块内必须是"知识点→练习紧挨", 禁止先教一堆再练一堆.**
+- 每写完一个知识点的 teaching 代码, 立即紧跟该知识点的练习
+- 格式: `知识点X.X (teaching) → 练习X.X (填空/补全) → 下一知识点`
+- 知识点难可以拆多个子练习: `练习1.2.1, 练习1.2.2, 练习1.2.3`
+- 且不能出现 `# 提示:` 或任何等同于提示的步骤指引
 - 练习描述只说"做什么"(what), 不说"怎么做"(how)
 - 变量名、数据结构、函数名都不能在描述里给
-- 例: ❌ `# 提示: pd.to_datetime(df_raw['date']) → set_index` → ✅ 去掉这行
-- 例: ❌ `用 df.resample('W').last()` → ✅ 只说"重采样为周频"
 - 超出当天知识点的附加题可以有提示, 但必须标注 `(选做)`
 
 **复习综合课结构 (每3-5天一次, 不教新内容):**
@@ -124,9 +124,16 @@ After writing, verify ALL:
 | 3. 依赖完整 | All syntax used was taught before or today |
 | 4. 每参数拆解 | Every function parameter explained |
 | 5. 量化场景 | Every concept linked to a quant dev use case |
-| 6. 提示克制 | Hints ≤ 2 sentences, not step-by-step |
+| 6. 禁止提示 | Exercise descriptions say "what" not "how", no `# 提示:` lines |
 | 7. 格式一致 | Separator style matches previous days |
-| 8. yfinance安全(如有) | 美股非A股, 有NaN注释, 有多级索引说明 |
+| 8. 知识点→练习紧挨 | Teaching→exercise 是紧挨的, 不是先教一堆再练一堆 |
+
+### Step 7.5: 结构复查
+Before updating progress, do a quick second-pass check:
+- [ ] 本课所有 `知识点X.X` 的 teaching 代码后面, 是不是立即跟着对应的 `练习X.X`?
+- [ ] 练习区有没有泄漏答案的注释或 `# 提示:`?
+- [ ] 脉络里对这个 Day 的描述能对上吗?(读一遍细脉络)
+- [ ] 用户目标(量化开发/考研/AI)和岗位要求(数据处理是面试必考)覆盖了吗?
 
 ### Step 8: 更新进度
 Update status in:
