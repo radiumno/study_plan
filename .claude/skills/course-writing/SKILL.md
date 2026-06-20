@@ -25,6 +25,14 @@ Check `docs/plans/阶段X_分脉络大纲.md`:
 - **不存在?** -> Stop. Run `roadmap-writing` skill first.
 - **对不上主脉络?** -> Stop. Update 细脉络 first.
 - **吻合?** -> Proceed with the day's arrangement.
+- **注意细脉络是否有 `[资源扫描]` 或 `[大审查]` 标记** -> 按标记执行
+
+### Step 2.5: 课前快速资源扫描 (每次写课前必做)
+Quick WebSearch for new resources relevant to today's topic:
+- 搜今日知识点的最新教程/工具 (eg: 写 Matplotlib 就搜 "Matplotlib 2026 教程 最新")
+- 搜 GitHub Trending 该方向有没有新项目
+- 有合适的直接更新到 `resources/lib/资源库.md`，本次写课就用上
+- ⏱ 5分钟，别拖太久
 
 ### Step 3: 加载记忆规则
 Scan `.claude/memory/` directory. Mandatory rules:
