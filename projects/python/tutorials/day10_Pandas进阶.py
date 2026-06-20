@@ -250,6 +250,9 @@ price_2 = 100 + np.cumsum(np.random.randn(100) * 0.5)  # 随机游走
 df_2 = pd.DataFrame({'close': price_2}, index=dates_2)
 
 # ↓ 你的代码 ↓
+df_2['SMA_5'] = df_2['close'].rolling(5).mean()
+df_2['SMA_20'] = df_2['close'].rolling(20).mean()
+print(df_2.tail(10))
 
 
 # ■ 练习 2.2: 波动率

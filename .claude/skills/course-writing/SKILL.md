@@ -17,8 +17,9 @@ git add -A && git commit -m "dayXX: 课前 checkpoint"
 ```
 **不询问用户**, 直接执行 (per CLAUDE.md: "不再问要不要 commit").
 
-### Step 1: 定位进度
+### Step 1: 定位进度 + 重建周审 cron
 Read `resources/主脉络.md` and `.claude/CLAUDE.md#当前状态` to determine current stage and day.
+同时检查周审 cron 是否还在 (用 CronList), 不在就重建: 周日 9:08, durable:true.
 
 ### Step 2: 核对细脉络
 Check `docs/plans/阶段X_分脉络大纲.md`:
