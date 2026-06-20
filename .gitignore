@@ -40,6 +40,11 @@ output/
 # MCP config (local)
 .mcp.json
 
+# Agent/skill artifacts (not part of project)
+agents/
+skills/web-search/
+skills/deep-research/
+
 # External repos (cloned, not submodules)
 projects/ai-engineering/
 
