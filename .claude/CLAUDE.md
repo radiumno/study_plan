@@ -114,7 +114,7 @@
 - "复习" → 抽综合题
 
 ## 目录
-- 教程: `projects/python/tutorials/dayXX_名称.py`（三线内容写在同一文件，不分开）
+- 教程: `projects/python/stageN_阶段名/dayXX_名称.py`（三线内容写在同一文件，不分开。stage1=python基础, stage2=数据处理, stage3=项目实战）
 - 项目: `projects/python/projects/`
 - AI项目: `projects/ai/`
 - C++: `projects/cpp/`

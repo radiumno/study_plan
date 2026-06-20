@@ -65,7 +65,7 @@ Per CLAUDE.md 教学模式, every lesson starts with:
 2. **抽题回练** — 从3-7天前的练习抽1道
 
 ### Step 6: 写教程
-Write `projects/python/tutorials/dayXX_名称.py`.
+Write `projects/python/stageN_阶段名/dayXX_名称.py` (根据当前阶段选 stage1_python基础 / stage2_数据处理 / stage3_项目实战).
 
 **常规课结构:**
 ```
