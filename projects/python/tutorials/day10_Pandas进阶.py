@@ -47,16 +47,22 @@ import pandas as pd
 stock_dict = {'AAPL': 185.0, 'MSFT': 420.5, 'GOOGL': 175.0}
 
 # ↓ 你的代码 ↓
-
+stock_Ser = pd.Series(stock_dict)
+over_180_price = stock_Ser[stock_Ser > 180]
+print(over_180_price)
 
 # --- 练习 R2: Day 08R 布尔索引回练 ---
 
 # 给定 NumPy 数组, 找出所有 > 0 的元素并替换为 1
 arr_r2 = np.array([-0.5, 1.2, 0.0, 2.1, -0.3, 1.5])
 
-# 提示: 布尔索引 + 赋值, 一行搞定
 
 # ↓ 你的代码 ↓
+mask = arr_r2 > 0
+arr_r2[mask] = 1
+# np.where(arr_r2 > 0 , 1,arr_r2)
+#重要
+print(arr_r2)
 
 
 # ═══════════════════════════════════════════════════
@@ -95,11 +101,15 @@ data_str = {
     'close': [180.0, 182.5, 181.0, 183.5, 185.0],
     'volume': [10000, 12000, 11000, 13000, 14000]
 }
+
+
+
+
+# ↓ 你的代码 ↓df_raw = pd.DataFrame(data_str)
 df_raw = pd.DataFrame(data_str)
-
-# 提示: pd.to_datetime(df_raw['date']) → 赋值 → set_index
-
-# ↓ 你的代码 ↓
+df_raw['date'] = pd.to_datetime(df_raw['date'])
+df_raw = df_raw.set_index('date')
+print(df_raw)
 
 
 # --- 知识点1.2: pd.date_range() 生成日期序列 ---
@@ -118,9 +128,10 @@ print("\n--- 练习1.2: 生成日期序列 ---")
 
 # 生成 2024 年 2 月的交易日历, 包含所有交易日的序号
 # 2月有28天(2024是闰年29天), 交易日约20天
-# 提示: pd.date_range(start='2024-02-01', periods=20, freq='B')
 
 # ↓ 你的代码 ↓
+biz_day = pd.date_range(start = '2024-02-01',periods = 20 , freq = 'B')
+print(biz_day)
 
 
 # --- 知识点1.3: 时间切片 ---
@@ -139,10 +150,10 @@ print("\n--- 练习1.3: 时间切片 ---")
 # 生成 2024年1月 每日数据, 取出:
 #   1. 1月5日到1月10日的数据
 #   2. 整个1月的数据
-# dates_slice = pd.date_range('2024-01-01', periods=31, freq='D')
-# df_slice = pd.DataFrame({'val': range(31)}, index=dates_slice)
 
 # ↓ 你的代码 ↓
+date_slice = pd.date_range('2024-01-01' , periods = 31 ,freq = 'D')
+df_slice = pd.DataFrame({'val' : range(31)} , index = date_slice)
 
 
 # ▸ 知识块1 总练习: 时间序列全流程
@@ -249,7 +260,6 @@ df_2 = pd.DataFrame({'close': price_2}, index=dates_2)
 #   3. 找波动率最高的那一天 (用 idxmax)
 #   4. 打印波动率 > 0.3 (30%) 的那些行
 
-# 提示:
 #   daily_ret = df_2['close'].pct_change()
 #   vol = daily_ret.rolling(20).std() * np.sqrt(252)
 
@@ -349,7 +359,6 @@ print("\n" + "=" * 40 + "\n知识块3 练习: 重采样 + 分组 + 合并")
 #   2. 重采样为月频, 取每月均价 (.mean())
 #   3. 打印两种结果, 对比数据量
 
-# 提示: df_2.resample('W').last()
 
 # ↓ 你的代码 ↓
 
@@ -359,7 +368,6 @@ print("\n" + "=" * 40 + "\n知识块3 练习: 重采样 + 分组 + 合并")
 # 从 df_2 生成周线 OHLC (4 列: Open/High/Low/Close).
 # 然后找这一列数据哪一周涨幅最大 (Close - Open).
 
-# 提示:
 #   weekly = df_2['close'].resample('W').ohlc()
 #   weekly['涨跌幅'] = weekly['close'] - weekly['open']
 
@@ -454,7 +462,6 @@ data_ret = pd.DataFrame({
               -0.01, 0.00, 0.02, -0.02, 0.01]
 })
 
-# 提示:
 #   grouped = data_ret.groupby('stock')['ret']
 #   mean_ret = grouped.mean()
 #   std_ret = grouped.std()
@@ -470,7 +477,6 @@ data_ret = pd.DataFrame({
 #   2. 按 month 分组, 算每个月所有股票的均价
 #   3. 找出收益率最好的月份
 
-# 提示: df_multi['month'] = df_multi['date'].dt.month
 
 # ↓ 你的代码 ↓
 
@@ -595,7 +601,6 @@ googl = pd.DataFrame({
     'volume': [8000, 9000, 8500]
 })
 
-# 提示:
 #   1. 先给每个 df 加 'stock' 列
 #   2. pd.concat([...], ignore_index=True)
 
@@ -618,7 +623,6 @@ volume_data = pd.DataFrame({
     'MSFT': [15000, 14000, 16000]
 })
 
-# 提示:
 #   1. 先把 price_data 和 volume_data 按 'date' merge
 #   2. 然后算 AAPL 成交额 = 价 * 量
 #   3. 再算 MSFT 成交额
@@ -634,7 +638,6 @@ volume_data = pd.DataFrame({
 price_b5 = pd.DataFrame({'date': ['2024-01-02','2024-01-03','2024-01-04'], 'AAPL': [180,182,181], 'MSFT': [380,385,383]})
 vol_b5 = pd.DataFrame({'date': ['2024-01-02','2024-01-03','2024-01-04'], 'AAPL': [10000,12000,11000], 'MSFT': [15000,14000,16000]})
 
-# 提示: merge → 算成交额 → groupby
 
 
 # ═══════════════════════════════════════════════════
