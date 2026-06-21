@@ -371,24 +371,36 @@ print("\n" + "=" * 40 + "\n知识块3 练习: 重采样 + 分组 + 合并")
 
 # ■ 练习 3.1: 日转周
 #
-# 用 df_2 (100 天的随机游走数据):
+# 用 df_new (100 天的随机游走数据):
 #   1. 重采样为周频, 取每周收盘价 (.last())
 #   2. 重采样为月频, 取每月均价 (.mean())
 #   3. 打印两种结果, 对比数据量
 
+# --- 新数据: 2025年1~3月模拟日线 ---
+dates = pd.date_range('2025-01-01', '2025-03-31', freq='D')
+df_new = pd.DataFrame({
+    'close': 100 + np.cumsum(np.random.randn(len(dates)) * 0.5)
+}, index=dates)
+
+# print(f"\n总行数: {len(df_new)}")
 
 # ↓ 你的代码 ↓
+weekly_last = df_new.resample('W').last()
+monthly_avg = df_new.resample("ME").mean()
+print(weeky_last)
+print(monthly_avg)
+
 
 
 # ■ 练习 3.2: OHLC 周线
 #
-# 从 df_2 生成周线 OHLC (4 列: Open/High/Low/Close).
+# 从 df_new 生成周线 OHLC (4 列: Open/High/Low/Close).
 # 然后找这一列数据哪一周涨幅最大 (Close - Open).
 
-#   weekly = df_2['close'].resample('W').ohlc()
-#   weekly['涨跌幅'] = weekly['close'] - weekly['open']
-
 # ↓ 你的代码 ↓
+weekly_ohlc = df_new.resample("W").ohlc()
+zhangfu = weekly_ohlc['close'] - weekly_ohlc['open']
+print(zhangfu.idaxmax())
 
 
 # ═══════════════════════════════════════════════════
@@ -479,14 +491,11 @@ data_ret = pd.DataFrame({
               -0.01, 0.00, 0.02, -0.02, 0.01]
 })
 
-#   grouped = data_ret.groupby('stock')['ret']
-#   mean_ret = grouped.mean()
-#   std_ret = grouped.std()
-#   正收益占比: grouped.apply(lambda x: (x > 0).mean())
-
 # ↓ 你的代码 ↓
-
-
+groupby_stock_avg_ratio = data_ret.groupby('stock')['ret'].mean()
+groupby_stock_avg_std = data_ret.groupby('stock')['ret'].std()
+data_ret['pos'] = data_ret['ret'] > 0
+zhengshouyi = data_ret.groupby('stock')['pos'].mean()
 # ■ 练习 4.2: 按月分组统计
 #
 # 给 df_multi 的代码补全 (或在上面基础上继续):
