@@ -106,10 +106,26 @@
 - 但禁止使用 Workflow 工具 (除非你明确说"用workflow")
 - Agent 跑在后台不阻塞对话, 结果回来了再整合
 
-## 知识库 (Obsidian Vault)
-- `vault/` 是我的跨会话记忆系统, 新会话先读 `vault/会话记录/` 和 `vault/量化知识点/`
-- 你说"记住xxx" → 我写进 vault
-- 目录: 量化知识点/课程记录/坑与教训/资源备忘/会话记录
+## 知识库 (Obsidian Vault) — Karpathy 三文件夹 + 数字前缀
+`vault/` 是我的跨会话记忆系统。结构:
+```
+00_OS/          系统文件(目录说明/模板/配置)
+10_RAW/         原始材料(会话记录/代码片段) — 只追加,不删改
+20_WIKI/        编译知识(量化知识点/坑与教训/课程进度) — 活文档
+30_OUTPUTS/     产出物
+会话交接.md     每次会话结束更新,新会话最先读
+VAULT_CLAUDE.md  vault 操作手册(目录=数据库、frontmatter、规则)
+```
+
+### 会话协议 (Session Protocol)
+**会话开始**: 读 `会话交接.md` + `00_OS/目录说明.md` + `VAULT_CLAUDE.md` + `20_WIKI/`
+**会话中**: 你说"记住X" → 我写进 20_WIKI/，source: claude
+**会话结束**: 更新 `会话交接.md` (做了什么/待办/薄弱环节)
+
+### 规则
+- 你说"记住X" → 我写进 20_WIKI/ 对应目录
+- 所有笔记带 YAML frontmatter: title/type/tags/date/source
+- 新会话必读: 会话交接.md + VAULT_CLAUDE.md
 
 ## 工作流程
 - `docs/workflows/写课程流程.md` — 每次写课, 先核对细脉络与主脉络, 再加载记忆规则, 执行依赖检查, 最后更新进度

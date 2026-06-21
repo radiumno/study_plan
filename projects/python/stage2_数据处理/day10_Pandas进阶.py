@@ -382,12 +382,12 @@ df_new = pd.DataFrame({
     'close': 100 + np.cumsum(np.random.randn(len(dates)) * 0.5)
 }, index=dates)
 
-# print(f"\n总行数: {len(df_new)}")
+print(f"\n总行数: {len(df_new)}")
 
 # ↓ 你的代码 ↓
 weekly_last = df_new.resample('W').last()
 monthly_avg = df_new.resample("ME").mean()
-print(weeky_last)
+print(weekly_last)
 print(monthly_avg)
 
 
@@ -399,8 +399,9 @@ print(monthly_avg)
 
 # ↓ 你的代码 ↓
 weekly_ohlc = df_new.resample("W").ohlc()
-zhangfu = weekly_ohlc['close'] - weekly_ohlc['open']
-print(zhangfu.idaxmax())
+print(weekly_ohlc.columns)       # 列是 MultiIndex: ('close','open'), ('close','high')...
+zhangfu = weekly_ohlc[('close', 'close')] - weekly_ohlc[('close', 'open')]
+print(f"涨幅最大周: {zhangfu.idxmax()}, 涨幅: {zhangfu.max():.2f}")
 
 
 # ═══════════════════════════════════════════════════
@@ -505,7 +506,18 @@ zhengshouyi = data_ret.groupby('stock')['pos'].mean()
 
 
 # ↓ 你的代码 ↓
-
+date_m = pd.date_range('2024-01-01' , '2024-03-31' , freq='D')
+df_multi = pd.DataFrame({
+    'date' : np.concatenate([date_m , date_m]),
+    'stock' : ['AAPL']*len(date_m) + ['MSFT']*len(date_m),
+    'price' : np.random.randn(len(date_m)*2).cumsum() + 100
+})
+df_multi['ym'] = df_multi['date'].dt.to_period('M')
+monthly_avg = df_multi.groupby(['stock','ym'])['price'].mean()
+monthly_price = df_multi.groupby(['stock','ym'])['price'].last()
+monthly_ret = monthly_price.groupby('stock').pct_change()
+best_mons_ret = monthly_ret.idxmax()
+print(best_mons_ret)
 
 # ▸ 知识块4 总练习: 多股票分组统计
 #
@@ -517,6 +529,11 @@ data_block4 = pd.DataFrame({
     'stock': ['A','A','A','A','A','B','B','B','B','B','C','C','C','C','C'],
     'ret': [0.01,-0.02,0.03,0.01,-0.01, 0.02,0.01,-0.01,0.03,0.02, -0.01,0.0,0.02,-0.02,0.01]
 })
+data_by_stock_avg_std = data_block4.groupby('stock')['ret'].agg(['mean','std'])
+# print(data_by_stock_avg_std)
+postive_ratio = data_block4.groupby('stock')['ret'].apply(lamba x :(x>0).mean())
+best_stock = data_by_stock_avg_std['mean'].idxmax()
+most_volatile = data_by_stock_avg_std['std'].idxmax()
 
 
 # ═══════════════════════════════════════════════════
@@ -631,6 +648,11 @@ googl = pd.DataFrame({
 #   2. pd.concat([...], ignore_index=True)
 
 # ↓ 你的代码 ↓
+appl['stock'] = 'apple'
+msft['stock'] = 'msft'
+googl['stock'] = 'googl'
+mixd = pd.concat([appl,msft,googl] ,axis =0 , ignore_index =True)
+
 
 
 # ■ 练习 5.2: Merge 合并价量数据
@@ -654,6 +676,7 @@ volume_data = pd.DataFrame({
 #   3. 再算 MSFT 成交额
 
 # ↓ 你的代码 ↓
+
 
 
 # ▸ 知识块5 总练习: 价量合并分析
