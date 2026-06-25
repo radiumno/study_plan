@@ -105,7 +105,7 @@ data_str = {
 
 
 
-# ↓ 你的代码 ↓df_raw = pd.DataFrame(data_str)
+# ↓ 你的代码 ↓
 df_raw = pd.DataFrame(data_str)
 df_raw['date'] = pd.to_datetime(df_raw['date'])
 df_raw = df_raw.set_index('date')
@@ -769,8 +769,12 @@ print(f"价格区间: {spy['close'].min():.2f} ~ {spy['close'].max():.2f}")
 # ↓ 你的代码 ↓
 spy['SMA_5'] = spy['close'].rolling(5).mean()
 spy['SMA20'] = spy['close'].rolling(20).mean()
-spt['20d_bodonglv'] = spy['SMA20'].std() * np.sqrt(252)
+spy['daily_ret'] = spy['close'].pct_change()
+spy['20d_bodonglv'] = spy['daily_ret'].rolling(20).std() * np.sqrt(252)
 
+spy['signal'] = 0
+spy.loc[spy['SMA_5'] > spy['SMA_20'] , siganl ] = 1
+spy.loc[spy['SMA_5'] > spy['SMA_20'] , siganl ] = -1
 
 
 # ═══════════════════════════════════════════════════
