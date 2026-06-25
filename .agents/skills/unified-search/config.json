@@ -1,0 +1,42 @@
+{
+  "name": "unified-search",
+  "version": "1.0.0",
+  "description": "Unified search combining direct engines + AnySearch API",
+  "anysearch": {
+    "api_key": "as_sk_d06f13c4ff2c1601e8fe5f40486f38ac",
+    "endpoint": "https://api.anysearch.ai/v1",
+    "timeout_ms": 15000,
+    "features": {
+      "vertical_search": true,
+      "batch_search": true,
+      "url_extract": true
+    }
+  },
+  "direct": {
+    "delay_ms": 1200,
+    "batch_size": 3,
+    "retry_attempts": 1,
+    "cookie_on_demand": true
+  },
+  "engines": [
+    { "name": "Baidu", "url": "https://www.baidu.com/s?wd={keyword}", "region": "cn", "type": "general" },
+    { "name": "Bing CN", "url": "https://cn.bing.com/search?q={keyword}&ensearch=0", "region": "cn", "type": "general" },
+    { "name": "Bing INT", "url": "https://cn.bing.com/search?q={keyword}&ensearch=1", "region": "cn", "type": "general" },
+    { "name": "360", "url": "https://www.so.com/s?q={keyword}", "region": "cn", "type": "general" },
+    { "name": "Sogou", "url": "https://sogou.com/web?query={keyword}", "region": "cn", "type": "general" },
+    { "name": "WeChat", "url": "https://wx.sogou.com/weixin?type=2&query={keyword}", "region": "cn", "type": "social" },
+    { "name": "Shenma", "url": "https://m.sm.cn/s?q={keyword}", "region": "cn", "type": "mobile" },
+    { "name": "Google", "url": "https://www.google.com/search?q={keyword}", "region": "global", "type": "general" },
+    { "name": "Google HK", "url": "https://www.google.com.hk/search?q={keyword}", "region": "global", "type": "general" },
+    { "name": "DuckDuckGo", "url": "https://duckduckgo.com/html/?q={keyword}", "region": "global", "type": "privacy" },
+    { "name": "Yahoo", "url": "https://search.yahoo.com/search?p={keyword}", "region": "global", "type": "general" },
+    { "name": "Startpage", "url": "https://www.startpage.com/sp/search?query={keyword}", "region": "global", "type": "privacy" },
+    { "name": "Brave", "url": "https://search.brave.com/search?q={keyword}", "region": "global", "type": "privacy" },
+    { "name": "Ecosia", "url": "https://www.ecosia.org/search?q={keyword}", "region": "global", "type": "green" },
+    { "name": "Qwant", "url": "https://www.qwant.com/?q={keyword}", "region": "global", "type": "privacy" },
+    { "name": "WolframAlpha", "url": "https://www.wolframalpha.com/input?i={keyword}", "region": "global", "type": "knowledge" }
+  ],
+  "anysearch_domains": [
+    "news", "academic", "social", "code", "shopping", "video", "image"
+  ]
+}

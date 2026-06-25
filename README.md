@@ -35,22 +35,31 @@
 
 ## 项目结构
 
-```
-study_plan/
-├── projects/python/           ← 教程文件
-│   ├── stage1_python基础/     Day 01-07: Python 核心语法
-│   ├── stage2_数据处理/        Day 08-14: NumPy/Pandas/Matplotlib
-│   └── stage3_项目实战/        Day 15-16: 综合项目
-├── docs/                      文档站 (mkdocs)
-│   ├── plans/                 各阶段分脉络大纲
-│   ├── lib/                   教学资源库
-│   └── workflows/             写课/周审/写脉络流程
-├── resources/                 主脉络、个人信息、教学参考
-├── vault/                     AI 知识库 (跨会话记忆系统)
-└── .claude/
-    ├── skills/                自动化工作流 (写课/周审/搜索)
-    └── memory/                项目记忆规则
-```
+| 路径 | 角色 | 是否手改 |
+|------|------|:--------:|
+| `projects/python/` | 课程源码主产物 | ✅ |
+| `resources/` | 主脉络、个人信息、资源库等主资料 | ✅ |
+| `docs/plans/` | 阶段细脉络与规划文档 | ✅ |
+| `docs/workflows/` | 写课、写脉络、周审流程 | ✅ |
+| `docs/references/` | AI 辅线、速查表、补充参考 | ✅ |
+| `docs/reviews/` / `docs/templates/` | 审计复盘 / 模板 | ✅ |
+| `docs/resources/` | `resources/` 的文档站镜像（含 `index.md`） | ❌ |
+| `docs/tutorials/` | `projects/python/` 的文档站镜像（含 `index.md`） | ❌ |
+| `scripts/` | 同步、校验、健康检查脚本 | ✅ |
+| `vault/会话交接.md` | 当前会话状态与下次待办 | ✅ |
+| `vault/00_OS/` | vault 说明、模板、系统文件 | ✅ |
+| `vault/10_RAW/` | 原始记录与课程快照归档 | 只追加 |
+| `vault/20_WIKI/` | 长期知识点 / 薄弱项 / 教训 | ✅ |
+| `projects/ai-engineering/` | 本地外部参考仓，供 AI 辅线查阅 | 谨慎 |
+| `.claude/` | 历史配置和记忆资产，仅补充参考 | 谨慎 |
+
+### 结构原则
+
+1. 课程真源只放在 `projects/python/`。
+2. 规划与教学主资料只放在 `resources/` 和 `docs/plans/`。
+3. `docs/resources/`、`docs/tutorials/` 是同步产物，不手工编辑，入口页分别是 `docs/resources/index.md`、`docs/tutorials/index.md`。
+4. 用户填写过答案的课程文件，先归档到 `vault/10_RAW/代码片段/filled_course_snapshots/`，再清空源码练习区。
+5. 外部克隆仓和历史资产可以参考，但不作为当前课程产出的事实来源。
 
 ### 技术栈
 
@@ -102,8 +111,8 @@ study_plan/
 git clone https://github.com/radiumno/study_plan.git
 cd study_plan
 
-# 2. 安装 Python 依赖
-pip install numpy pandas matplotlib baostock
+# 2. 一次性初始化环境
+python3 scripts/checks.py bootstrap
 
 # 3. 运行 Day 09 示例
 python3 projects/python/stage2_数据处理/day09_Pandas入门.py
@@ -113,9 +122,89 @@ python3 projects/python/stage2_数据处理/day09_Pandas入门.py
 
 ```bash
 pip install mkdocs mkdocs-material
+python3 scripts/checks.py docs
 mkdocs serve
 # 浏览器打开 http://localhost:8000
 ```
+
+### 文档站维护
+
+文档站现在只依赖 `docs/` 目录。
+
+- `resources/` 中的主资料通过 `scripts/sync_docs.py` 同步到 `docs/resources/`
+- `projects/python/` 中的课程源码通过 `scripts/sync_docs.py` 生成镜像页到 `docs/tutorials/`
+- 每次改动文档入口、课程源码、资源资料后，优先跑 `python3 scripts/checks.py docs`
+
+不要手工改 `docs/resources/` 和 `docs/tutorials/` 里的同步产物，源文件分别是 `resources/` 和 `projects/python/`。
+
+### 仓库健康检查
+
+```bash
+python3 scripts/checks.py health
+```
+
+当前会执行：
+- 文档同步 `scripts/sync_docs.py`
+- 文档结构校验 `scripts/check_docs_structure.py`
+- 课程质量校验 `scripts/check_course_quality.py`
+
+也可以按组运行：
+
+```bash
+python3 scripts/checks.py list
+python3 scripts/checks.py docs
+python3 scripts/checks.py course
+python3 scripts/checks.py tests
+```
+
+- `list`：查看统一入口可用命令
+- `docs`：只跑文档同步与文档结构校验
+- `course`：只跑课程质量硬检查
+- `tests`：只跑脚本级回归测试
+
+### 统一维护入口
+
+如果不想记多个脚本名，直接用统一入口：
+
+```bash
+python3 scripts/checks.py list
+python3 scripts/checks.py bootstrap
+python3 scripts/checks.py status
+python3 scripts/checks.py sync
+python3 scripts/checks.py docs
+python3 scripts/checks.py course
+python3 scripts/checks.py tests
+python3 scripts/checks.py health
+python3 scripts/checks.py install-hooks
+python3 scripts/checks.py reset-stage1
+python3 scripts/checks.py reset-stage2
+```
+
+### Git hooks
+
+仓库内提供了可追踪的 git hooks：
+
+```bash
+python3 scripts/checks.py install-hooks
+```
+
+- `pre-commit`：提交前跑 `python3 scripts/checks.py tests`
+- `pre-push`：推送前跑 `python3 scripts/checks.py health`
+
+如果是新环境，`python3 scripts/checks.py bootstrap` 会一并创建 `.venv`、安装依赖、安装 hooks，并跑一次全量健康检查。
+
+`python3 scripts/checks.py status` 会快速显示当前环境、hooks、docs 镜像和工作树状态，适合开工前先看一眼。
+
+### 课程练习区重置
+
+当课程文件里的 `# ↓ 你的代码 ↓` 已经被填满，需要恢复成可再次教学的版本时：
+
+```bash
+python3 scripts/archive_and_clear_filled_exercises.py stage1
+python3 scripts/archive_and_clear_filled_exercises.py stage2
+```
+
+原始已填写版本会先归档到 `vault/10_RAW/代码片段/filled_course_snapshots/`，然后再清空课程源文件里的练习区。
 
 ---
 
@@ -124,11 +213,11 @@ mkdocs serve
 ### 写课自动化
 
 每次 "开始写课" 触发完整工作流：
-1. 自动重建周审 cron
-2. 搜索当日知识点最新资源（5 分钟快速扫描）
+1. 读取主脉络、细脉络、会话交接和项目规则
+2. 搜索当日知识点最新资源（必要时，5 分钟快速扫描）
 3. 按标准结构写课（复习 → 知识块 → 练习紧挨 → 块练习 → Day 综合）
 4. 反向检查 + 结构复查
-5. 自动 commit + push
+5. 更新进度与交接，完成后提交相关改动
 
 ### 知识点→练习紧挨
 

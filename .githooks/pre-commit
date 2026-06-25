@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "[pre-commit] running script-level regression tests"
+python3 scripts/checks.py tests

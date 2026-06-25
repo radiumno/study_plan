@@ -56,3 +56,6 @@ report.txt
 # Obsidian workspace config (user-specific)
 vault/.obsidian/workspace*
 site/
+
+# Docs sync artifacts are generated from source files in resources/ and projects/python/
+# Keep them tracked, but do not treat them as hand-edited content.

@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+baostock
+requests
+yfinance
+pytest
+mkdocs
+mkdocs-material
+PyYAML

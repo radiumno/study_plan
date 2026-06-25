@@ -20,7 +20,7 @@ date: 2026-05-29
 | 分类 | 数量 | 说明 |
 |------|------|------|
 | 🟢 融入主线 | 6 Phase | 直接写进 study_plan 教案 |
-| 🟡 AI 侧线 | 11 Phase | 单独放 `docs/ai-side/`，有空再学 |
+| 🟡 AI 侧线 | 11 Phase | 单独放 `docs/references/ai-side/`，有空再学 |
 | ⬜ 跳过 | 3 Phase | 跟你的方向完全不重叠 |
 
 **本地路径：** `projects/ai-engineering\phases\<NN>-<name>\`
@@ -129,7 +129,7 @@ date: 2026-05-29
 
 ## 🟡 AI 侧线（独立学习）
 
-这些放 `docs/ai-side/`，不强制。你哪天想换脑子了走过来翻翻。每个 Phase 都包含完整的 doc narrative (en.md) + 可运行代码。
+这些放 `docs/references/ai-side/`，不强制。你哪天想换脑子了走过来翻翻。每个 Phase 都包含完整的 doc narrative (en.md) + 可运行代码。
 
 ### Phase 4 — Computer Vision（28 节）
 
@@ -297,7 +297,7 @@ python backprop.py
 
 ```bash
 # 直接打开 AI 侧线目录
-cd docs/ai-side/
+cd docs/references/ai-side/
 # 或者直接进 projects/ai-engineering 翻
 cd projects/ai-engineering/phases/14-agent-engineering/01-the-agent-loop/code/
 python agent_loop.py

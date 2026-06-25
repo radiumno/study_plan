@@ -1,7 +1,7 @@
-# 阶段4: 量化核心(60%) + AI应用(40%) — 分脉络大纲
+# 阶段4: 量化系统主线(75%) + AI工具化辅线(25%) — 分脉络大纲
 
-> 编写依据: 主脉络岗位能力模型 + BOSS直聘真实JD + Datawhale LLM Cookbook + whale-quant
-> 调研日期: 2026-06-05
+> 编写依据: 主脉络岗位能力模型 + 2026-06-26多平台JD补充调研 + whale-quant + C++低延迟/交易系统JD
+> 调研日期: 2026-06-26
 > 学习者: 孙溢镭, 地大(武汉) 数据科学, 大二下
 > 时间: 2027年2月 - 2027年7月 (大二下学期, ~6个月/24周)
 
@@ -9,16 +9,16 @@
 
 ## 1. 定位与目标
 
-**在主脉络中的位置:** 阶段4（共6阶段），**最关键的一学期** — 双线并行, 产出决定实习竞争力
+**在主脉络中的位置:** 阶段4（共6阶段），**最关键的一学期** — 交易系统项目产出决定实习竞争力
 
-**双线分配:**
-- 量化主线 (60%): Linux/多线程/网络/SQL/金融基础/回测引擎
-- AI辅线 (40%): LangChain/RAG/Agent/PyTorch因子
+**时间分配:**
+- 量化系统主线 (75%): Linux/性能排障/多线程/网络/SQL/金融基础/回测引擎/交易链路模拟器
+- AI工具化辅线 (25%): AI编码工具/PyTorch简单因子/RAG资料助手/Agent工具调用
 - 考研重叠 (额外): 408 OS/网络/计组 + 数一基础
 
 **目标:**
-- **量化:** 完成C++回测引擎项目, LeetCode 250题, 可投大二实习
-- **AI:** 完成RAG+Agent两个可展示项目
+- **量化:** 完成C++回测引擎 + 简易交易链路模拟器, LeetCode 250题, 可投大二实习
+- **AI:** 完成一个轻量RAG/Agent工具化项目, 服务量化资料检索或回测运行
 - **考研:** 408(OS/网络/计组)过一轮, 数一基础过完
 
 ---
@@ -26,41 +26,40 @@
 ## 2. 总体结构
 
 ```
-阶段4: 量化核心 + AI应用 (大二下, 2027.2-2027.7, 24周)
-├── Part 1: Linux + Git深入 (4周)
+阶段4: 量化系统主线 + AI工具化辅线 (大二下, 2027.2-2027.7, 24周)
+├── Part 1: Linux + Git深入 + 性能排障 (4周)
 │   ├── Week 1-2: Linux环境/命令/Shell脚本
-│   └── Week 3-4: Git工作流 + 开源项目协作
+│   └── Week 3-4: Git工作流 + GDB/perf/日志/简单压测
 │
 ├── Part 2: 多线程 + 网络编程 (6周)
 │   ├── Week 5-6: C++多线程(thread/mutex/condition_variable)
 │   ├── Week 7-8: 网络编程(socket TCP/UDP)
-│   ├── Week 9: 多线程+网络结合 (实战)
+│   ├── Week 9: 行情接收器(多线程+网络)
 │   └── Week 10: LeetCode专题 + 八股
 │
-├── Part 3: SQL + 金融基础 (4周)
+├── Part 3: SQL + 金融基础 + 交易链路认知 (4周)
 │   ├── Week 11-12: SQL (CRUD/联表/聚合/窗口函数)
-│   ├── Week 13-14: 金融基础 (股票/期货/订单簿/撮合)
+│   ├── Week 13-14: 金融基础 (股票/期货/订单簿/撮合/风控/对账)
 │
 ├── Part 4: 项目实战 (6周)
-│   ├── Week 15-17: 回测引擎 v1 (C++)
-│   ├── Week 18-20: 因子计算器 (C++/Python混合)
+│   ├── Week 15-17: 事件驱动回测引擎 v1 (C++)
+│   ├── Week 18-20: 简易交易链路模拟器 (C++)
 │
 ├── Part 5: 实习准备 + 投递 (4周)
 │   ├── Week 21-22: 简历+八股+模拟面试
 │   ├── Week 23-24: 海投 + 面试
 │
-└── AI辅线 (并行, 贯穿Part 1-3 + 暑假)
-    ├── Stage 1: LangChain入门 (Week 5-8)
-    ├── Stage 2: RAG实战 (Week 9-14)
-    ├── Stage 3: Agent开发 (Week 15-20)
-    └── Stage 4: LLM微调入門 → 移至暑假(阶段5期间)
+└── AI工具化辅线 (并行, 严格不挤占主线)
+    ├── Stage 1: AI编码工作流 + PyTorch基础 (Week 5-8)
+    ├── Stage 2: 轻量RAG资料助手 (Week 9-14)
+    └── Stage 3: Agent工具调用(行情查询/回测运行/报告生成) (Week 15-20)
 ```
 
 ---
 
 ## 3. 量化主线 (60%)
 
-### Part 1: Linux + Git (Week 1-4)
+### Part 1: Linux + Git + 性能排障 (Week 1-4)
 
 #### Week 1-2: Linux开发环境
 
@@ -72,7 +71,7 @@
 | Shell脚本基础 | 黑马 | 批量处理数据文件 |
 | Makefile/CMake | Cherno C++ | 编译C++项目 |
 
-#### Week 3-4: Git深入 + 开源协作
+#### Week 3-4: Git深入 + 性能排障入门
 
 | 知识点 | 参考 | 练习 |
 |--------|------|------|
@@ -80,6 +79,9 @@
 | 冲突解决 | - | 模拟冲突场景 |
 | PR/Code Review流程 | GitHub | 给开源项目提PR |
 | GitHub Actions CI | 官方文档 | 自动跑测试 |
+| GDB基础 | 官方文档/教程 | 定位段错误和变量变化 |
+| perf/time/top | Linux工具 | 对比不同容器/算法耗时 |
+| 日志与压测 | 自编 | 给行情处理脚本打日志并做简单压测 |
 
 ---
 
@@ -95,7 +97,7 @@
 | atomic | cppreference | 无锁计数器 |
 | async/future/promise | cppreference | 异步任务(回测) |
 
-**练习:** 多线程股票数据更新器
+**练习:** 多线程股票数据更新器; 生产者-消费者行情队列
 
 #### Week 7-8: 网络编程
 
@@ -108,8 +110,8 @@
 
 **练习:** 用socket从模拟服务器获取行情数据
 
-#### Week 9: 多线程+网络结合
-**练习:** 实现一个简易的行情接收器 (TCP + 多线程处理)
+#### Week 9: 行情接收器
+**练习:** 实现一个简易行情接收器 (TCP模拟行情源 + 多线程处理 + 日志 + 简单延迟统计)
 
 #### Week 10: LeetCode + 八股
 - 多线程/网络相关 LeetCode 15题
@@ -117,7 +119,7 @@
 
 ---
 
-### Part 3: SQL + 金融基础 (Week 11-14)
+### Part 3: SQL + 金融基础 + 交易链路认知 (Week 11-14)
 
 #### Week 11-12: SQL
 
@@ -129,9 +131,9 @@
 | 窗口函数 (ROW_NUMBER/RANK) | LeetCode SQL | 因子排名 |
 | 索引/执行计划 | - | 查询优化 |
 
-**练习:** 用SQLite存股票数据, 写5个分析查询
+**练习:** 用SQLite存股票数据, 写5个分析查询; 为行情数据设计数据质量检查表
 
-#### Week 13-14: 金融基础
+#### Week 13-14: 金融基础 + 交易链路
 
 | 知识点 | 参考 | 对应 |
 |--------|------|------|
@@ -139,42 +141,72 @@
 | 期货/期权基础概念 | 衍生产品(Hull) | 期权岗 |
 | 订单簿/限价单/市价单 | 量化投资黑箱 | 订单系统 |
 | 撮合机制/滑点 | 交易与交易所 | 回测精度 |
+| 订单生命周期 | 自编 + JD样本 | 下单/撤单/成交回报/持仓资金更新 |
+| 风控与对账 | 券商/私募JD | 拒单、部分成交、回报异常、对账差异 |
 | 因子:价值/动量/质量 | whale-quant ch04 | 因子计算 |
 
 ---
 
 ### Part 4: 项目实战 (Week 15-20)
 
-#### Week 15-17: 回测引擎 v1 (C++)
+#### Week 15-17: 事件驱动回测引擎 v1 (C++)
 
 **功能:**
 - 读取行情CSV
 - 支持简单策略 (均线交叉/动量)
 - 计算绩效指标 (收益率/夏普/最大回撤)
 - 输出绩效报告
+- 支持事件流: MarketDataEvent → SignalEvent → OrderEvent → FillEvent
 
 **架构:**
 ```
-DataLoader → Strategy → Portfolio → Metrics → Report
+DataLoader → EventQueue → Strategy → Portfolio → Metrics → Report
 ```
 
 **要求:**
 - C++17, 智能指针, STL容器
 - 支持多线程并行回测 (不同参数)
+- 有单元测试/样例数据/性能对比
 - GitHub项目, 写README
 
-#### Week 18-20: 因子计算器 (C++/Python混合)
+#### Week 18-20: 简易交易链路模拟器 (C++)
 
 **功能:**
-- C++核心: 因子计算 (动量/波动/反转等)
-- Python绑定: 用pybind11封装C++因子
-- Jupyter Notebook: 因子分析 (IC/IR/分层回测)
+- 模拟行情源: 本地TCP服务推送盘口/成交数据
+- 信号模块: 读取行情并生成下单请求
+- 订单状态机: New/Submitted/PartiallyFilled/Filled/Cancelled/Rejected
+- 风控模块: 仓位上限、单笔金额、涨跌停/停牌模拟检查
+- 成交回报: 模拟撮合与成交回报,更新持仓和资金
+- 监控日志: 输出延迟、拒单、成交、持仓变化
 
-**参考:** whale-quant ch04 (因子选股), Qlib (AI因子)
+**架构:**
+```
+MarketDataServer → Gateway → Strategy → Risk → OrderManager → FillSimulator → Monitor
+```
+
+**要求:**
+- C++17, socket, thread, condition_variable, queue
+- 每个模块有清晰接口, README能画出端到端链路
+- 能讲清一次异常: 拒单/部分成交/连接断开/回报异常如何处理
+
+**可选扩展:** C++/Python混合因子计算器(pybind11), IC/IR/分层回测放入Notebook展示。
 
 ---
 
 ### Part 5: 实习准备 (Week 21-24)
+
+### 投实习触发条件
+
+满足以下 4 条再正式海投,否则先补项目:
+
+| 条件 | 验收标准 |
+|------|----------|
+| LeetCode | 200题以上,数组/链表/树/哈希/DP基础题能独立写 |
+| C++项目 | 回测引擎v1可运行,README有架构图和样例输出 |
+| 交易链路 | 能讲清行情→信号→下单→风控→成交回报→持仓资金更新 |
+| 简历 | 一页纸,项目能讲30分钟,GitHub链接可打开 |
+
+投递顺序: 小私募/FinTech/券商IT → 实习友好量化私募 → 头部量化试投。
 
 #### Week 21-22: 简历+八股
 
@@ -195,48 +227,36 @@ DataLoader → Strategy → Portfolio → Metrics → Report
 
 ---
 
-## 4. AI辅线 (40%, 并行)
+## 4. AI工具化辅线 (25%, 并行)
 
-### Stage 1: LangChain入门 (Week 5-8)
+### Stage 1: AI编码工作流 + PyTorch基础 (Week 5-8)
 
 | 知识点 | 参考 | 产出 |
 |--------|------|------|
-| Chain (LLMChain/SimpleSequentialChain) | LLM Cookbook | 简单问答链 |
-| Prompt Template | LangChain官方文档 | 模板化提示 |
-| Memory (ConversationBufferMemory) | LLM Cookbook | 多轮对话 |
-| Tool/Agent概念 | LLM Cookbook | Agent初探 |
+| AI辅助读代码 | Claude Code/Cursor | 为C++项目生成模块说明 |
+| AI辅助测试 | Claude Code/Cursor | 给回测/订单模块生成测试用例 |
+| PyTorch Tensor/Autograd | 土堆PyTorch/d2l | 简单收益率预测实验 |
+| 简单ML因子 | d2l + 自编 | 用动量/波动特征做toy模型 |
 
-### Stage 2: RAG实战 (Week 9-14)
+### Stage 2: 轻量RAG资料助手 (Week 9-14)
 
 | 知识点 | 参考 | 产出 |
 |------|------|------|
-| 文档切分 (RecursiveCharacterTextSplitter) | LLM Cookbook | PDF/文本切分 |
-| 向量化嵌入 (OpenAI/HuggingFace) | LLM Cookbook | 向量数据库 |
-| Chroma/FAISS 向量存储 | LLM Cookbook | 文档检索 |
-| RAG完整链路 (检索+生成) | LLM-Universe | **RAG知识库系统** |
+| 文档切分 | LLM Cookbook | JD/研报/项目README切分 |
+| 向量化嵌入 | LLM Cookbook | 本地资料索引 |
+| Chroma/FAISS | LLM Cookbook | 检索问答 |
+| RAG完整链路 | LLM-Universe | **量化资料问答助手** |
 
-### Stage 3: Agent开发 (Week 15-20)
+### Stage 3: Agent工具调用 (Week 15-20)
 
 | 知识点 | 参考 | 产出 |
 |------|------|------|
 | ReAct框架 | LLM Cookbook | 思考-行动-观察循环 |
 | Function Calling | LangChain文档 | 工具调用 |
-| 多工具编排 | LLM Cookbook | 组合工具 |
-| **项目:** 量化数据查询Agent | 自编 | Agent+量化数据 |
+| 工具封装 | 自编 | 行情查询/回测运行/报告生成 |
+| **项目:** 量化项目助手 | 自编 | 能调用回测脚本并解释结果 |
 
-### Stage 4: LLM微调入門 → 移至暑假
-
-> ⚠️ 阶段4内容量过高, 微调部分移到暑假(阶段5期间)进行.
-> 阶段4 Week 21-24 专注: 实习准备 + 项目收尾 + 刷题.
-
-暑假微调安排:
-
-| 知识点 | 参考 | 时间估计 |
-|------|------|---------|
-| LoRA/QLoRA原理 | Happy-LLM | 2天 |
-| LLaMA-Factory实战 | LLaMA-Factory | 3天 |
-| 数据集准备+微调 | Self-LLM | 3天 |
-| **产出:** 微调后的模型 + 使用文档 | — | 1周 |
+> 暂缓: LLM微调、复杂Agent、多模型部署。它们对当前量化开发JD不是硬门槛,阶段5-6有余力再补。
 
 ---
 
@@ -244,11 +264,11 @@ DataLoader → Strategy → Portfolio → Metrics → Report
 
 | 检查项 | 状态 |
 |--------|------|
-| 1. 岗位要求覆盖 (多线程80%+/网络60%+/SQL50%+/金融50%) | ✅ 全部覆盖 |
-| 2. AI辅线完整 (LangChain/RAG/Agent/微调) | ✅ 4个Stage (微调移至暑假减压) |
+| 1. 岗位要求覆盖 (C++/Linux/多线程/网络/SQL/交易链路/性能排障) | ✅ 全部覆盖 |
+| 2. AI辅线降噪 (工具化25%, 不挤占主线) | ✅ |
 | 3. AI+量化交叉 (PyTorch因子+LLM另类数据) | ⏳ 可选 |
 | 4. 考研重叠 (OS/网络/计组+数一) | ✅ 贯穿 |
-| 5. 产出 (回测引擎+因子+GitHub) | ✅ 2个大项目 |
+| 5. 产出 (回测引擎+交易链路模拟器+GitHub) | ✅ 2个大项目 |
 | 6. 实习准备 (简历/八股/投递) | ✅ 最后4周 |
 
 ---

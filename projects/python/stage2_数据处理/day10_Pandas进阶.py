@@ -531,7 +531,7 @@ data_block4 = pd.DataFrame({
 })
 data_by_stock_avg_std = data_block4.groupby('stock')['ret'].agg(['mean','std'])
 # print(data_by_stock_avg_std)
-postive_ratio = data_block4.groupby('stock')['ret'].apply(lamba x :(x>0).mean())
+postive_ratio = data_block4.groupby('stock')['ret'].apply(lambda x :(x>0).mean())
 best_stock = data_by_stock_avg_std['mean'].idxmax()
 most_volatile = data_by_stock_avg_std['std'].idxmax()
 
@@ -648,10 +648,10 @@ googl = pd.DataFrame({
 #   2. pd.concat([...], ignore_index=True)
 
 # ↓ 你的代码 ↓
-appl['stock'] = 'apple'
+aapl['stock'] = 'apple'
 msft['stock'] = 'msft'
 googl['stock'] = 'googl'
-mixd = pd.concat([appl,msft,googl] ,axis =0 , ignore_index =True)
+mixd = pd.concat([aapl,msft,googl] ,axis =0 , ignore_index =True)
 
 
 
@@ -676,6 +676,9 @@ volume_data = pd.DataFrame({
 #   3. 再算 MSFT 成交额
 
 # ↓ 你的代码 ↓
+merged = pd.merge(price_data , volume_data ,on = 'date',suffixes=('_price','_vol'))
+merged['AAPL_成交额'] = merged['AAPL_price'] * merged['AAPL_vol']
+merged['MSFT_成交额'] = merged['MSFT_price'] * merged['MSFT_vol']
 
 
 
@@ -683,9 +686,15 @@ volume_data = pd.DataFrame({
 #
 # 给定 price 和 volume 两个 DataFrame,
 # 按 date merge 后计算每只股票的每日成交额,
-# 然后按 stock 分组求月均成交额.
+# 然后计算每只股票的日均成交额 (直接用 .mean()).
 price_b5 = pd.DataFrame({'date': ['2024-01-02','2024-01-03','2024-01-04'], 'AAPL': [180,182,181], 'MSFT': [380,385,383]})
 vol_b5 = pd.DataFrame({'date': ['2024-01-02','2024-01-03','2024-01-04'], 'AAPL': [10000,12000,11000], 'MSFT': [15000,14000,16000]})
+
+# ↓ 你的代码 ↓
+merged = pd.merge(price_b5, vol_b5, on='date', suffixes=('_price', '_vol'))
+merged['AAPL_成交额'] = merged['AAPL_price'] * merged['AAPL_vol']
+merged['MSFT_成交额'] = merged['MSFT_price'] * merged['MSFT_vol']
+print(f"AAPL: {merged['AAPL_成交额'].mean():.0f}, MSFT: {merged['MSFT_成交额'].mean():.0f}")
 
 
 
@@ -758,6 +767,10 @@ print(f"价格区间: {spy['close'].min():.2f} ~ {spy['close'].max():.2f}")
 #    最大单日跌幅: -x.xx%
 
 # ↓ 你的代码 ↓
+spy['SMA_5'] = spy['close'].rolling(5).mean()
+spy['SMA20'] = spy['close'].rolling(20).mean()
+spt['20d_bodonglv'] = spy['SMA20'].std() * np.sqrt(252)
+
 
 
 # ═══════════════════════════════════════════════════

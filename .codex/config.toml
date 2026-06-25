@@ -1,0 +1,14 @@
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+[project_doc]
+fallback = "legacy"
+
+project_doc_fallback_filenames = ["CLAUDE.md", "TEAM_GUIDE.md", ".agents.md"]
+project_doc_max_bytes = 65536
+
+[mcp_servers.web-research]
+command = "npx"
+args = [
+    "-y",
+    "web-research-mcp",
+]

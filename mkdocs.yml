@@ -27,11 +27,12 @@ markdown_extensions:
   - admonition
   - footnotes
   - tables
+  - attr_list
 
 nav:
   - 首页: index.md
   - 学习路线:
-    - 主脉络: 主脉络.md
+    - 主脉络: resources/主脉络.md
     - 分脉络 (阶段1):
       - Python基础: plans/阶段1_Python_分脉络大纲.md
     - 分脉络 (后续):
@@ -40,23 +41,37 @@ nav:
       - 量化+AI: plans/阶段4_量化核心AI_分脉络大纲.md
       - 实习冲刺: plans/阶段5-6_实习与冲刺_分脉络大纲.md
   - 教程:
-    - Stage 1 - Python基础:
-      - 'Day 01: 变量/类型/字符串': '../projects/python/stage1_python基础/day01_Python起步.py'
-      - 'Day 02: 列表与字典': '../projects/python/stage1_python基础/day02_列表与字典.py'
-      - 'Day 03: 函数': '../projects/python/stage1_python基础/day03_函数.py'
-      - 'Day 04: Set/文件/异常': '../projects/python/stage1_python基础/day04_set文件异常.py'
-      - 'Day 05: 模块与包': '../projects/python/stage1_python基础/day05_模块与包.py'
-      - 'Day 06: 股票数据管理器': '../projects/python/stage1_python基础/day06_股票数据管理器.py'
-      - 'Day 07: 复习课': '../projects/python/stage1_python基础/day07_复习课.py'
-    - Stage 2 - 数据处理:
-      - 'Day 08: NumPy': '../projects/python/stage2_数据处理/day08_NumPy数组运算.py'
-      - 'Day 08R: NumPy强化': '../projects/python/stage2_数据处理/day08R_NumPy强化课.py'
-      - 'Day 09: Pandas入门': '../projects/python/stage2_数据处理/day09_Pandas入门.py'
-      - 'Day 10: Pandas进阶': '../projects/python/stage2_数据处理/day10_Pandas进阶.py'
+    - 教程索引: tutorials/index.md
   - 资源库:
-    - 教学资源: lib/资源库.md
-    - 招聘调研: ../resources/招聘市场调研报告.md
+    - 资源库索引: resources/index.md
   - 周审: workflows/周审流程.md
+  - 参考资料:
+    - AI 辅线: references/ai-side/README.md
+    - AI Engineering 索引: references/ai-side/ai-engineering.md
+    - Phase 10: references/ai-side/phase-10-llms-from-scratch.md
+    - Phase 13: references/ai-side/phase-13-tools-and-protocols.md
+    - Phase 14: references/ai-side/phase-14-agent-engineering.md
+    - 其他 AI Phases: references/ai-side/其他-phase.md
+    - Phase 4: references/ai-side/phase-04-computer-vision.md
+    - Phase 5: references/ai-side/phase-05-nlp.md
+    - Phase 12: references/ai-side/phase-12-multimodal.md
+    - Phase 15: references/ai-side/phase-15-autonomous.md
+    - Phase 16: references/ai-side/phase-16-multi-agent.md
+    - Phase 17: references/ai-side/phase-17-infra.md
+    - Phase 18: references/ai-side/phase-18-ethics.md
+    - Phase 19: references/ai-side/phase-19-capstone.md
+    - Git 速查: references/cheatsheets/git基础.md
+    - 审计复盘: reviews/audit-2026-05-31.md
+    - 历史归档:
+      - 遗漏知识点归档: archive/遗漏.py
+      - Day 03 学习汇报: archive/day03_学习汇报.md
+  - 规划补充:
+    - 技能需求-权重矩阵: plans/技能需求-权重矩阵.md
+    - AI辅线分脉络: plans/ai-side/AI辅线_分脉络大纲.md
+    - easy-vibe 启动计划: plans/ai-side/easy-vibe-启动计划.md
+  - 工作流:
+    - 写课程流程: workflows/写课程流程.md
+    - 写脉络流程: workflows/写脉络流程.md
   - 考研: plans/考研备考对照表.md
 
 extra:

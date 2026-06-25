@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "[pre-push] running full repository healthcheck"
+python3 scripts/checks.py health
