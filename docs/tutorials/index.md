@@ -23,3 +23,4 @@ description: projects/python/ 的文档站入口，由 scripts/sync_docs.py 生�
 - [Day 8 | NumPy 数组运算 -- 量化数据处理第一步](python/stage2_数据处理/day08_NumPy数组运算.md)
 - [Day 09 | Pandas 入门 — 从 NumPy 到 DataFrame](python/stage2_数据处理/day09_Pandas入门.md)
 - [Day 10 | Pandas 进阶 -- 时间序列 + 多表操作](python/stage2_数据处理/day10_Pandas进阶.md)
+- [Day 11 | Matplotlib 可视化 -- 让行情和策略看得见](python/stage2_数据处理/day11_Matplotlib可视化.md)

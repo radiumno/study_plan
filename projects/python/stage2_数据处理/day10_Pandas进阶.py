@@ -768,14 +768,20 @@ print(f"价格区间: {spy['close'].min():.2f} ~ {spy['close'].max():.2f}")
 
 # ↓ 你的代码 ↓
 spy['SMA_5'] = spy['close'].rolling(5).mean()
-spy['SMA20'] = spy['close'].rolling(20).mean()
+spy['SMA_20'] = spy['close'].rolling(20).mean()
 spy['daily_ret'] = spy['close'].pct_change()
 spy['20d_bodonglv'] = spy['daily_ret'].rolling(20).std() * np.sqrt(252)
 
 spy['signal'] = 0
-spy.loc[spy['SMA_5'] > spy['SMA_20'] , siganl ] = 1
-spy.loc[spy['SMA_5'] > spy['SMA_20'] , siganl ] = -1
+spy.loc[spy['SMA_5'] > spy['SMA_20'] , 'signal' ] = 1
+# spy.loc[spy['SMA_5'] < spy['SMA_20'] , 'signal' ] = -1
 
+spy['golden'] = (spy['SMA_5'] > spy['SMA_20']) & (spy['SMA_5'].shift(1) <= spy['SMA_20'].shift(1))
+spy['death'] = (spy['SMA_5'] < spy['SMA_20']) & (spy['SMA_5'].shift(1) >= spy['SMA_20'].shift(1))
+
+spy['strategy_ret'] = spy['signal'].shift(1) * spy['daily_ret']
+spy['strategy_net'] = (1 + spy['strategy_ret']).cumprod()
+spy['benchmark_net'] = (1 + spy['daily_ret']).cumprod()
 
 # ═══════════════════════════════════════════════════
 # ▸ 附: Baostock 真实 A 股数据 (国内直连)
