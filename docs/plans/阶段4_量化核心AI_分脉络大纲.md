@@ -286,3 +286,6 @@ MarketDataServer → Gateway → Strategy → Risk → OrderManager → FillSimu
 | LLM Cookbook | github.com/datawhalechina/llm-cookbook | RAG+Agent主力 |
 | LLaMA-Factory | github.com/hiyouga/LLaMA-Factory | 微调框架 |
 | Qlib | github.com/microsoft/qlib | AI量化参考 |
+| Vibe-Trading | github.com/HKUDS/Vibe-Trading | 回测loader、Alpha Zoo、MCP工具、Agent工具调用拆解 |
+| daily_stock_analysis | github.com/ZhuLinsen/daily_stock_analysis | 多数据源降级、AI分析报告、WebUI/推送产品化参考 |
+| 开源项目拆解路线图 | docs/plans/开源项目拆解路线图.md | 阶段触发点和拆解边界 |
