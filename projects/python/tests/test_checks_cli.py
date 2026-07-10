@@ -17,6 +17,7 @@ def test_command_map_contains_core_workflows() -> None:
     assert checks.COMMANDS["bootstrap"][-1] == "scripts/bootstrap.py"
     assert checks.COMMANDS["status"][-1] == "scripts/status.py"
     assert checks.COMMANDS["sync"][-1] == "scripts/sync_docs.py"
+    assert checks.COMMANDS["plans"][-2:] == ["scripts/healthcheck.py", "plans"]
     assert checks.COMMANDS["docs"][-2:] == ["scripts/healthcheck.py", "docs"]
     assert checks.COMMANDS["course"][-2:] == ["scripts/healthcheck.py", "course"]
     assert checks.COMMANDS["tests"][-2:] == ["scripts/healthcheck.py", "tests"]

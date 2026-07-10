@@ -1,34 +1,25 @@
 ---
-title: AI 辅线启动计划 — easy-vibe
-description: 阶段1进行到一半时启动 AI 辅线（easy-vibe），周末并行跑，不拖累主线
-date: 2026-06-13
-tags: [AI, easy-vibe, 辅线, 计划]
+title: easy-vibe启动计划（已废弃）
+description: 历史AI辅线计划，已被门槛触发的AI工具化辅线替代
+date: 2026-07-10
+status: superseded
 ---
 
-## 时机
+# easy-vibe启动计划（已废弃）
 
-当前：Day 08（Part 2 开始）
-启动：**Day 10**（1周后，给 Pandas 入门留够稳定时间）
-方式：周末 1 天跑辅线，平时 3-4 天跑主线
+此计划原本准备在阶段1并行学习Prompt、Function Calling、RAG和AI量化助手。
 
-## 为什么现在启动而不是等阶段1结束
+2026-07-10整体审查后确认:
 
-1. 用户日常已经用 Claude Code/Cursor 写代码，有 AI 工具使用经验
-2. 早接触 AI 开发概念（prompt、chain、RAG）有助于理解 AI+量化交叉方向
-3. easy-vibe 门槛低（已克隆在 projects/ 下），上手快
-4. 周末时间利用率提升
+- 阶段1后半段已有数据处理、工程化、采集、回测和项目收尾任务。
+- easy-vibe会同时引入多个新概念和新工程结构，违反学习量上限。
+- 官方量化系统岗位证据并不支持把RAG/Agent当作所有量化开发岗的共同硬门槛。
 
-## 3周辅线安排
+因此本计划不再执行。
 
-| 周 | Day | 内容 | 预期产出 |
-|----|-----|------|---------|
-| 1 | Day 10+ | 安装环境，跑第一个 demo | 本地跑通 simple-chat |
-| 1 | Day 11+ | 理解项目结构、prompt 工程基础 | 修改 prompt 看效果变化 |
-| 2 | Day 12+ | 学习 Function Calling 概念 | 实现一个简单 tool call |
-| 2 | Day 13+ | RAG 概念入门 | 跑通带知识库的 demo |
-| 3 | Day 14+ | 小项目：AI 量化助手 v0.1 | 能回答股票数据问题 |
-| 3 | Day 15+ | 整理+回顾 | 决定后续方向 |
+当前有效AI计划见:
 
-## 后续
+- `docs/plans/ai-side/AI辅线_分脉络大纲.md`
+- `docs/plans/阶段4_量化核心AI_分脉络大纲.md`
 
-Phase 1 结束后，easy-vibe 基础已经打完，可以直接进入 LLM Cookbook（Datawhale）系统学习 AI 开发。
+easy-vibe可继续留在候选资源库，未来只有在目标岗位和阶段容量允许时再评估。

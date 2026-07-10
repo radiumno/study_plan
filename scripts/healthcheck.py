@@ -14,7 +14,19 @@ PYTHON = str(PROJECT_PYTHON if PROJECT_PYTHON.exists() else Path(sys.executable)
 CHECKS = [
     ("docs_sync", "docs sync", [PYTHON, "scripts/sync_docs.py"], "docs"),
     ("docs_structure", "docs structure", [PYTHON, "scripts/check_docs_structure.py"], "docs"),
+    (
+        "plan_consistency",
+        "plan consistency",
+        [PYTHON, "scripts/check_plan_consistency.py"],
+        "plans",
+    ),
     ("course_quality", "course quality", [PYTHON, "scripts/check_course_quality.py"], "course"),
+    (
+        "plan_consistency_tests",
+        "plan consistency tests",
+        [PYTHON, "-m", "pytest", "projects/python/tests/test_plan_consistency.py"],
+        "tests",
+    ),
     (
         "course_quality_tests",
         "course quality tests",
@@ -64,7 +76,7 @@ CHECKS = [
         "tests",
     ),
 ]
-CHECK_GROUPS = ("all", "docs", "course", "tests")
+CHECK_GROUPS = ("all", "plans", "docs", "course", "tests")
 
 
 def build_parser() -> argparse.ArgumentParser:

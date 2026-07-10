@@ -15,6 +15,7 @@ COMMANDS = {
     "bootstrap": [PYTHON, "scripts/bootstrap.py"],
     "status": [PYTHON, "scripts/status.py"],
     "sync": [PYTHON, "scripts/sync_docs.py"],
+    "plans": [PYTHON, "scripts/healthcheck.py", "plans"],
     "docs": [PYTHON, "scripts/healthcheck.py", "docs"],
     "course": [PYTHON, "scripts/healthcheck.py", "course"],
     "tests": [PYTHON, "scripts/healthcheck.py", "tests"],
@@ -45,6 +46,7 @@ def print_available_commands() -> None:
     print("- bootstrap    -> create venv, install deps/hooks, run healthcheck")
     print("- status       -> show current workspace and environment status")
     print("- sync         -> sync docs mirrors only")
+    print("- plans        -> run planning consistency checks")
     print("- docs         -> run docs-only checks")
     print("- course       -> run course-quality hard checks")
     print("- tests        -> run script-level regression tests")

@@ -1,53 +1,48 @@
 # 量化开发学习计划
 
-目标: 量化开发工程师(主) | AI应用开发(保底) | 考研 408/数一(贯穿)
+主目标: 量化交易系统 / 策略系统开发
 
----
+现实入口: 量化数据与研究平台、C++系统或FinTech后端
 
-## 当前进度
+AI定位: 日常工具 + 主线达标后的定向辅线
 
-**阶段1: Python 基础 — 进行中 (Day 10/16)**
+## 当前阶段
 
-- [x] Part 1: Python 核心 (Day 01-07)
-- [x] Part 2: 数据处理 (Day 08-10 进行中)
-- [ ] 复习综合课 Day 11R
-- [ ] 阶段期末大综合 Day 14R
-- [ ] Part 3: 项目实战 (Day 15-16)
+阶段1 Python数据闭环正在执行。精确进度以课程文件、Code Review和会话交接为准。
 
 ## 快速导航
 
-| 资源 | 地址 |
+| 内容 | 页面 |
 |------|------|
-| 学习路线总表 | [主脉络](resources/主脉络.md) |
-| 阶段1 每日计划 | [分脉络](plans/阶段1_Python_分脉络大纲.md) |
+| 路线总览 | [主脉络](resources/主脉络.md) |
+| 项目层级 | [规划层级与滚动执行规则](plans/规划层级与滚动执行规则.md) |
+| 阶段1计划 | [Python数据闭环](plans/阶段1_Python_分脉络大纲.md) |
+| 岗位证据 | [招聘市场调研](resources/招聘市场调研报告.md) |
+| 技能矩阵 | [技能需求矩阵](plans/技能需求-权重矩阵.md) |
+| 核心资源 | [核心学习资源清单](resources/核心学习资源清单.md) |
 | 教程索引 | [教程总览](tutorials/index.md) |
-| 资源索引 | [资源总览](resources/index.md) |
-| 教学资源库 | [资源库](resources/lib/资源库.md) |
-| 招聘市场调研 | [调研报告](resources/招聘市场调研报告.md) |
-| 周审流程 | [周审](workflows/周审流程.md) |
-| AI 辅线参考 | [AI 辅线](references/ai-side/README.md) |
-| 考研备考 | [考研对照表](plans/考研备考对照表.md) |
+| 资源候选库 | [资源库](resources/lib/资源库.md) |
+| 写课流程 | [写课程流程](workflows/写课程流程.md) |
+| 周审流程 | [周审流程](workflows/周审流程.md) |
 
-## 项目结构
+## 路线
 
 ```
-study_plan/
-├── projects/python/          # 课程源码主产物
-├── resources/                # 主脉络、资源库、背景资料
-├── docs/plans/               # 阶段细脉络
-├── docs/workflows/           # 写课 / 写脉络 / 周审流程
-├── docs/references/          # AI 辅线 / 速查表 / 补充资料
-├── docs/resources/           # resources/ 的同步镜像（含 index.md）
-├── docs/tutorials/           # projects/python/ 的同步镜像（含 index.md）
-├── scripts/                  # 同步与健康检查脚本
-├── vault/                    # 会话交接、原始记录、长期知识库
-└── mkdocs.yml
+Python数据闭环
+  -> 现代C++与算法
+  -> C++系统/并发/性能
+  -> 量化系统核心
+  -> 真实经历
+  -> 定向冲刺
 ```
 
-> 编辑入口：课程改 `projects/python/`，主资料改 `resources/`，流程与规划改 `docs/` 下对应源文件。`docs/resources/` 和 `docs/tutorials/` 是自动同步的镜像页，不手改；导航入口页分别是 `resources/index.md` 和 `tutorials/index.md`。
+当前阶段细到Day；下一阶段只细化未来1-2周；更远阶段保持Block和闸门。
 
-## 四轨路线
+## 编辑边界
 
-> 量化开发(60%) + AI大模型(30%) + 后端保底(10%) + 考研(贯穿)
+- 课程真源: `projects/python/`
+- 规划与资源真源: `resources/`、`docs/plans/`
+- 实时状态: `vault/会话交接.md`
+- 自动镜像: `docs/resources/`、`docs/tutorials/`
 
-详见 [主脉络](resources/主脉络.md) 中的完整路线图和岗位能力模型。
+自动镜像不要手工编辑。

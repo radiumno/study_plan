@@ -1,5 +1,5 @@
 site_name: 量化开发学习计划
-site_description: 从零到量化开发工程师 - 四轨并行(量化/AI/后端/考研)
+site_description: Python数据闭环 -> C++系统能力 -> 量化交易系统
 repo_url: https://github.com/radiumno/study_plan
 site_url: https://radiumno.github.io/study_plan
 edit_uri: edit/main/docs/
@@ -31,49 +31,41 @@ markdown_extensions:
 
 nav:
   - 首页: index.md
-  - 学习路线:
+  - 路线与证据:
     - 主脉络: resources/主脉络.md
-    - 分脉络 (阶段1):
-      - Python基础: plans/阶段1_Python_分脉络大纲.md
-    - 分脉络 (后续):
-      - C++算法: plans/阶段2_C++算法_分脉络大纲.md
-      - C++深入: plans/阶段3_C++深入_分脉络大纲.md
-      - 量化+AI: plans/阶段4_量化核心AI_分脉络大纲.md
-      - 实习冲刺: plans/阶段5-6_实习与冲刺_分脉络大纲.md
+    - 规划层级与滚动执行: plans/规划层级与滚动执行规则.md
+    - 招聘市场调研: resources/招聘市场调研报告.md
+    - 技能需求矩阵: plans/技能需求-权重矩阵.md
+    - 核心学习资源: resources/核心学习资源清单.md
+  - 阶段计划:
+    - 阶段1 Python数据闭环: plans/阶段1_Python_分脉络大纲.md
+    - 阶段2 C++与算法: plans/阶段2_C++算法_分脉络大纲.md
+    - 阶段3 C++系统与性能: plans/阶段3_C++深入_分脉络大纲.md
+    - 阶段4 量化系统核心: plans/阶段4_量化核心AI_分脉络大纲.md
+    - 阶段5-6 实习与冲刺: plans/阶段5-6_实习与冲刺_分脉络大纲.md
+    - AI工具化辅线: plans/ai-side/AI辅线_分脉络大纲.md
   - 教程:
     - 教程索引: tutorials/index.md
-  - 资源库:
-    - 资源库索引: resources/index.md
-  - 周审: workflows/周审流程.md
-  - 参考资料:
-    - AI 辅线: references/ai-side/README.md
-    - AI Engineering 索引: references/ai-side/ai-engineering.md
-    - Phase 10: references/ai-side/phase-10-llms-from-scratch.md
-    - Phase 13: references/ai-side/phase-13-tools-and-protocols.md
-    - Phase 14: references/ai-side/phase-14-agent-engineering.md
-    - 其他 AI Phases: references/ai-side/其他-phase.md
-    - Phase 4: references/ai-side/phase-04-computer-vision.md
-    - Phase 5: references/ai-side/phase-05-nlp.md
-    - Phase 12: references/ai-side/phase-12-multimodal.md
-    - Phase 15: references/ai-side/phase-15-autonomous.md
-    - Phase 16: references/ai-side/phase-16-multi-agent.md
-    - Phase 17: references/ai-side/phase-17-infra.md
-    - Phase 18: references/ai-side/phase-18-ethics.md
-    - Phase 19: references/ai-side/phase-19-capstone.md
-    - Git 速查: references/cheatsheets/git基础.md
-    - 审计复盘: reviews/audit-2026-05-31.md
-    - 历史归档:
-      - 遗漏知识点归档: archive/遗漏.py
-      - Day 03 学习汇报: archive/day03_学习汇报.md
-  - 规划补充:
-    - 技能需求-权重矩阵: plans/技能需求-权重矩阵.md
-    - 开源项目拆解路线图: plans/开源项目拆解路线图.md
-    - AI辅线分脉络: plans/ai-side/AI辅线_分脉络大纲.md
-    - easy-vibe 启动计划: plans/ai-side/easy-vibe-启动计划.md
+  - 资源:
+    - 资源索引: resources/index.md
+    - 候选资源库: resources/lib/资源库.md
   - 工作流:
     - 写课程流程: workflows/写课程流程.md
     - 写脉络流程: workflows/写脉络流程.md
-  - 考研: plans/考研备考对照表.md
+    - 周审流程: workflows/周审流程.md
+  - 质量规则:
+    - 学习量校准: plans/学习量校准规则.md
+    - 练习依赖校准: plans/练习依赖校准规则.md
+    - 实战触发点: plans/实战触发点路线图.md
+    - 开源项目拆解: plans/开源项目拆解路线图.md
+  - 参考资料:
+    - AI参考资料库: references/ai-side/README.md
+    - AI Engineering索引: references/ai-side/ai-engineering.md
+    - Git速查: references/cheatsheets/git基础.md
+    - 审查 2026-07-10: reviews/audit-2026-07-10.md
+    - 历史审查 2026-05-31: reviews/audit-2026-05-31.md
+  - 考研:
+    - 考研对照表: plans/考研备考对照表.md
 
 extra:
   social:

@@ -13,6 +13,13 @@ def test_select_checks_docs_filters_group() -> None:
     assert [check[0] for check in selected] == ["docs_sync", "docs_structure"]
 
 
+def test_select_checks_plans_filters_group() -> None:
+    selected = hc.select_checks("plans")
+    assert selected
+    assert all(check[3] == "plans" for check in selected)
+    assert [check[0] for check in selected] == ["plan_consistency"]
+
+
 def test_select_checks_course_filters_group() -> None:
     selected = hc.select_checks("course")
     assert selected
